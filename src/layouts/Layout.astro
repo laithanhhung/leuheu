@@ -8,6 +8,13 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="/blog">Blog</a></li>
+			</ul>
+		</nav>
 		<slot />
 	</body>
 </html>
@@ -18,5 +25,122 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		line-height: 1.6;
+		color: #2d3748;
+		background-color: #f8fafc;
+	}
+
+	/* Global navigation */
+	nav {
+		background: #1a202c;
+		padding: 1rem 0;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	nav a {
+		color: #e2e8f0;
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease;
+	}
+
+	nav a:hover {
+		color: #63b3ed;
+	}
+
+	/* Global typography */
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: 0;
+		line-height: 1.2;
+		font-weight: 700;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+		margin-bottom: 0.8rem;
+	}
+
+	p {
+		margin-bottom: 1rem;
+	}
+
+	/* Global links */
+	a {
+		color: #3182ce;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	a:hover {
+		color: #2c5282;
+		text-decoration: underline;
+	}
+
+	/* Global buttons */
+	.button, button {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		background: #3182ce;
+		color: white;
+		border: none;
+		border-radius: 6px;
+		font-weight: 500;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+		text-decoration: none;
+	}
+
+	.button:hover, button:hover {
+		background: #2c5282;
+	}
+
+	/* Global containers */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	/* Global utilities */
+	.text-center {
+		text-align: center;
+	}
+
+	.mb-4 {
+		margin-bottom: 2rem;
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		nav ul {
+			flex-direction: column;
+			gap: 1rem;
+			padding: 0 1rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+		}
 	}
 </style>
