@@ -1,4 +1,9 @@
 ---
+import { getEntry } from "astro:content";
+
+const statsEntry = await getEntry("sections", "stats");
+const { data } = statsEntry!;
+
 const creators = Array(12)
     .fill(0)
     .map((_, i) => ({
@@ -9,14 +14,17 @@ const creators = Array(12)
     }));
 ---
 
-<section class="text-white py-16 px-4 md:px-8 relative">
+<section
+    class="text-white py-16 px-4 md:px-8 relative bg-black border-y border-gray-900"
+>
     <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl md:text-6xl font-black mb-12 uppercase">
-            80+ Exclusive <span class="text-neon-lime">Creators</span>
+            {data.title}
+            <span class="text-neon-lime">{data.subtitle}</span>
         </h2>
 
         <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-16"
         >
             {
                 creators.map((c) => (
@@ -37,16 +45,26 @@ const creators = Array(12)
             }
         </div>
 
-        <div class="flex flex-col md:flex-row gap-8 mt-16 items-center">
+        <div class="flex flex-col md:flex-row gap-8 items-center">
             <div
                 class="bg-card-gray rounded-[2rem] p-8 flex-1 w-full flex items-center justify-between border border-gray-800"
             >
                 <div>
-                    <p class="text-neon-lime text-lg font-bold">TOTAL</p>
-                    <p class="text-4xl md:text-5xl font-black">
-                        10M <span class="text-white text-2xl font-normal"
-                            >followers</span>
-                    </p>
+                    {
+                        data.stats?.map((stat) => (
+                            <>
+                                <p class="text-neon-lime text-lg font-bold">
+                                    {stat.label}
+                                </p>
+                                <p class="text-4xl md:text-5xl font-black">
+                                    {stat.value}{" "}
+                                    <span class="text-white text-2xl font-normal">
+                                        followers
+                                    </span>
+                                </p>
+                            </>
+                        ))
+                    }
                 </div>
                 <div class="text-neon-lime text-6xl">✦</div>
             </div>
@@ -56,11 +74,12 @@ const creators = Array(12)
             >
                 <div>
                     <p class="text-5xl md:text-7xl font-black">
-                        150<span class="text-2xl align-top">+</span>
+                        {data.extraData?.stat2Value}<span
+                            class="text-2xl align-top">+</span
+                        >
                     </p>
                     <p class="font-bold text-lg">
-                        Partners on various social platforms (TikTok, Facebook,
-                        Youtube, etc)
+                        {data.extraData?.stat2Label}
                     </p>
                 </div>
             </div>

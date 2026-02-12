@@ -1,32 +1,39 @@
 ---
-import { SERVICES } from "../constants";
+import { getCollection, render } from "astro:content";
+
+const services = await getCollection("services");
+const sortedServices = services.sort(
+    (a, b) => (a.data.order || 0) - (b.data.order || 0),
+);
+
+const servicesWithContent = await Promise.all(
+    sortedServices.map(async (service) => {
+        const { Content } = await render(service);
+        return { ...service, Content };
+    }),
+);
 ---
 
-<section class="py-16 px-4 md:px-8">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {
-                SERVICES.map((s) => (
-                    <div class="bg-card-gray rounded-3xl overflow-hidden flex flex-col h-full border border-gray-800 hover:border-neon-lime transition-colors duration-300 group">
-                        <div class="p-8 flex-grow">
-                            <h3 class="text-neon-lime text-2xl md:text-3xl font-black uppercase mb-4 leading-tight">
-                                {s.title}
-                            </h3>
-                            <p class="text-gray-300 leading-relaxed">
-                                {s.description}
-                            </p>
-                        </div>
-                        <div class="h-64 overflow-hidden relative">
-                            <img
-                                src={s.image}
-                                alt={s.title}
-                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110"
-                            />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                        </div>
+<section class="bg-white text-black py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+            servicesWithContent.map((service) => (
+                <div class="flex flex-col gap-4">
+                    <div class="overflow-hidden rounded-2xl">
+                        <img
+                            src={service.data.image}
+                            alt={service.data.title}
+                            class="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                        />
                     </div>
-                ))
-            }
-        </div>
+                    <h3 class="text-2xl font-black uppercase mt-4">
+                        {service.data.title}
+                    </h3>
+                    <div class="text-gray-600 font-medium">
+                        <service.Content />
+                    </div>
+                </div>
+            ))
+        }
     </div>
 </section>

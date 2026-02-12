@@ -1,32 +1,32 @@
 ---
-import { PARTNERS } from "../constants";
+import { getCollection } from "astro:content";
+
+const partners = await getCollection("partners");
+const sortedPartners = partners.sort(
+    (a, b) => (a.data.order || 0) - (b.data.order || 0),
+);
 ---
 
 <section
-    class="bg-neon-lime py-20 px-4 md:px-8 rounded-t-[3rem] mt-12 text-black"
+    class="bg-black text-white py-16 px-4 md:px-8 border-t border-gray-900 overflow-hidden"
 >
-    <div class="max-w-6xl mx-auto text-center">
-        <h2
-            class="text-4xl md:text-6xl font-black mb-16 uppercase tracking-tight"
-        >
-            Significant Partners
-        </h2>
-        <div class="flex justify-center mb-8">
-            <div class="h-1 w-24 bg-black"></div>
-        </div>
+    <h2
+        class="text-center text-gray-500 text-sm font-bold uppercase tracking-widest mb-12"
+    >
+        Trusted by top-tier partners
+    </h2>
 
-        <div class="flex flex-wrap justify-center gap-6 md:gap-10">
-            {
-                PARTNERS.map((p) => (
-                    <div class="bg-white/90 backdrop-blur-sm p-4 rounded-xl w-32 h-20 md:w-48 md:h-28 flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300">
-                        <img
-                            src={p.logo}
-                            alt={p.name}
-                            class="max-w-full max-h-full object-contain mix-blend-multiply"
-                        />
-                    </div>
-                ))
-            }
-        </div>
+    <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50">
+        {
+            sortedPartners.map((partner) => (
+                <div class="w-24 md:w-32 hover:opacity-100 transition-opacity">
+                    <img
+                        src={partner.data.logo}
+                        alt={partner.data.name}
+                        class="w-full h-auto grayscale hover:grayscale-0 transition-all"
+                    />
+                </div>
+            ))
+        }
     </div>
 </section>

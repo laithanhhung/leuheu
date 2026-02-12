@@ -1,9 +1,9 @@
 ---
-import type { Campaign } from "../types";
+import type { CollectionEntry } from "astro:content";
 import { Play } from "lucide-astro";
 
 interface Props {
-    campaign: Campaign;
+    campaign: CollectionEntry<"campaigns">["data"];
 }
 
 const { campaign } = Astro.props;
