@@ -74,7 +74,7 @@ const sortedCampaigns = campaigns.sort(
             <Services />
 
             {/* Campaigns Header Section */}
-            <section class="py-16 px-4 md:px-8">
+            <section class="py-16">
                 <div
                     class="flex items-center justify-center gap-4 text-neon-lime mb-12 overflow-hidden"
                 >
@@ -117,15 +117,21 @@ const sortedCampaigns = campaigns.sort(
                 </div>
 
                 {/* Campaign Cards Loop */}
-                <div class="max-w-6xl mx-auto">
+                <div class="w-full">
                     {
-                        sortedCampaigns.map((campaign) => (
-                            <CampaignCard campaign={campaign.data} />
+                        sortedCampaigns.map((campaign, index) => (
+                            <div class="campaigns-container w-full h-[100vh] min-h-[100vh] relative">
+                                <CampaignCard
+                                    className={`campaign-card relative w-full h-full transform transform-origin-bottom-left will-change-transform ${index !== 0 ? "rotate-[30deg]" : ""}`}
+                                    campaign={campaign.data}
+                                />
+                            </div>
                         ))
                     }
                 </div>
             </section>
 
+            <!-- Background SVG -->
             <div
                 class="absolute top-[0] left-1/2 -translate-x-1/2 w-[100%] h-full -z-10 pointer-events-none"
             >
@@ -189,6 +195,37 @@ const sortedCampaigns = campaigns.sort(
                     },
                 });
             }
+
+            // Campaign Cards Animation
+            const campaignContainers = document.querySelectorAll(
+                ".campaigns-container",
+            );
+
+            campaignContainers.forEach((container, index) => {
+                const card = container.querySelector(".campaign-card");
+                if (!card) return;
+
+                gsap.to(card, {
+                    rotate: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top bottom",
+                        end: "top 20%",
+                        scrub: true,
+                    },
+                });
+
+                if (index !== campaignContainers.length - 1) {
+                    ScrollTrigger.create({
+                        trigger: container,
+                        start: "bottom bottom",
+                        end: "bottom top",
+                        pin: true,
+                        pinSpacing: false,
+                    });
+                }
+            });
         </script>
     </body>
 </html>

@@ -8,6 +8,10 @@ export default {
                 'dark-bg': '#0a0a0a',
                 'card-gray': '#1f1f1f',
             },
+            screens: {
+                'xs': '480px',
+                '3xl': '1600px',
+            },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
             },
