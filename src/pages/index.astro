@@ -50,7 +50,7 @@ const sortedCampaigns = campaigns.sort(
         {/* Splash Screen */}
         <SplashScreen />
 
-        <div class="spotlight relative min-h-screen">
+        <div class="relative">
             <Hero />
 
             <div class="text-neon-lime border-y-2 border-neon-lime/20">
@@ -59,18 +59,10 @@ const sortedCampaigns = campaigns.sort(
                     className="bg-black text-neon-lime"
                 />
             </div>
-
+        </div>
+        <div class="spotlight relative h-full">
             <About />
             <Stats />
-
-            <div class="bg-neon-lime text-black transform -skew-y-1 my-8 py-2">
-                <Marquee
-                    text="services + services + services +"
-                    className="font-black"
-                    reverse
-                />
-            </div>
-
             <Services />
 
             {/* Campaigns Header Section */}
