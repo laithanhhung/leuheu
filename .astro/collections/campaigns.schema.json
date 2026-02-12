@@ -1,0 +1,60 @@
+{
+  "$ref": "#/definitions/campaigns",
+  "definitions": {
+    "campaigns": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "badge": {
+          "type": "string"
+        },
+        "description": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mainStat": {
+          "type": "string"
+        },
+        "secondaryStat": {
+          "type": "string"
+        },
+        "posterImage": {
+          "type": "string"
+        },
+        "galleryImages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isDark": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "number",
+          "default": 0
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "posterImage",
+        "galleryImages"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

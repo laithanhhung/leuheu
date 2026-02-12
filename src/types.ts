@@ -1,7 +1,6 @@
 export interface Campaign {
   id: string;
   title: string;
-  subTitle?: string;
   badge?: string;
   description: string[];
   mainStat?: string;
@@ -9,6 +8,7 @@ export interface Campaign {
   posterImage: string;
   galleryImages: string[];
   isDark?: boolean;
+  order?: number;
 }
 
 export interface Partner {

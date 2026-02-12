@@ -1,0 +1,32 @@
+---
+import { SERVICES } from "../constants";
+---
+
+<section class="py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {
+                SERVICES.map((s) => (
+                    <div class="bg-card-gray rounded-3xl overflow-hidden flex flex-col h-full border border-gray-800 hover:border-neon-lime transition-colors duration-300 group">
+                        <div class="p-8 flex-grow">
+                            <h3 class="text-neon-lime text-2xl md:text-3xl font-black uppercase mb-4 leading-tight">
+                                {s.title}
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                {s.description}
+                            </p>
+                        </div>
+                        <div class="h-64 overflow-hidden relative">
+                            <img
+                                src={s.image}
+                                alt={s.title}
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

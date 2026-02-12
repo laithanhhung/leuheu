@@ -1,0 +1,36 @@
+---
+interface Props {
+    text: string;
+    className?: string;
+    reverse?: boolean;
+}
+
+const { text, className = "", reverse = false } = Astro.props;
+---
+
+<div class={`overflow-hidden whitespace-nowrap py-3 md:py-5 flex ${className}`}>
+    <div
+        class={`flex ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
+    >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+        <span class="text-xl md:text-3xl font-black uppercase mx-4">{text}</span
+        >
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Campaign, Partner, Service } from './types';
+import type { Campaign, Partner, Service } from './types';
 
 export const CAMPAIGNS: Campaign[] = [
   {
