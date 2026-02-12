@@ -7,7 +7,7 @@ const { data } = hero!;
 ---
 
 <section
-    class="bg-neon-lime text-black w-full min-h-[100vh] flex flex-col justify-between p-4 md:p-8 relative overflow-hidden"
+    class="bg-neon-lime text-black w-full min-h-[100vh] flex flex-col justify-between p-4 xs:p-6 md:p-8 3xl:p-16 relative overflow-hidden"
 >
     <div
         class="absolute top-4 right-4 md:top-8 md:right-8 bg-black rounded-full p-2 md:p-4 text-neon-lime"
@@ -15,37 +15,45 @@ const { data } = hero!;
         <ArrowUpRight size={32} class="md:w-12 md:h-12" />
     </div>
 
-    <div class="mt-12 md:mt-20">
-        <p class="font-bold text-lg md:text-2xl mb-2">
+    <div class="mt-12 md:mt-20 3xl:mt-32">
+        <p class="font-bold text-lg md:text-2xl 3xl:text-4xl mb-2">
             {data.extraData?.topText1}
         </p>
-        <p class="font-bold text-lg md:text-2xl">{data.extraData?.topText2}</p>
+        <p class="font-bold text-lg md:text-2xl 3xl:text-4xl">
+            {data.extraData?.topText2}
+        </p>
     </div>
 
-    <div class="flex flex-col items-center justify-center my-8">
+    <div class="flex flex-col items-center justify-center my-8 3xl:my-16">
         <h1
-            class="text-5xl md:text-[150px] font-black tracking-tighter leading-none"
+            class="text-5xl xs:text-6xl md:text-8xl lg:text-9xl 3xl:text-[150px] font-black tracking-tighter leading-none text-center"
         >
             {data.title}
         </h1>
-        <p class="text-xl md:text-3xl font-medium mt-2">
+        <p
+            class="text-xl md:text-3xl 3xl:text-5xl font-medium mt-2 3xl:mt-4 text-center"
+        >
             {data.subtitle}
         </p>
-        <p class="text-lg md:text-xl font-light">
+        <p
+            class="text-lg md:text-xl 3xl:text-3xl font-light mt-2 3xl:mt-4 text-center"
+        >
             {data.extraData?.bottomText}
         </p>
     </div>
 
     <div class="flex flex-wrap gap-4 mt-8">
         <div
-            class="border-2 border-black rounded-full px-6 py-2 font-bold flex items-center gap-2"
+            class="border-2 border-black rounded-full px-6 py-2 3xl:px-8 3xl:py-4 font-bold flex items-center gap-2 text-sm md:text-base 3xl:text-xl"
         >
-            <span class="bg-black text-white p-1 rounded-sm text-xs"
+            <span class="bg-black text-white p-1 rounded-sm text-xs 3xl:text-sm"
                 >{data.badge}</span
             >
             <span>{data.badge}</span>
         </div>
-        <div class="border-2 border-black rounded-full px-6 py-2 font-bold">
+        <div
+            class="border-2 border-black rounded-full px-6 py-2 3xl:px-8 3xl:py-4 font-bold text-sm md:text-base 3xl:text-xl"
+        >
             {data.title}
         </div>
     </div>

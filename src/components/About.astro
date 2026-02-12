@@ -7,52 +7,70 @@ const { data } = about!;
 const { Content } = await render(about!);
 ---
 
-<section class="text-white py-16 px-4 md:px-8 border-t border-gray-800">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-12">
+<section
+    class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 border-t border-gray-800"
+>
+    <div
+        class="max-w-6xl 3xl:max-w-8xl mx-auto flex flex-col md:flex-row items-start gap-8 md:gap-12 3xl:gap-24"
+    >
         <div class="flex-1">
-            <h2 class="text-4xl md:text-6xl font-black mb-2">
+            <h2
+                class="text-3xl xs:text-4xl md:text-6xl 3xl:text-8xl font-black mb-2 3xl:mb-4"
+            >
                 {data.title}
                 <br />
-                <span class="text-neon-lime text-6xl md:text-8xl"
+                <span
+                    class="text-neon-lime text-5xl xs:text-6xl md:text-8xl 3xl:text-[10rem] 3xl:leading-none"
                     >{data.subtitle}</span
                 >
             </h2>
-            <div class="w-20 h-2 bg-gray-700 my-6"></div>
+            <div
+                class="w-16 xs:w-20 3xl:w-32 h-2 3xl:h-3 bg-gray-700 my-6 3xl:my-10"
+            >
+            </div>
 
             <div
-                class="text-lg md:text-xl leading-relaxed text-gray-300 space-y-4"
+                class="text-base xs:text-lg md:text-xl 3xl:text-3xl leading-relaxed text-gray-300 space-y-4 3xl:space-y-8"
             >
                 <p>{data.extraData?.introduction}</p>
                 <p>{data.extraData?.introduction2}</p>
             </div>
         </div>
 
-        <div class="flex-1 w-full flex justify-center md:justify-end">
+        <div
+            class="flex-1 w-full flex justify-center md:justify-end mt-8 md:mt-0"
+        >
             <div
-                class="bg-white text-black rounded-xl p-4 max-w-sm w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
+                class="bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-sm 3xl:max-w-xl w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
             >
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3 3xl:gap-6 mb-4 3xl:mb-8">
                     <div
-                        class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-neon-lime font-bold"
+                        class="w-12 h-12 3xl:w-20 3xl:h-20 bg-black rounded-full flex items-center justify-center text-neon-lime font-bold 3xl:text-2xl"
                     >
                         #
                     </div>
                     <div>
-                        <p class="font-bold">{data.extraData?.cardTitle}</p>
-                        <p class="text-sm text-gray-500">
+                        <p class="font-bold 3xl:text-2xl">
+                            {data.extraData?.cardTitle}
+                        </p>
+                        <p class="text-sm 3xl:text-lg text-gray-500">
                             {data.extraData?.cardSubtitle}
                         </p>
                     </div>
                 </div>
-                <div class="bg-gray-100 p-2 rounded text-sm mb-4">
+                <div
+                    class="bg-gray-100 p-2 3xl:p-4 rounded 3xl:rounded-xl text-sm 3xl:text-lg mb-4 3xl:mb-8"
+                >
                     {data.extraData?.cardTagline}
                 </div>
-                <div class="text-sm text-gray-700 mb-4">
+                <div class="text-sm 3xl:text-lg text-gray-700 mb-4 3xl:mb-8">
                     <Content />
                 </div>
-                <div class="flex justify-between text-gray-400 text-xs">
+                <div
+                    class="flex justify-between text-gray-400 text-xs 3xl:text-base"
+                >
                     <div class="flex items-center gap-1">
-                        <Heart size={14} />
+                        <Heart size={14} class="3xl:w-6 3xl:h-6" />
                         {data.extraData?.cardStats}
                     </div>
                     <div>Chia sẻ</div>

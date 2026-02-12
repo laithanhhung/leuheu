@@ -8,18 +8,20 @@ const sortedPartners = partners.sort(
 ---
 
 <section
-    class="bg-black text-white py-16 px-4 md:px-8 border-t border-gray-900 overflow-hidden"
+    class="bg-black text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 border-t border-gray-900 overflow-hidden"
 >
     <h2
-        class="text-center text-gray-500 text-sm font-bold uppercase tracking-widest mb-12"
+        class="text-center text-gray-500 text-xs xs:text-sm 3xl:text-xl font-bold uppercase tracking-widest mb-8 xs:mb-12 3xl:mb-20"
     >
         Trusted by top-tier partners
     </h2>
 
-    <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50">
+    <div
+        class="flex flex-wrap justify-center gap-6 xs:gap-8 md:gap-16 3xl:gap-24 opacity-50"
+    >
         {
             sortedPartners.map((partner) => (
-                <div class="w-24 md:w-32 hover:opacity-100 transition-opacity">
+                <div class="w-20 xs:w-24 md:w-32 3xl:w-48 hover:opacity-100 transition-opacity">
                     <img
                         src={partner.data.logo}
                         alt={partner.data.name}
