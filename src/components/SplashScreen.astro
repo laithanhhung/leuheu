@@ -1,0 +1,77 @@
+<div
+    id="splash-screen"
+    class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.87,0,0.13,1)]"
+>
+    <div class="relative z-10 text-center px-4">
+        {/* Brand */}
+        <div class="mb-6">
+            <h1
+                class="text-6xl md:text-9xl font-black text-neon-lime tracking-tighter animate-pulse leading-none"
+            >
+                #leuheu
+            </h1>
+            <p
+                class="text-white text-lg md:text-2xl font-bold uppercase tracking-widest mt-2"
+            >
+                ChiuChiu Entertainment
+            </p>
+        </div>
+
+        {/* Progress Bar */}
+        <div
+            class="w-full max-w-xs md:max-w-md h-1 bg-gray-900 rounded-full overflow-hidden mx-auto relative mt-12"
+        >
+            <div
+                id="splash-progress-bar"
+                class="absolute left-0 top-0 bottom-0 bg-neon-lime transition-all duration-100 ease-out"
+                style="width: 0%"
+            >
+            </div>
+        </div>
+
+        <div
+            class="flex justify-between w-full max-w-xs md:max-w-md mx-auto mt-2"
+        >
+            <span class="text-gray-600 font-mono text-xs uppercase"
+                >Loading assets</span
+            >
+            <span
+                id="splash-progress-text"
+                class="text-neon-lime font-mono text-xs font-bold"
+            >
+                0%
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const splashScreen = document.getElementById("splash-screen");
+    const progressBar = document.getElementById("splash-progress-bar");
+    const progressText = document.getElementById("splash-progress-text");
+
+    let progress = 0;
+    const interval = setInterval(() => {
+        // Random increment for organic feel
+        const increment = Math.random() * 4 + 1;
+        progress += increment;
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+
+            // Start exit sequence
+            setTimeout(() => {
+                splashScreen?.classList.add("-translate-y-full");
+
+                // Remove from DOM after transition
+                setTimeout(() => {
+                    splashScreen?.remove();
+                }, 1000);
+            }, 400);
+        }
+
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (progressText) progressText.innerText = `${Math.floor(progress)}%`;
+    }, 40);
+</script>
