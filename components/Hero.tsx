@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="bg-neon-lime text-black w-full min-h-[60vh] flex flex-col justify-between p-4 md:p-8 relative overflow-hidden">
+    <section className=" bg-neon-lime text-black w-full min-h-[100vh] flex flex-col justify-between p-4 md:p-8 relative overflow-hidden">
       <div className="absolute top-4 right-4 md:top-8 md:right-8 bg-black rounded-full p-2 md:p-4 text-neon-lime">
         <ArrowUpRight size={32} className="md:w-12 md:h-12" />
       </div>
@@ -21,8 +21,8 @@ const Hero: React.FC = () => {
 
       <div className="flex flex-wrap gap-4 mt-8">
         <div className="border-2 border-black rounded-full px-6 py-2 font-bold flex items-center gap-2">
-           <span className="bg-black text-white p-1 rounded-sm text-xs">TikTok</span>
-           <span>TikTok</span>
+          <span className="bg-black text-white p-1 rounded-sm text-xs">TikTok</span>
+          <span>TikTok</span>
         </div>
         <div className="border-2 border-black rounded-full px-6 py-2 font-bold">
           #leuheu
