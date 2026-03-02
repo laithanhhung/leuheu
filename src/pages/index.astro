@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Hero from "../components/Hero.astro";
 import Marquee from "../components/Marquee.astro";
+import Welcome from "../components/Welcome.astro";
 import About from "../components/About.astro";
 import Stats from "../components/Stats.astro";
 import Services from "../components/Services.astro";
@@ -57,9 +58,11 @@ const sortedCampaigns = campaigns.sort(
                     className="bg-black text-neon-lime"
                 />
             </div>
-            <div class="spotlight relative h-full w-full overflow-hidden">
-                <!-- Welcome -->
-
+            <!-- Welcome -->
+            <Welcome />
+            <div class="spotlight relative h-full w-full">
+                <!-- section empty -->
+                <section class="h-[100vh] w-full"></section>
                 <!-- About -->
                 <About />
                 <!-- Stats -->
@@ -68,24 +71,26 @@ const sortedCampaigns = campaigns.sort(
                 <Services />
                 <!-- Background SVG -->
                 <div
-                    class="absolute xl:top-[25svh] xl:left-[50svw] -translate-x-1/2 w-[90%] h-full -z-10 pointer-events-none"
+                    class="absolute top-[50svh] xs:left-[25svw] sm:left-[25svw] md:left-[25svw] lg:left-[25svw] xl:top-[5svh] xl:left-[45svw] -translate-x-1/2 w-[90%] h-full -z-10 pointer-events-none"
                 >
                     <svg
-                        width="1323"
-                        height="4944"
-                        viewBox="0 0 1323 4944"
+                        width="1328"
+                        height="5382"
+                        viewBox="0 0 1328 5382"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
                             id="stroke-path"
-                            d="M340.381 185.004C7.19728 466.504 247.065 870.504 707.881 1182.5C1168.7 1494.5 1159.2 1969.5 943.197 2305.5C727.197 2641.5 293.197 2493 293.197 2185C293.197 1877 637.698 1784.5 844.698 1975.5C1051.7 2166.5 1367.26 2509 770.698 3221C174.138 3933 46.1976 4712.5 1137.7 4759"
+                            d="M722.619 185.029C1504.62 649.529 1029.51 1241.03 614.82 1620.39C200.135 1999.75 91.8898 2487.02 379.504 2743.27C667.119 2999.53 1029.51 2930.76 1029.51 2622.79C1029.51 2314.82 685.005 2222.33 478.004 2413.31C271.004 2604.29 -44.5562 2946.75 552.004 3658.68C1148.57 4370.61 1276.51 5150.03 185.003 5196.53"
                             stroke="#CCFF00"
+                            class="[stroke-width:100px] xs:[stroke-width:100px] sm:[stroke-width:150px] md:[stroke-width:200px] lg:[stroke-width:250px] xl:[stroke-width:350px]"
                             stroke-width="370"
                             stroke-linecap="round"></path>
                     </svg>
                 </div>
             </div>
+            <!-- Tiktok Award: build later -->
             <!-- Campaigns -->
             <section class="relative w-full">
                 {/* Campaign Cards Loop */}
@@ -149,7 +154,11 @@ const sortedCampaigns = campaigns.sort(
             // gsap.registerPlugin(SplitText);
 
             // Initialize Lenis once
-            const lenis = new Lenis();
+            const lenis = new Lenis({
+                lerp: 0.05, // Lower value for smoother scrolling (default is 0.1)
+                wheelMultiplier: 0.4, // Slows down wheel scroll step
+                smoothWheel: true,
+            });
 
             // Sincronize Lenis with ScrollTrigger
             lenis.on("scroll", ScrollTrigger.update);
@@ -181,8 +190,24 @@ const sortedCampaigns = campaigns.sort(
                         scrollTrigger: {
                             trigger: ".spotlight",
                             start: "top top",
-                            end: "bottom bottom",
-                            scrub: true,
+                            end: () => {
+                                const spotlight = document.querySelector(
+                                    ".spotlight",
+                                ) as HTMLElement | null;
+                                const campaign = document.querySelector(
+                                    ".campaigns-container",
+                                ) as HTMLElement | null;
+                                if (spotlight && campaign) {
+                                    // Calculate precise pixel distance from start of spotlight to campaign container
+                                    const distance =
+                                        campaign.getBoundingClientRect().top -
+                                        spotlight.getBoundingClientRect().top;
+                                    return `+=${distance}`;
+                                }
+                                return "bottom bottom";
+                            },
+                            scrub: 1.5,
+                            invalidateOnRefresh: true,
                         },
                     });
                 }
