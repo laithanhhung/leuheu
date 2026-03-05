@@ -1,0 +1,98 @@
+---
+import { getCollection } from "astro:content";
+import CampaignCard from "./CampaignCard.astro";
+
+const campaigns = await getCollection("campaigns");
+const sortedCampaigns = campaigns.sort(
+    (a, b) => (a.data.order || 0) - (b.data.order || 0),
+);
+---
+
+<section class="relative w-full">
+    {/* Campaign Cards Loop */}
+    <div class="campaigns-container w-full">
+        <div
+            class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0"
+        >
+            <div
+                class="campaign-card relative w-full h-full flex items-center bg-neon-lime origin-bottom-left"
+            >
+                <div
+                    class="max-w-4xl 3xl:max-w-7xl mx-auto bg-white rounded-[1.5rem] xs:rounded-[2rem] p-6 xs:p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 xs:gap-12 mb-16 xs:mb-20"
+                >
+                    <div class="flex-1 w-full text-center md:text-left">
+                        <h2
+                            class="text-3xl xs:text-4xl md:text-6xl 3xl:text-7xl font-black text-black uppercase leading-none"
+                        >
+                            Significant <br />
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-600"
+                                >Campaigns</span
+                            >
+                        </h2>
+                        <p
+                            class="mt-4 text-gray-600 font-medium text-sm xs:text-base 3xl:text-xl"
+                        >
+                            #leuheu with partners
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {
+            sortedCampaigns.map((campaign, index) => (
+                <div class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0 ">
+                    <CampaignCard
+                        className="campaign-card overflow-hidden relative w-full h-full transform origin-bottom-left will-change-transform rotate-[30deg]"
+                        campaign={campaign.data}
+                    />
+                </div>
+            ))
+        }
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    declare global {
+        interface Window {
+            initCampaignAnimation?: () => void;
+        }
+    }
+
+    window.initCampaignAnimation = () => {
+        const campaignContainers = document.querySelectorAll(
+            ".campaign-container",
+        );
+
+        campaignContainers.forEach((container, index) => {
+            const card = container.querySelector(".campaign-card");
+            if (!card) return;
+
+            gsap.to(card, {
+                rotate: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top bottom",
+                    end: "top 20%",
+                    scrub: true,
+                },
+            });
+
+            if (index !== campaignContainers.length - 1) {
+                ScrollTrigger.create({
+                    trigger: container,
+                    start: "bottom bottom",
+                    end: "bottom top",
+                    pin: true,
+                    pinSpacing: false,
+                });
+            }
+        });
+    };
+</script>

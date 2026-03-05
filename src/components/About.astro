@@ -7,110 +7,184 @@ const { data } = about!;
 const { Content } = await render(about!);
 ---
 
-<section
-    class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 relative z-20 -mt-10 md:-mt-20 3xl:-mt-32"
->
-    <div
-        class="max-w-6xl 3xl:max-w-8xl mx-auto flex flex-col items-start gap-16 md:gap-12 3xl:gap-24"
+<div class="spotlight relative h-full w-full">
+    <!-- section empty -->
+    <section class="h-[100vh] w-full"></section>
+
+    <section
+        class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 relative z-20 -mt-10 md:-mt-20 3xl:-mt-32"
     >
         <div
-            class="about-card flex-1 shadow-lg w-full mt-80 bg-[#0A0A0A]/80 backdrop-blur-3xl border max-w-xl 3xl:max-w-2xl border-gray-800/60 rounded-3xl p-8 md:p-12 3xl:p-16 shadow-2xl relative overflow-hidden group hover:border-[#CCFF00]/40 hover:shadow-[#CCFF00]/5 transition-all duration-700"
+            class="max-w-6xl 3xl:max-w-8xl mx-auto flex flex-col items-start gap-16 md:gap-12 3xl:gap-24"
         >
-            <!-- Decorative Glow Backgrounds -->
             <div
-                class="absolute -top-32 -right-32 w-64 h-64 bg-neon-lime rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-30 transition-opacity duration-1000"
+                class="about-card flex-1 shadow-lg w-full mt-80 bg-[#0A0A0A]/80 backdrop-blur-3xl border max-w-xl 3xl:max-w-2xl border-gray-800/60 rounded-3xl p-8 md:p-12 3xl:p-16 shadow-2xl relative overflow-hidden group hover:border-[#CCFF00]/40 hover:shadow-[#CCFF00]/5 transition-all duration-700"
             >
-            </div>
-            <div
-                class="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600 rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-20 transition-opacity duration-1000"
-            >
-            </div>
-
-            <div class="relative z-10">
-                <h2
-                    class="text-3xl xs:text-4xl md:text-5xl lg:text-6xl 3xl:text-8xl font-black mb-2 3xl:mb-4 tracking-tighter"
-                >
-                    {data.title}
-                    <br />
-                    <span
-                        class="text-neon-lime drop-shadow-[0_0_20px_rgba(204,255,0,0.3)]"
-                        >{data.subtitle}</span
-                    >
-                </h2>
-
+                <!-- Decorative Glow Backgrounds -->
                 <div
-                    class="w-24 3xl:w-40 h-1 3xl:h-2 bg-gradient-to-r from-neon-lime via-neon-lime/50 to-transparent my-8 3xl:my-12 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                    class="absolute -top-32 -right-32 w-64 h-64 bg-neon-lime rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-30 transition-opacity duration-1000"
+                >
+                </div>
+                <div
+                    class="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600 rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-20 transition-opacity duration-1000"
                 >
                 </div>
 
-                <div
-                    class="text-base xs:text-lg md:text-xl 3xl:text-3xl leading-relaxed text-gray-300 space-y-6 3xl:space-y-8"
-                >
-                    <p
-                        class="group-hover:border-neon-lime transition-colors duration-500"
+                <div class="relative z-10">
+                    <h2
+                        class="text-3xl xs:text-4xl md:text-5xl lg:text-6xl 3xl:text-8xl font-black mb-2 3xl:mb-4 tracking-tighter"
                     >
-                        {data.extraData?.introduction}
-                    </p>
-                    <p
-                        class="group-hover:border-neon-lime/70 transition-colors duration-500 delay-150"
-                    >
-                        {data.extraData?.introduction2}
-                    </p>
-                </div>
-            </div>
-        </div>
+                        {data.title}
+                        <br />
+                        <span
+                            class="text-neon-lime drop-shadow-[0_0_20px_rgba(204,255,0,0.3)]"
+                            >{data.subtitle}</span
+                        >
+                    </h2>
 
-        <!-- section empty -->
-        <section class="h-[95vh] w-full"></section>
-
-        <div
-            class="flex-1 w-full flex justify-center items-center md:justify-end mt-8 md:mt-0"
-        >
-            <div
-                class="about-card mx-auto bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-md 3xl:max-w-xl w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
-            >
-                <div class="flex items-center gap-3 3xl:gap-6 mb-4 3xl:mb-8">
                     <div
-                        class="w-12 h-12 3xl:w-20 3xl:h-20 bg-black rounded-full flex items-center justify-center text-neon-lime font-bold 3xl:text-2xl"
+                        class="w-24 3xl:w-40 h-1 3xl:h-2 bg-gradient-to-r from-neon-lime via-neon-lime/50 to-transparent my-8 3xl:my-12 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                     >
-                        #
                     </div>
-                    <div>
-                        <p class="font-bold 3xl:text-2xl">
-                            {data.extraData?.cardTitle}
+
+                    <div
+                        class="text-base xs:text-lg md:text-xl 3xl:text-3xl leading-relaxed text-gray-300 space-y-6 3xl:space-y-8"
+                    >
+                        <p
+                            class="group-hover:border-neon-lime transition-colors duration-500"
+                        >
+                            {data.extraData?.introduction}
                         </p>
-                        <p class="text-sm 3xl:text-lg text-gray-500">
-                            {data.extraData?.cardSubtitle}
+                        <p
+                            class="group-hover:border-neon-lime/70 transition-colors duration-500 delay-150"
+                        >
+                            {data.extraData?.introduction2}
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <!-- section empty -->
+            <section class="h-[95vh] w-full"></section>
+
+            <div
+                class="flex-1 w-full flex justify-center items-center md:justify-end mt-8 md:mt-0"
+            >
                 <div
-                    class="bg-gray-100 p-2 3xl:p-4 rounded 3xl:rounded-xl text-sm 3xl:text-lg mb-4 3xl:mb-8"
+                    class="about-card mx-auto bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-md 3xl:max-w-xl w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
                 >
-                    {data.extraData?.cardTagline}
-                </div>
-                <div class="text-sm 3xl:text-lg text-gray-700 mb-4 3xl:mb-16">
-                    <Content />
-                </div>
-                <div
-                    class="flex justify-between text-gray-400 text-xs 3xl:text-base"
-                >
-                    <div class="flex items-center gap-1">
-                        <Heart size={14} class="3xl:w-6 3xl:h-6" />
-                        {data.extraData?.cardStats}
+                    <div
+                        class="flex items-center gap-3 3xl:gap-6 mb-4 3xl:mb-8"
+                    >
+                        <div
+                            class="w-12 h-12 3xl:w-20 3xl:h-20 bg-black rounded-full flex items-center justify-center text-neon-lime font-bold 3xl:text-2xl"
+                        >
+                            #
+                        </div>
+                        <div>
+                            <p class="font-bold 3xl:text-2xl">
+                                {data.extraData?.cardTitle}
+                            </p>
+                            <p class="text-sm 3xl:text-lg text-gray-500">
+                                {data.extraData?.cardSubtitle}
+                            </p>
+                        </div>
                     </div>
-                    <div>Chia sẻ</div>
+                    <div
+                        class="bg-gray-100 p-2 3xl:p-4 rounded 3xl:rounded-xl text-sm 3xl:text-lg mb-4 3xl:mb-8"
+                    >
+                        {data.extraData?.cardTagline}
+                    </div>
+                    <div
+                        class="text-sm 3xl:text-lg text-gray-700 mb-4 3xl:mb-16"
+                    >
+                        <Content />
+                    </div>
+                    <div
+                        class="flex justify-between text-gray-400 text-xs 3xl:text-base"
+                    >
+                        <div class="flex items-center gap-1">
+                            <Heart size={14} class="3xl:w-6 3xl:h-6" />
+                            {data.extraData?.cardStats}
+                        </div>
+                        <div>Chia sẻ</div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Stroke path -->
+    <div
+        class="absolute top-[50svh] xs:left-[25svw] sm:left-[25svw] md:left-[25svw] lg:left-[25svw] xl:top-[5svh] xl:left-[45svw] -translate-x-1/2 w-[90%] h-full -z-10 pointer-events-none"
+    >
+        <svg
+            width="1328"
+            height="5382"
+            viewBox="0 0 1328 5382"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                id="stroke-path"
+                d="M722.619 185.029C1504.62 649.529 1029.51 1241.03 614.82 1620.39C200.135 1999.75 91.8898 2487.02 379.504 2743.27C667.119 2999.53 1029.51 2930.76 1029.51 2622.79C1029.51 2314.82 685.005 2222.33 478.004 2413.31C271.004 2604.29 -44.5562 2946.75 552.004 3658.68C1148.57 4370.61 1276.51 5150.03 185.003 5196.53"
+                stroke="#CCFF00"
+                class="[stroke-width:100px] xs:[stroke-width:100px] sm:[stroke-width:150px] md:[stroke-width:200px] lg:[stroke-width:250px] xl:[stroke-width:350px]"
+                stroke-linecap="round"></path>
+        </svg>
     </div>
-</section>
+</div>
 
 <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
     gsap.registerPlugin(ScrollTrigger);
+
+    declare global {
+        interface Window {
+            initSpotlightAnimation?: () => void;
+        }
+    }
+
+    window.initSpotlightAnimation = () => {
+        // SVG Path Animation
+        const path = document.getElementById(
+            "stroke-path",
+        ) as SVGPathElement | null;
+        if (path) {
+            const length = path.getTotalLength();
+            // Set up the starting positions
+            path.style.strokeDasharray = length + " " + length;
+            path.style.strokeDashoffset = String(length);
+
+            // Trigger the animation on scrub
+            gsap.to(path, {
+                strokeDashoffset: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".spotlight",
+                    start: "top top",
+                    end: () => {
+                        const spotlight = document.querySelector(
+                            ".spotlight",
+                        ) as HTMLElement | null;
+                        if (spotlight) {
+                            // Calculate precise pixel distance from start of spotlight to campaign container
+                            const distance =
+                                1024 +
+                                spotlight.getBoundingClientRect().bottom -
+                                spotlight.getBoundingClientRect().top;
+                            return `+=${distance}`;
+                        }
+                        return "bottom bottom";
+                    },
+                    scrub: 1.5,
+                    invalidateOnRefresh: true,
+                },
+            });
+        }
+    };
 
     function initAboutAnimations() {
         const cards = document.querySelectorAll(".about-card");

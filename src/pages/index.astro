@@ -6,15 +6,11 @@ import Welcome from "../components/Welcome.astro";
 import About from "../components/About.astro";
 import Stats from "../components/Stats.astro";
 import Services from "../components/Services.astro";
-import CampaignCard from "../components/CampaignCard.astro";
+import CampaignSection from "../components/CampaignSection.astro";
 import Partners from "../components/Partners.astro";
 import Footer from "../components/Footer.astro";
 import SplashScreen from "../components/SplashScreen.astro";
-
-const campaigns = await getCollection("campaigns");
-const sortedCampaigns = campaigns.sort(
-    (a, b) => (a.data.order || 0) - (b.data.order || 0),
-);
+import TikTokAward from "../components/TikTokAward.astro";
 ---
 
 <!doctype html>
@@ -60,83 +56,18 @@ const sortedCampaigns = campaigns.sort(
             </div>
             <!-- Welcome -->
             <Welcome />
-            <div class="spotlight relative h-full w-full">
-                <!-- section empty -->
-                <section class="h-[100vh] w-full"></section>
-                <!-- About -->
-                <About />
-                <!-- Stats -->
-                <Stats />
-                <!-- Services -->
-                <Services />
-                <!-- Background SVG -->
-                <div
-                    class="absolute top-[50svh] xs:left-[25svw] sm:left-[25svw] md:left-[25svw] lg:left-[25svw] xl:top-[5svh] xl:left-[45svw] -translate-x-1/2 w-[90%] h-full -z-10 pointer-events-none"
-                >
-                    <svg
-                        width="1328"
-                        height="5382"
-                        viewBox="0 0 1328 5382"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            id="stroke-path"
-                            d="M722.619 185.029C1504.62 649.529 1029.51 1241.03 614.82 1620.39C200.135 1999.75 91.8898 2487.02 379.504 2743.27C667.119 2999.53 1029.51 2930.76 1029.51 2622.79C1029.51 2314.82 685.005 2222.33 478.004 2413.31C271.004 2604.29 -44.5562 2946.75 552.004 3658.68C1148.57 4370.61 1276.51 5150.03 185.003 5196.53"
-                            stroke="#CCFF00"
-                            class="[stroke-width:100px] xs:[stroke-width:100px] sm:[stroke-width:150px] md:[stroke-width:200px] lg:[stroke-width:250px] xl:[stroke-width:350px]"
-                            stroke-width="370"
-                            stroke-linecap="round"></path>
-                    </svg>
-                </div>
-            </div>
-            <!-- Tiktok Award: build later -->
+            <!-- About -->
+            <About />
+            <!-- Stats -->
+            <Stats />
+            <!-- Services -->
+            <Services />
+            <!-- Background SVG -->
+
+            <!-- Tiktok Award -->
+            <TikTokAward />
             <!-- Campaigns -->
-            <section class="relative w-full">
-                {/* Campaign Cards Loop */}
-                <div class="campaigns-container w-full">
-                    <div
-                        class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0"
-                    >
-                        <div
-                            class="campaign-card relative w-full h-full flex items-center bg-neon-lime origin-bottom-left"
-                        >
-                            <div
-                                class="max-w-4xl 3xl:max-w-7xl mx-auto bg-white rounded-[1.5rem] xs:rounded-[2rem] p-6 xs:p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 xs:gap-12 mb-16 xs:mb-20"
-                            >
-                                <div
-                                    class="flex-1 w-full text-center md:text-left"
-                                >
-                                    <h2
-                                        class="text-3xl xs:text-4xl md:text-6xl 3xl:text-7xl font-black text-black uppercase leading-none"
-                                    >
-                                        Significant <br />
-                                        <span
-                                            class="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-600"
-                                            >Campaigns</span
-                                        >
-                                    </h2>
-                                    <p
-                                        class="mt-4 text-gray-600 font-medium text-sm xs:text-base 3xl:text-xl"
-                                    >
-                                        #leuheu with partners
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {
-                        sortedCampaigns.map((campaign, index) => (
-                            <div class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0 ">
-                                <CampaignCard
-                                    className="campaign-card relative w-full h-full transform origin-bottom-left will-change-transform rotate-[30deg]"
-                                    campaign={campaign.data}
-                                />
-                            </div>
-                        ))
-                    }
-                </div>
-            </section>
+            <CampaignSection />
 
             <Partners />
             <Footer />
@@ -152,6 +83,16 @@ const sortedCampaigns = campaigns.sort(
             gsap.registerPlugin(ScrollTrigger);
             // If you have SplitText (Club GSAP), uncomment the import above and register it here:
             // gsap.registerPlugin(SplitText);
+
+            // Extend window correctly for the global TS declaration
+            declare global {
+                interface Window {
+                    initStatsAnimation?: () => void;
+                    initTikTokAwardAnimation?: () => void;
+                    initCampaignAnimation?: () => void;
+                    initSpotlightAnimation?: () => void;
+                }
+            }
 
             // Initialize Lenis once
             const lenis = new Lenis({
@@ -173,75 +114,25 @@ const sortedCampaigns = campaigns.sort(
 
             // Main Animation Logic
             function initAnimations() {
-                // SVG Path Animation
-                const path = document.getElementById(
-                    "stroke-path",
-                ) as SVGPathElement | null;
-                if (path) {
-                    const length = path.getTotalLength();
-                    // Set up the starting positions
-                    path.style.strokeDasharray = length + " " + length;
-                    path.style.strokeDashoffset = String(length);
-
-                    // Trigger the animation on scrub
-                    gsap.to(path, {
-                        strokeDashoffset: 0,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: ".spotlight",
-                            start: "top top",
-                            end: () => {
-                                const spotlight = document.querySelector(
-                                    ".spotlight",
-                                ) as HTMLElement | null;
-                                const campaign = document.querySelector(
-                                    ".campaigns-container",
-                                ) as HTMLElement | null;
-                                if (spotlight && campaign) {
-                                    // Calculate precise pixel distance from start of spotlight to campaign container
-                                    const distance =
-                                        campaign.getBoundingClientRect().top -
-                                        spotlight.getBoundingClientRect().top;
-                                    return `+=${distance}`;
-                                }
-                                return "bottom bottom";
-                            },
-                            scrub: 1.5,
-                            invalidateOnRefresh: true,
-                        },
-                    });
+                // Call the globally exposed Spotlight animation script
+                if (typeof window.initSpotlightAnimation === "function") {
+                    window.initSpotlightAnimation();
                 }
 
-                // Campaign Cards Animation
-                const campaignContainers = document.querySelectorAll(
-                    ".campaign-container",
-                );
+                // Call the globally exposed Stats animation script now that GSAP/Lenis is ready
+                if (typeof window.initStatsAnimation === "function") {
+                    window.initStatsAnimation();
+                }
 
-                campaignContainers.forEach((container, index) => {
-                    const card = container.querySelector(".campaign-card");
-                    if (!card) return;
+                // Call the TikTok Award animation script
+                if (typeof window.initTikTokAwardAnimation === "function") {
+                    window.initTikTokAwardAnimation();
+                }
 
-                    gsap.to(card, {
-                        rotate: 0,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: container,
-                            start: "top bottom",
-                            end: "top 20%",
-                            scrub: true,
-                        },
-                    });
-
-                    if (index !== campaignContainers.length - 1) {
-                        ScrollTrigger.create({
-                            trigger: container,
-                            start: "bottom bottom",
-                            end: "bottom top",
-                            pin: true,
-                            pinSpacing: false,
-                        });
-                    }
-                });
+                // Call the globally exposed Campaign animation script
+                if (typeof window.initCampaignAnimation === "function") {
+                    window.initCampaignAnimation();
+                }
             }
 
             // Execute logic when ready

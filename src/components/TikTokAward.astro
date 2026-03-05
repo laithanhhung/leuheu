@@ -1,0 +1,853 @@
+---
+// TikTok Award Component
+// Ported from standalone 3d-tiktok project
+---
+
+<section class="tiktok-award-wrapper">
+    <!-- Intro -->
+    <section class="ta-intro">
+        <div class="ta-intro-content">
+            <span class="ta-intro-label">TikTok Awards 2025</span>
+            <h1>Where entertainment<br />meets legacy.</h1>
+        </div>
+    </section>
+
+    <!-- Product Overview (pinned section with 3D model) -->
+    <section class="ta-product-overview">
+        <div class="ta-header-1">
+            <h1>TikTok Awards</h1>
+        </div>
+        <div class="ta-header-2">
+            <h1>CREATOR OF THE YEAR</h1>
+        </div>
+
+        <div class="ta-circular-mask"></div>
+
+        <div class="ta-tooltips">
+            <!-- Creator 1: Ran Xa Neo -->
+            <div class="ta-tooltip">
+                <div class="ta-avatar-clip">
+                    <div class="ta-avatar">
+                        <img
+                            src="/tiktok-award/ran_xa_neo.png"
+                            alt="Ran Xa Neo"
+                        />
+                    </div>
+                </div>
+                <div class="ta-divider"></div>
+                <div class="ta-title">
+                    <h2>Ran Xa Neo</h2>
+                </div>
+                <div class="ta-description">
+                    <p>
+                        With a signature comedic world that blends surreal
+                        storytelling and relatable humor, Ran Xa Neo has
+                        redefined what entertainment means on TikTok — one viral
+                        moment at a time.
+                    </p>
+                </div>
+            </div>
+            <!-- Creator 2: ducreation -->
+            <div class="ta-tooltip">
+                <div class="ta-avatar-clip">
+                    <div class="ta-avatar">
+                        <img
+                            src="/tiktok-award/ducreation.png"
+                            alt="ducreation"
+                        />
+                    </div>
+                </div>
+                <div class="ta-divider"></div>
+                <div class="ta-title">
+                    <h2>ducreation</h2>
+                </div>
+                <div class="ta-description">
+                    <p>
+                        ducreation brings cinematic vision to short-form
+                        content. From raw emotion to electrifying performance —
+                        every video is a production audiences can't stop
+                        watching.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="ta-model-container"></div>
+    </section>
+
+    <!-- Outro -->
+    <section class="ta-outro">
+        <div class="ta-outro-content">
+            <span class="ta-outro-label">TikTok Awards 2025</span>
+            <h1>Congratulations to our creators.</h1>
+            <p>Creator of the Year</p>
+        </div>
+    </section>
+</section>
+
+<style>
+    /* ---- Variables ---- */
+    .tiktok-award-wrapper {
+        --ta-bg-dark: #0a0a0a;
+        --ta-bg-light: #f5f0e8;
+        --ta-gold: #d4a84b;
+        --ta-gold-bright: #ffd700;
+        --ta-text-light: #f5f0e8;
+        --ta-text-muted: #8a8070;
+        font-family: "PP Neue Montreal", "Inter", sans-serif;
+    }
+
+    /* ---- Section base ---- */
+    .tiktok-award-wrapper section {
+        position: relative;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+    }
+
+    .ta-product-overview {
+        background-color: var(--ta-bg-light);
+        color: var(--ta-bg-dark);
+    }
+
+    /* ---- Intro / Outro ---- */
+    .ta-intro,
+    .ta-outro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--ta-bg-dark);
+        color: var(--ta-text-light);
+        padding: 2rem;
+    }
+
+    .ta-intro-content,
+    .ta-outro-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.25rem;
+        max-width: 700px;
+    }
+
+    .ta-intro h1,
+    .ta-outro h1 {
+        font-size: 4rem;
+        font-weight: 500;
+        line-height: 1;
+        color: var(--ta-text-light);
+    }
+
+    .ta-intro-label,
+    .ta-outro-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--ta-gold);
+        font-weight: 500;
+    }
+
+    .ta-outro p {
+        color: var(--ta-text-muted);
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    /* ---- 3D Model ---- */
+    .ta-model-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+
+    /* ---- Headers ---- */
+    .ta-header-1 {
+        position: relative;
+        width: 200vw;
+        height: 100svh;
+        transform: translateX(5%);
+        will-change: transform;
+    }
+
+    .ta-header-2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200vw;
+        height: 100svh;
+        color: var(--ta-text-light);
+        transform: translateX(100%);
+        z-index: 2;
+    }
+
+    .ta-header-1,
+    .ta-header-2 {
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .ta-header-1 h1,
+    .ta-header-2 h1 {
+        width: 100%;
+        font-size: 12vw;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+    }
+
+    .ta-header-1 h1 {
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .ta-header-2 h1 {
+        background: linear-gradient(
+            to right,
+            #2a2a2a,
+            #c0c0c0,
+            #ffffff,
+            #2a2a2a,
+            #2a2a2a,
+            #c0c0c0,
+            #ffffff,
+            #2a2a2a
+        );
+        background-size: 250%;
+        background-position: left;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: ta-silver-shimmer 4s linear infinite;
+    }
+
+    @keyframes ta-silver-shimmer {
+        0% {
+            background-position: left;
+        }
+        100% {
+            background-position: right;
+        }
+    }
+
+    /* ---- SplitText animation helpers ---- */
+    :global(.ta-header-1 h1 .word) {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    :global(.ta-header-1 h1 .word > span) {
+        position: relative;
+        display: block;
+        transform: translateY(100%);
+        will-change: transform;
+        background: linear-gradient(
+            to right,
+            #77530a,
+            #ffd277,
+            #fffbe6,
+            #77530a,
+            #77530a,
+            #ffd277,
+            #fffbe6,
+            #77530a
+        );
+        background-size: 250%;
+        background-position: left;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: ta-gold-shimmer 8s linear infinite;
+    }
+
+    @keyframes ta-gold-shimmer {
+        0% {
+            background-position: left;
+        }
+        100% {
+            background-position: right;
+        }
+    }
+
+    /* ---- Circular Mask ---- */
+    .ta-circular-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--ta-bg-dark);
+        clip-path: circle(0% at 50% 50%);
+    }
+
+    /* ---- Creator Tooltips ---- */
+    .ta-tooltips {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 80%;
+        display: flex;
+        gap: 10rem;
+    }
+
+    .ta-tooltip {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        color: var(--ta-text-light);
+    }
+
+    .ta-tooltip:nth-child(2) {
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .ta-divider {
+        position: relative;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            #7a5200 0%,
+            #c8972d 15%,
+            #ffd700 30%,
+            #fffbe6 42%,
+            #ffd700 55%,
+            #b8821c 70%,
+            #7a5200 100%
+        );
+        background-size: 300% auto;
+        margin: 0.5rem 0;
+        transform: scaleX(0);
+        animation: ta-divider-shimmer 3s linear infinite;
+    }
+
+    @keyframes ta-divider-shimmer {
+        0% {
+            background-position: 0% center;
+        }
+        100% {
+            background-position: 300% center;
+        }
+    }
+
+    .ta-tooltip:nth-child(1) .ta-divider {
+        transform-origin: left center;
+    }
+
+    .ta-tooltip:nth-child(2) .ta-divider {
+        transform-origin: right center;
+    }
+
+    /* ---- Creator Avatar ---- */
+    .ta-avatar-clip {
+        overflow: hidden;
+        display: flex;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+    }
+
+    .ta-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid var(--ta-gold);
+        box-shadow: 0 0 20px rgba(212, 168, 75, 0.25);
+        flex-shrink: 0;
+        transform: translateY(120%);
+    }
+
+    .ta-avatar img {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        display: block;
+        border-radius: 50%;
+        filter: grayscale(20%);
+        transition: filter 0.4s ease;
+    }
+
+    .ta-avatar:hover img {
+        filter: grayscale(0%);
+    }
+
+    /* ---- Tooltip text ---- */
+    .ta-tooltip h2 {
+        font-size: 2.75rem;
+        font-weight: 500;
+        line-height: 1.125;
+        letter-spacing: -0.03rem;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .ta-tooltip p {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .ta-description {
+        color: var(--ta-text-muted);
+        width: 80%;
+    }
+
+    .ta-tooltip:nth-child(2) .ta-description {
+        width: 80%;
+    }
+
+    /* SplitText helpers for tooltips */
+    :global(.ta-tooltip .ta-title .line),
+    :global(.ta-tooltip .ta-description .line) {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    :global(.ta-tooltip .ta-title .line > span),
+    :global(.ta-tooltip .ta-description .line > span) {
+        position: relative;
+        display: block;
+        transform: translateY(100%);
+        will-change: transform;
+    }
+
+    :global(.ta-tooltip .ta-title .line > span) {
+        background: linear-gradient(
+            105deg,
+            #7a5200 0%,
+            #c8972d 12%,
+            #ffd700 25%,
+            #fffbe6 36%,
+            #ffd700 47%,
+            #e8c97a 60%,
+            #b8821c 75%,
+            #ffd700 87%,
+            #7a5200 100%
+        );
+        background-size: 250% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: ta-gold-shimmer 4s linear infinite;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1000px) {
+        .ta-intro h1,
+        .ta-outro h1 {
+            font-size: 2.5rem;
+        }
+
+        .ta-tooltip h2 {
+            font-size: 1.6rem;
+        }
+
+        .ta-tooltips {
+            width: 100%;
+            align-items: center;
+            flex-direction: column;
+            gap: 3rem;
+            padding-top: 5rem;
+        }
+
+        .ta-tooltip {
+            width: 90%;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ta-tooltip:nth-child(2) {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ta-divider {
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ta-tooltip:nth-child(1) .ta-divider,
+        .ta-tooltip:nth-child(2) .ta-divider {
+            transform-origin: center center;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--ta-gold) 50%,
+                transparent 100%
+            );
+        }
+
+        .ta-tooltip:nth-child(2) .ta-title,
+        .ta-tooltip:nth-child(2) .ta-description,
+        .ta-description {
+            width: 100%;
+        }
+
+        .ta-header-1,
+        .ta-header-2 {
+            height: auto;
+            min-height: 50svh;
+            display: flex;
+            align-items: center;
+        }
+
+        .ta-header-2 h1 {
+            font-size: 5vw;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .ta-intro h1,
+        .ta-outro h1 {
+            font-size: 1.8rem;
+        }
+
+        .ta-tooltip h2 {
+            font-size: 1.3rem;
+        }
+
+        .ta-header-2 h1 {
+            font-size: 6vw;
+        }
+    }
+</style>
+
+<script>
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    import { SplitText } from "gsap/SplitText";
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    declare global {
+        interface Window {
+            initTikTokAwardAnimation?: () => void;
+        }
+    }
+
+    window.initTikTokAwardAnimation = () => {
+        // ---- SplitText Setup ----
+        document.fonts.ready.then(() => {
+            const header1Split = new SplitText(".ta-header-1 h1", {
+                type: "words",
+                wordsClass: "word",
+            });
+
+            const titleSplits = new SplitText(".ta-tooltip .ta-title h2", {
+                type: "lines",
+                linesClass: "line",
+            });
+
+            const descriptionSplits = new SplitText(
+                ".ta-tooltip .ta-description p",
+                {
+                    type: "lines",
+                    linesClass: "line",
+                },
+            );
+
+            (header1Split.words as HTMLElement[]).forEach((word) => {
+                word.innerHTML = `<span>${word.textContent}</span>`;
+            });
+            (
+                [
+                    ...titleSplits.lines,
+                    ...descriptionSplits.lines,
+                ] as HTMLElement[]
+            ).forEach((line) => {
+                line.innerHTML = `<span>${line.textContent}</span>`;
+            });
+
+            ScrollTrigger.create({
+                trigger: ".ta-product-overview",
+                start: "top 75%",
+                onEnter: () =>
+                    gsap.to(".ta-header-1 h1 .word > span", {
+                        y: "0%",
+                        duration: 1,
+                        ease: "power3.out",
+                        stagger: 0.025,
+                    }),
+                onLeaveBack: () =>
+                    gsap.to(".ta-header-1 h1 .word > span", {
+                        y: "100%",
+                        duration: 1,
+                        ease: "power3.out",
+                        stagger: 0.025,
+                    }),
+            });
+
+            ScrollTrigger.refresh();
+        });
+
+        // ---- Animation options ----
+        const animOptions = { duration: 1, ease: "power3.out", stagger: 0.025 };
+        const tooltipSelectors = [
+            {
+                trigger: 0.65,
+                elements: [
+                    ".ta-tooltip:nth-child(1) .ta-avatar",
+                    ".ta-tooltip:nth-child(1) .ta-title .line > span",
+                    ".ta-tooltip:nth-child(1) .ta-description .line > span",
+                ],
+            },
+            {
+                trigger: 0.85,
+                elements: [
+                    ".ta-tooltip:nth-child(2) .ta-avatar",
+                    ".ta-tooltip:nth-child(2) .ta-title .line > span",
+                    ".ta-tooltip:nth-child(2) .ta-description .line > span",
+                ],
+            },
+        ];
+
+        // ---- Three.js Setup ----
+        let model: THREE.Group | undefined;
+        let currentRotation = 0;
+        let modelSize: THREE.Vector3 | undefined;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            60,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000,
+        );
+        const renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true,
+        });
+
+        renderer.setClearColor(0x000000, 0);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+
+        const container = document.querySelector(".ta-model-container");
+        if (container) {
+            container.appendChild(renderer.domElement);
+        }
+
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmremGenerator.fromScene(
+            new RoomEnvironment(),
+        ).texture;
+
+        // Ambient light
+        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+        // Stage spotlight — gold tone from above
+        const stageLight = new THREE.SpotLight(0xffa500, 150.0);
+        stageLight.position.set(15, 30, 15);
+        stageLight.angle = Math.PI / 4;
+        stageLight.penumbra = 0.5;
+        stageLight.decay = 2;
+        stageLight.distance = 100;
+        stageLight.castShadow = true;
+        stageLight.shadow.bias = -0.001;
+        stageLight.shadow.mapSize.width = 1024;
+        stageLight.shadow.mapSize.height = 1024;
+        scene.add(stageLight);
+
+        // Fill light — orange-red rim
+        const fillLight = new THREE.DirectionalLight(0xff6600, 10.0);
+        fillLight.position.set(-5, 0, -2);
+        scene.add(fillLight);
+
+        // Bounce light from below
+        const bounceLight = new THREE.DirectionalLight(0xffccaa, 5.0);
+        bounceLight.position.set(2, -4, 4);
+        scene.add(bounceLight);
+
+        // Front spotlight — white fill
+        const frontLight = new THREE.SpotLight(0xffffff, 40.0);
+        frontLight.position.set(0, 0, 15);
+        frontLight.angle = Math.PI / 4;
+        frontLight.penumbra = 0.8;
+        scene.add(frontLight);
+
+        function setupModel() {
+            if (!model || !modelSize) return;
+
+            const isMobile = window.innerWidth < 1000;
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+
+            model.position.set(
+                isMobile
+                    ? center.x + modelSize.x * 1
+                    : -center.x - modelSize.x * 0.4,
+                -center.y + modelSize.y * 0.085,
+                -center.z,
+            );
+
+            model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(-35);
+
+            const cameraDistance = isMobile ? 2 : 1.25;
+            camera.position.set(
+                0,
+                0,
+                Math.max(modelSize.x, modelSize.y, modelSize.z) *
+                    cameraDistance,
+            );
+            camera.lookAt(0, 0, 0);
+        }
+
+        new GLTFLoader().load("/tiktok-award/tiktokaward.glb", (gltf) => {
+            const loadedModel = gltf.scene;
+            model = loadedModel;
+
+            loadedModel.traverse((node: THREE.Object3D) => {
+                if (
+                    (node as THREE.Mesh).isMesh &&
+                    (node as THREE.Mesh).material instanceof
+                        THREE.MeshStandardMaterial
+                ) {
+                    const mat = (node as THREE.Mesh)
+                        .material as THREE.MeshStandardMaterial;
+                    Object.assign(mat, {
+                        metalness: 1,
+                        roughness: 0.2,
+                        color: new THREE.Color(0xffd700),
+                    });
+                }
+            });
+
+            const box = new THREE.Box3().setFromObject(loadedModel);
+            const size = box.getSize(new THREE.Vector3());
+            modelSize = size;
+
+            scene.add(loadedModel);
+            setupModel();
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener("resize", () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            setupModel();
+        });
+
+        // ---- Scroll-driven animations ----
+        ScrollTrigger.create({
+            trigger: ".ta-product-overview",
+            start: "top top",
+            end: `+=${window.innerHeight * 10}px`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            onUpdate: ({ progress }) => {
+                // Header 1 parallax
+                const headerProgress = Math.max(
+                    0,
+                    Math.min(1, (progress - 0.05) / 0.3),
+                );
+                gsap.to(".ta-header-1", {
+                    xPercent:
+                        progress < 0.05
+                            ? 0
+                            : progress > 0.35
+                              ? -100
+                              : -100 * headerProgress,
+                });
+
+                // Circular mask reveal
+                const maskSize =
+                    progress < 0.2
+                        ? 0
+                        : progress > 0.3
+                          ? 100
+                          : 100 * ((progress - 0.2) / 0.1);
+                gsap.to(".ta-circular-mask", {
+                    clipPath: `circle(${maskSize}% at 50% 50%)`,
+                });
+
+                // Header 2 parallax
+                const header2Progress = (progress - 0.15) / 0.35;
+                const header2XPercent =
+                    progress < 0.15
+                        ? 100
+                        : progress > 0.5
+                          ? -250
+                          : 100 - 350 * header2Progress;
+                gsap.to(".ta-header-2", {
+                    xPercent: header2XPercent,
+                });
+
+                // Divider scale
+                const scaleX =
+                    progress < 0.45
+                        ? 0
+                        : progress > 0.65
+                          ? 100
+                          : 100 * ((progress - 0.45) / 0.2);
+                gsap.to(".ta-tooltips .ta-divider", {
+                    scaleX: `${scaleX}%`,
+                    ...animOptions,
+                });
+
+                // Tooltip reveals
+                tooltipSelectors.forEach(({ trigger, elements }) => {
+                    gsap.to(elements, {
+                        y: progress > trigger ? 0 : "125%",
+                        ...animOptions,
+                    });
+                });
+
+                // 3D model rotation + lighting
+                if (model && progress > 0.05) {
+                    const rotationProgress = (progress - 0.05) / 0.95;
+                    const targetRotation = Math.PI * 3 * 4 * rotationProgress;
+                    const rotationDiff = targetRotation - currentRotation;
+                    if (Math.abs(rotationDiff) > 0.001) {
+                        model.rotateOnAxis(
+                            new THREE.Vector3(0, 1, 0),
+                            rotationDiff,
+                        );
+                        currentRotation = targetRotation;
+                    }
+
+                    // Stage light orbits the model
+                    const lightAngle = progress * Math.PI * 4;
+                    stageLight.position.x = Math.sin(lightAngle) * 20;
+                    stageLight.position.z = Math.cos(lightAngle) * 20;
+                    stageLight.position.y =
+                        30 + Math.sin(progress * Math.PI * 2) * 5;
+
+                    // Background color transition (light → dark)
+                    const bgProgress = Math.max(
+                        0,
+                        Math.min(1, (progress - 0.2) / 0.3),
+                    );
+                    const whiteToBlackVal = Math.floor(255 - 242 * bgProgress);
+                    gsap.to(".ta-product-overview", {
+                        backgroundColor: `rgb(${whiteToBlackVal}, ${whiteToBlackVal}, ${whiteToBlackVal})`,
+                        duration: 0.1,
+                    });
+                }
+            },
+        });
+    };
+</script>
