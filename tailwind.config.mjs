@@ -4,7 +4,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                'neon-lime': '#ccff00',
+                'neon-lime': '#c7f900',
                 'dark-bg': '#0a0a0a',
                 'card-gray': '#1f1f1f',
             },

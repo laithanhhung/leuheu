@@ -87,7 +87,7 @@
 <style>
     /* ---- Variables ---- */
     .tiktok-award-wrapper {
-        --ta-bg-dark: #0a0a0a;
+        --ta-bg-dark: #000000;
         --ta-bg-light: #f5f0e8;
         --ta-gold: #d4a84b;
         --ta-gold-bright: #ffd700;
@@ -634,7 +634,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
         renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.0;
@@ -709,7 +709,7 @@
             camera.lookAt(0, 0, 0);
         }
 
-        new GLTFLoader().load("/tiktok-award/tiktokaward.glb", (gltf) => {
+        new GLTFLoader().load("/tiktok-award/tiktokaward.glb", (gltf: any) => {
             const loadedModel = gltf.scene;
             model = loadedModel;
 
