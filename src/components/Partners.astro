@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { CldImage } from "astro-cloudinary";
 
 const partners = await getCollection("partners");
 const sortedPartners = partners.sort(
@@ -22,9 +23,12 @@ const sortedPartners = partners.sort(
         {
             sortedPartners.map((partner) => (
                 <div class="w-20 xs:w-24 md:w-32 3xl:w-48 hover:opacity-100 transition-opacity">
-                    <img
+                    <CldImage
                         src={partner.data.logo}
                         alt={partner.data.name}
+                        width={200}
+                        height={100}
+                        crop="fit"
                         class="w-full h-auto grayscale hover:grayscale-0 transition-all"
                     />
                 </div>

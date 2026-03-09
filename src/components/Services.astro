@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { CldImage } from "astro-cloudinary";
 
 const services = await getCollection("services");
 const sortedServices = services.sort(
@@ -22,9 +23,12 @@ const servicesWithContent = await Promise.all(
             servicesWithContent.map((service) => (
                 <div class="flex flex-col gap-3 xs:gap-4 3xl:gap-8">
                     <div class="overflow-hidden rounded-2xl 3xl:rounded-[2rem]">
-                        <img
+                        <CldImage
                             src={service.data.image}
                             alt={service.data.title}
+                            width={600}
+                            height={400}
+                            crop="fill"
                             class="w-full h-56 xs:h-64 3xl:h-96 object-cover hover:scale-105 transition-transform duration-500"
                         />
                     </div>

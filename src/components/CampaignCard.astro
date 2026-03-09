@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Play } from "lucide-astro";
+import { CldImage } from "astro-cloudinary";
 
 interface Props {
     campaign: CollectionEntry<"campaigns">["data"];
@@ -28,9 +29,12 @@ const { campaign, className = "" } = Astro.props;
             <div
                 class="rounded-2xl overflow-hidden shadow-2xl rotate-[-2deg] hover:rotate-0 transition-transform duration-300"
             >
-                <img
+                <CldImage
                     src={campaign.posterImage}
                     alt={campaign.title}
+                    width={400}
+                    height={600}
+                    crop="fill"
                     class="w-full h-auto object-cover aspect-[2/3]"
                 />
             </div>
@@ -84,9 +88,12 @@ const { campaign, className = "" } = Astro.props;
                 {
                     campaign.galleryImages.slice(0, 4).map((img) => (
                         <div class="relative aspect-[9/16] rounded-lg overflow-hidden group cursor-pointer">
-                            <img
+                            <CldImage
                                 src={img}
                                 alt="Gallery"
+                                width={200}
+                                height={355}
+                                crop="fill"
                                 class="w-full h-full object-cover"
                             />
                             <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">

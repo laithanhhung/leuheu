@@ -1,6 +1,7 @@
 ---
 // TikTok Award Component
 // Ported from standalone 3d-tiktok project
+import { CldImage } from "astro-cloudinary";
 ---
 
 <section class="tiktok-award-wrapper">
@@ -28,9 +29,13 @@
             <div class="ta-tooltip">
                 <div class="ta-avatar-clip">
                     <div class="ta-avatar">
-                        <img
-                            src="/tiktok-award/ran_xa_neo.png"
+                        <CldImage
+                            src="/images/creators/creators-tiktok-ranxaneo"
                             alt="Ran Xa Neo"
+                            width={150}
+                            height={150}
+                            crop="fill"
+                            gravity="faces"
                         />
                     </div>
                 </div>
@@ -51,9 +56,13 @@
             <div class="ta-tooltip">
                 <div class="ta-avatar-clip">
                     <div class="ta-avatar">
-                        <img
-                            src="/tiktok-award/ducreation.png"
+                        <CldImage
+                            src="/images/creators/creators-tiktok-ducreation"
                             alt="ducreation"
+                            width={150}
+                            height={150}
+                            crop="fill"
+                            gravity="faces"
                         />
                     </div>
                 </div>
