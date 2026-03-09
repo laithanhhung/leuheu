@@ -718,33 +718,36 @@ import { CldImage } from "astro-cloudinary";
             camera.lookAt(0, 0, 0);
         }
 
-        new GLTFLoader().load("/tiktok-award/tiktokaward.glb", (gltf: any) => {
-            const loadedModel = gltf.scene;
-            model = loadedModel;
+        new GLTFLoader().load(
+            "https://cdn.jsdelivr.net/gh/laithanhhung/3d-tiktok-award-model/tiktokaward.glb",
+            (gltf: any) => {
+                const loadedModel = gltf.scene;
+                model = loadedModel;
 
-            loadedModel.traverse((node: THREE.Object3D) => {
-                if (
-                    (node as THREE.Mesh).isMesh &&
-                    (node as THREE.Mesh).material instanceof
-                        THREE.MeshStandardMaterial
-                ) {
-                    const mat = (node as THREE.Mesh)
-                        .material as THREE.MeshStandardMaterial;
-                    Object.assign(mat, {
-                        metalness: 1,
-                        roughness: 0.2,
-                        color: new THREE.Color(0xffd700),
-                    });
-                }
-            });
+                loadedModel.traverse((node: THREE.Object3D) => {
+                    if (
+                        (node as THREE.Mesh).isMesh &&
+                        (node as THREE.Mesh).material instanceof
+                            THREE.MeshStandardMaterial
+                    ) {
+                        const mat = (node as THREE.Mesh)
+                            .material as THREE.MeshStandardMaterial;
+                        Object.assign(mat, {
+                            metalness: 1,
+                            roughness: 0.2,
+                            color: new THREE.Color(0xffd700),
+                        });
+                    }
+                });
 
-            const box = new THREE.Box3().setFromObject(loadedModel);
-            const size = box.getSize(new THREE.Vector3());
-            modelSize = size;
+                const box = new THREE.Box3().setFromObject(loadedModel);
+                const size = box.getSize(new THREE.Vector3());
+                modelSize = size;
 
-            scene.add(loadedModel);
-            setupModel();
-        });
+                scene.add(loadedModel);
+                setupModel();
+            },
+        );
 
         function animate() {
             requestAnimationFrame(animate);
