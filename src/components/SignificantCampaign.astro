@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+
+const campaigns = await getCollection("campaigns");
+// Sort or filter if needed, here we just use the fetched ones
+---
+
+<section>
+    <div class="container">
+        <div class="revealers">
+            <div class="reveal r-1"></div>
+            <div class="reveal r-2"></div>
+        </div>
+        <div class="images">
+            {
+                campaigns.map((campaign) => (
+                    <div class={`img ${campaign.data.isMain ? 'main' : ''}`.trim()}>
+                        <img
+                            src={campaign.data.posterImage}
+                            alt={campaign.data.title}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <style></style>
+
+    <script>
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+        import { SplitText } from "gsap/SplitText";
+
+        gsap.registerPlugin(ScrollTrigger, SplitText);
+    </script>
+</section>

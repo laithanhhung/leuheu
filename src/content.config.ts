@@ -13,6 +13,7 @@ const campaigns = defineCollection({
         posterImage: z.string(),
         galleryImages: z.array(z.string()),
         isDark: z.boolean().default(false),
+        isMain: z.boolean().optional(),
         order: z.number().default(0),
     }),
 });

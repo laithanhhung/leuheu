@@ -12,5 +12,7 @@ galleryImages:
   - "https://picsum.photos/200/300?random=17"
   - "https://picsum.photos/200/300?random=18"
 description:
-  - "Strategic planning and executing marketing plan for the movie on TikTok platform"
+  - "Collaborated with CJ Entertainment Vietnam on media promotion for film releases in Vietnam."
+  - "The film topped the box office, earning more than 50 billion VND within its first three days."
+  - "Earned media: 26M+ engagements."
 ---
