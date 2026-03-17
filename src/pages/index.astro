@@ -6,6 +6,7 @@ import Welcome from "../components/Welcome.astro";
 import About from "../components/About.astro";
 import Stats from "../components/Stats.astro";
 import Services from "../components/Services.astro";
+import WaveDivider from "../components/WaveDivider.astro";
 import CampaignSection from "../components/CampaignSection.astro";
 import Partners from "../components/Partners.astro";
 import Footer from "../components/Footer.astro";
@@ -63,150 +64,7 @@ import TikTokAward from "../components/TikTokAward.astro";
             <!-- Services -->
             <Services />
             <!-- Background SVG -->
-            <section
-                class="overflow-hidden relative flex flex-col items-center justify-center -mb-2"
-            >
-                <!-- Layer 1 (Back) -->
-                <svg
-                    class="w-[150vw] md:w-[120vw] flex-shrink-0 h-auto opacity-30 -translate-x-[2vw]"
-                    viewBox="0 0 1537 160"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle cx="96" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="160" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="224" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="288" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="352" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="416" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="480" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="544" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="608" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="672" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="736" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="800" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="864" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="928" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="992" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1056" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1120" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1184" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1248" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1312" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1376" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1440" cy="32" r="32" fill="#C7F900"></circle>
-                    <rect y="32" width="1537" height="128" fill="#C7F900"
-                    ></rect>
-                    <circle cx="1504" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="32" cy="32" r="32" fill="#C7F900"></circle>
-                </svg>
-
-                <!-- Layer 2 (Middle) -->
-                <svg
-                    class="w-[150vw] md:w-[120vw] flex-shrink-0 h-auto opacity-60 translate-x-[1vw] -mt-[13.4vw] md:-mt-[10.5vw] drop-shadow-lg"
-                    viewBox="0 0 1537 160"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle cx="96" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="160" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="224" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="288" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="352" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="416" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="480" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="544" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="608" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="672" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="736" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="800" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="864" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="928" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="992" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1056" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1120" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1184" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1248" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1312" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1376" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1440" cy="32" r="32" fill="#C7F900"></circle>
-                    <rect y="32" width="1537" height="128" fill="#C7F900"
-                    ></rect>
-                    <circle cx="1504" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="32" cy="32" r="32" fill="#C7F900"></circle>
-                </svg>
-                <!-- Layer 3 (Front) -->
-                <svg
-                    class="w-[150vw] md:w-[120vw] flex-shrink-0 h-auto opacity-100 -translate-x-[2vw] -mt-[13.4vw] md:-mt-[10.5vw] drop-shadow-xl z-10"
-                    viewBox="0 0 1537 160"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle cx="96" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="160" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="224" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="288" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="352" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="416" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="480" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="544" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="608" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="672" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="736" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="800" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="864" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="928" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="992" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1056" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1120" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1184" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1248" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1312" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1376" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="1440" cy="32" r="32" fill="#B0DB00"></circle>
-                    <rect y="32" width="1537" height="128" fill="#B0DB00"
-                    ></rect>
-                    <circle cx="1504" cy="32" r="32" fill="#B0DB00"></circle>
-                    <circle cx="32" cy="32" r="32" fill="#B0DB00"></circle>
-                </svg>
-                <!-- Layer 4 (Transition) -->
-                <svg
-                    class="w-[150vw] md:w-[120vw] flex-shrink-0 h-auto opacity-100 translate-x-[1vw] -mt-[13.4vw] md:-mt-[10.5vw] drop-shadow-2xl z-20"
-                    viewBox="0 0 1537 160"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle cx="96" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="160" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="224" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="288" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="352" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="416" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="480" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="544" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="608" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="672" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="736" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="800" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="864" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="928" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="992" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1056" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1120" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1184" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1248" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1312" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1376" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="1440" cy="32" r="32" fill="#C7F900"></circle>
-                    <rect y="32" width="1537" height="128" fill="#C7F900"
-                    ></rect>
-                    <circle cx="1504" cy="32" r="32" fill="#C7F900"></circle>
-                    <circle cx="32" cy="32" r="32" fill="#C7F900"></circle>
-                </svg>
-                <!-- Filler for fractional pixel gaps -->
-                <div class="w-[150vw] h-4 bg-[#C7F900] -mt-1 relative z-20">
-                </div>
-            </section>
+            <WaveDivider />
             <!-- Campaigns -->
             <CampaignSection />
             <!-- Tiktok Award -->
