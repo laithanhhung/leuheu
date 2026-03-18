@@ -1,18 +1,18 @@
 ---
-id: 'teeyod'
-title: "TOP 1 BOX OFFICE THAI MOVIE IN VIETNAM 2024"
-badge: "TEE YOD 2"
-posterImage: "https://picsum.photos/400/600?random=3"
+id: 'teeyod3'
+title: "TEE YOD 3"
+badge: "TEE YOD 3"
+posterImage: "Thám_tử_Kiên_dg4uzb"
+horizontalImage: "Thám_tử_Kiên_dg4uzb"
 isDark: true
-order: 3
-mainStat: "30M+ video"
-secondaryStat: ""
+order: 17
+mainStat: "30M views clip viral san xuất"
+secondaryStat: "Top 3 trending TikTok"
 galleryImages:
-  - "https://picsum.photos/200/300?random=16"
-  - "https://picsum.photos/200/300?random=17"
-  - "https://picsum.photos/200/300?random=18"
+  - "https://picsum.photos/200/300?random=25"
+  - "https://picsum.photos/200/300?random=26"
+  - "https://picsum.photos/200/300?random=27"
 description:
-  - "Collaborated with CJ Entertainment Vietnam on media promotion for film releases in Vietnam."
-  - "The film topped the box office, earning more than 50 billion VND within its first three days."
-  - "Earned media: 26M+ engagements."
+  - "Lead the strategic planning and executing marketing plan for the movie on TikTok platform."
+  - "More than 200 videos and 30M views"
 ---

@@ -2,7 +2,8 @@
 id: 'anmang'
 title: "ÁN MẠNG LẨU 4 MOVIE"
 badge: "ÁN MẠNG LẨU 4 MOVIE"
-posterImage: "https://picsum.photos/400/600?random=6"
+posterImage: "Thám_tử_Kiên_dg4uzb"
+horizontalImage: "MMDB_a6vkbl"
 isDark: true
 order: 6
 mainStat: "30M views clip viral san xuất"

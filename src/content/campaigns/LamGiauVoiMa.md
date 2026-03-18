@@ -1,18 +1,18 @@
 ---
-id: 'lamgiau'
-title: "HIGHEST EARNING MOVIE IN VIETNAM NATIONAL HOLIDAY (2/9)"
-badge: "LÀM GIÀU VỚI MA MOVIE"
-posterImage: "https://picsum.photos/400/600?random=4"
-isDark: false
-order: 4
-mainStat: "50M+ views"
-secondaryStat: ""
+id: 'lamgiauvoima'
+title: "LÀM GIÀU VỚI MA"
+badge: "LÀM GIÀU VỚI MA"
+posterImage: "Thám_tử_Kiên_dg4uzb"
+horizontalImage: "Thám_tử_Kiên_dg4uzb"
+isDark: true
+order: 11
+mainStat: "30M views clip viral san xuất"
+secondaryStat: "Top 3 trending TikTok"
 galleryImages:
-  - "https://picsum.photos/150/250?random=19"
-  - "https://picsum.photos/150/250?random=20"
-  - "https://picsum.photos/150/250?random=21"
-  - "https://picsum.photos/150/250?random=22"
+  - "https://picsum.photos/200/300?random=25"
+  - "https://picsum.photos/200/300?random=26"
+  - "https://picsum.photos/200/300?random=27"
 description:
-  - "Strategic planning and executing marketing plan for the movie on TikTok platform."
-  - "More than 200 videos and 50M views"
+  - "Lead the strategic planning and executing marketing plan for the movie on TikTok platform."
+  - "More than 200 videos and 30M views"
 ---

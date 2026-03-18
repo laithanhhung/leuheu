@@ -1,16 +1,18 @@
 ---
-id: 'keanhon'
-title: "KẺ ĂN HỒN MOVIE"
-badge: "KẺ ĂN HỒN MOVIE"
-posterImage: "https://picsum.photos/400/600?random=5"
+id: 'teeyod2'
+title: "TEE YOD 2"
+badge: "TEE YOD 2"
+posterImage: "Thám_tử_Kiên_dg4uzb"
+horizontalImage: "Thám_tử_Kiên_dg4uzb"
 isDark: true
-order: 5
-mainStat: "150M+ views on TikTok"
-secondaryStat: "50M+ views ON PRODUCED VIDEOS"
+order: 16
+mainStat: "30M views clip viral san xuất"
+secondaryStat: "Top 3 trending TikTok"
 galleryImages:
-  - "https://picsum.photos/300/200?random=23"
-  - "https://picsum.photos/300/200?random=24"
+  - "https://picsum.photos/200/300?random=25"
+  - "https://picsum.photos/200/300?random=26"
+  - "https://picsum.photos/200/300?random=27"
 description:
   - "Lead the strategic planning and executing marketing plan for the movie on TikTok platform."
-  - "More than 300 videos and 150M views"
+  - "More than 200 videos and 30M views"
 ---

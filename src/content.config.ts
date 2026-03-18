@@ -11,9 +11,12 @@ const campaigns = defineCollection({
         mainStat: z.string().optional(),
         secondaryStat: z.string().optional(),
         posterImage: z.string(),
+        horizontalImage: z.string(),
         galleryImages: z.array(z.string()),
         isDark: z.boolean().default(false),
+        isFilm: z.boolean().default(false),
         isMain: z.boolean().optional(),
+        isSignificant: z.boolean().optional(),
         order: z.number().default(0),
     }),
 });

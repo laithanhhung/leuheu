@@ -1,37 +1,411 @@
 ---
 import { getCollection } from "astro:content";
+import { CldImage } from "astro-cloudinary";
 
 const campaigns = await getCollection("campaigns");
 // Sort or filter if needed, here we just use the fetched ones
 ---
 
-<section>
-    <div class="container">
+<section
+    id="significant-campaign"
+    class="bg-black overflow-hidden h-screen w-full flex items-center justify-center"
+>
+    <div class="container w-full h-full">
         <div class="revealers">
-            <div class="reveal r-1"></div>
-            <div class="reveal r-2"></div>
+            <div class="revealer r-1"></div>
+            <div class="revealer r-2"></div>
         </div>
+
         <div class="images">
             {
                 campaigns.map((campaign) => (
-                    <div class={`img ${campaign.data.isMain ? 'main' : ''}`.trim()}>
-                        <img
-                            src={campaign.data.posterImage}
+                    <div class:list={["img", { main: campaign.data.isMain }]}>
+                        <CldImage
+                            src={campaign.data.horizontalImage || campaign.data.posterImage}
                             alt={campaign.data.title}
                         />
                     </div>
                 ))
             }
         </div>
+
+        <div class="hero-content">
+            <div class="site-logo">
+                <div class="logo-content">
+                    <div class="word">
+                        <h1>SIGNIFICANT</h1>
+                    </div>
+                    <div class="word">
+                        <h1>CAMPAIGNS</h1>
+                    </div>
+                </div>
+                <div class="word">
+                    <p>#leuheu with partners</p>
+                </div>
+            </div>
+
+            <div class="cover-img rounded-lg overflow-hidden">
+                {
+                    campaigns.length > 0 && (
+                        <CldImage
+                            src={campaigns[0].data.horizontalImage || campaigns[0].data.posterImage}
+                            alt={campaigns[0].data.title}
+                        />
+                    )
+                }
+            </div>
+
+            <div class="site-info">
+                <div class="row">
+                    <div class="col">
+                        <div class="line">
+                            <p>Highlight Campaigns</p>
+                        </div>
+                    </div>
+                    <div class="col images-col flex flex-col gap-4 w-full">
+                        {
+                            campaigns
+                                .filter((campaign) => !campaign.data.isMain)
+                                .slice(0, 2)
+                                .map((campaign) => (
+                                    <div class="line w-full">
+                                        <CldImage
+                                            class="info-img w-full h-full object-cover"
+                                            src={
+                                                campaign.data.horizontalImage ||
+                                                campaign.data.posterImage
+                                            }
+                                            alt={campaign.data.title}
+                                        />
+                                    </div>
+                                ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <style></style>
+    <style>
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+            font-family: "PP Neue Montreal", sans-serif;
+        }
+
+        .revealers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .revealer {
+            flex: 1;
+            width: 100%;
+            background-color: #fff;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        .images {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        .img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.5);
+            width: 100%;
+            height: 100%;
+            visibility: visible;
+            will-change: transform;
+            opacity: 0;
+        }
+
+        :global(.img img) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .img:first-child {
+            opacity: 1;
+        }
+
+        .images.stacked-container {
+            position: fixed;
+            left: 2em;
+            bottom: 2em;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 1em;
+            transform: none;
+            will-change: transform;
+        }
+
+        .img.stacked {
+            position: relative;
+            width: 150px;
+            height: 100px;
+            transform: none;
+            top: auto;
+            left: auto;
+            opacity: 1;
+            will-change: transform;
+        }
+
+        :global(.img.stacked img) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .site-logo {
+            position: absolute;
+            top: 2em;
+            left: 2em;
+            display: flex;
+            gap: 1em;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .logo-content {
+            display: flex;
+        }
+
+        .site-logo h1 {
+            color: #fff;
+            font-size: 5vw;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        .cover-img {
+            border-radius: 10px;
+            position: absolute;
+            right: 2em;
+            bottom: 2em;
+            width: 40%;
+            height: 50%;
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        }
+
+        :global(.cover-img img) {
+            filter: saturate(0);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .site-info {
+            position: absolute;
+            bottom: 2em;
+            left: 2em;
+            width: 50%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .site-info .row {
+            display: flex;
+            gap: 2em;
+        }
+
+        .site-info .row .col {
+            flex: 1;
+        }
+
+        .images-col {
+            display: flex;
+            gap: 1em;
+        }
+
+        .images-col .line {
+            flex: 1;
+            height: auto;
+            aspect-ratio: 16/9;
+        }
+
+        :global(.info-img) {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateY(150%);
+            will-change: transform;
+        }
+
+        .site-info p {
+            text-transform: uppercase;
+            font-family: "Apercu Mono Pro", monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: #fff;
+            margin: 0;
+        }
+
+        .word,
+        .line {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .word h1,
+        .word p,
+        .line p {
+            position: relative;
+            will-change: transform;
+            transform: translateY(100%);
+        }
+
+        .word p {
+            display: block;
+        }
+    </style>
 
     <script>
         import { gsap } from "gsap";
-        import { ScrollTrigger } from "gsap/ScrollTrigger";
-        import { SplitText } from "gsap/SplitText";
+        import { CustomEase, Flip, ScrollTrigger } from "gsap/all";
 
-        gsap.registerPlugin(ScrollTrigger, SplitText);
+        gsap.registerPlugin(Flip, CustomEase, ScrollTrigger);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            CustomEase.create(
+                "hop",
+                "M0,0 C0.355,0.022 0.448,0.079 0.5,0.5 0.542,0.846 0.615,1 1,1",
+            );
+            CustomEase.create(
+                "hop2",
+                "M0,0 C0.078,0.617 0.114,0.716 0.255,0.828 0.373,0.922 0.561,1 1,1",
+            );
+
+            const mainTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#significant-campaign",
+                    start: "bottom 100%",
+                },
+            });
+            const revealer = gsap.timeline();
+            const scaleTl = gsap.timeline();
+
+            revealer
+                .to(".r-1", {
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+                    duration: 1.5,
+                    ease: "hop",
+                })
+                .to(
+                    ".r-2",
+                    {
+                        clipPath:
+                            "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+                        duration: 0.5,
+                        ease: "hop",
+                    },
+                    "<",
+                );
+
+            scaleTl.to(".img:first-child", {
+                scale: 1,
+                duration: 1.5,
+                ease: "power4.inOut",
+            });
+
+            const images = document.querySelectorAll(".img:not(:first-child)");
+            images.forEach((image) => {
+                scaleTl.to(
+                    image,
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.7,
+                        ease: "power3.out",
+                    },
+                    ">-0.5",
+                );
+            });
+
+            mainTl
+                .add(revealer)
+                .add(scaleTl, "-=1.25")
+                .add(() => {
+                    document
+                        .querySelectorAll(".img:not(.main)")
+                        .forEach((image) => {
+                            image.remove();
+                        });
+
+                    const state = Flip.getState(".main");
+
+                    const imagesContainer = document.querySelector(".images");
+                    if (imagesContainer) {
+                        imagesContainer.classList.add("stacked-container");
+                    }
+
+                    document
+                        .querySelectorAll(".main")
+                        .forEach((image, index) => {
+                            image.classList.add("stacked");
+                            if (image instanceof HTMLElement) {
+                                image.style.order = index.toString();
+                            }
+                            gsap.set(image, {
+                                clearProps: "transform, top, left",
+                            });
+                        });
+
+                    Flip.from(state, {
+                        duration: 2,
+                        ease: "hop",
+                        absolute: true,
+                        stagger: {
+                            amount: -0.3,
+                        },
+                    });
+                })
+                .to(".word h1, .word p, .line p, .info-img", {
+                    y: 0,
+                    duration: 3,
+                    ease: "hop2",
+                    stagger: 0.1,
+                    delay: 1.25,
+                })
+                .to(".cover-img", {
+                    clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0% 0%)",
+                    duration: 1.5,
+                    ease: "hop",
+                    delay: -4.75,
+                });
+        });
     </script>
 </section>
