@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import CampaignCard from "./CampaignCard.astro";
+import SignificantCampaign from "./SignificantCampaign.astro";
 
 const campaigns = await getCollection("campaigns");
 const sortedCampaigns = campaigns.sort(
@@ -10,34 +11,11 @@ const sortedCampaigns = campaigns.sort(
 
 <section class="relative w-full">
     {/* Campaign Cards Loop */}
-    <div class="campaigns-container w-full">
+    <div class="campaigns-container w-full bg-neon-lime">
         <div
             class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0"
         >
-            <div
-                class="campaign-card relative w-full h-full flex items-center bg-neon-lime origin-bottom-left"
-            >
-                <div
-                    class="max-w-4xl 3xl:max-w-7xl mx-auto bg-white rounded-[1.5rem] xs:rounded-[2rem] p-6 xs:p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 xs:gap-12 mb-16 xs:mb-20"
-                >
-                    <div class="flex-1 w-full text-center md:text-left">
-                        <h2
-                            class="text-3xl xs:text-4xl md:text-6xl 3xl:text-7xl font-black text-black uppercase leading-none"
-                        >
-                            Significant <br />
-                            <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-600"
-                                >Campaigns</span
-                            >
-                        </h2>
-                        <p
-                            class="mt-4 text-gray-600 font-medium text-sm xs:text-base 3xl:text-xl"
-                        >
-                            #leuheu with partners
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <SignificantCampaign className="campaign-card" />
         </div>
         {
             sortedCampaigns.map((campaign, index) => (
@@ -79,7 +57,7 @@ const sortedCampaigns = campaigns.sort(
                 scrollTrigger: {
                     trigger: container,
                     start: "top bottom",
-                    end: "top 20%",
+                    end: "top 0%",
                     scrub: true,
                 },
             });
