@@ -28,6 +28,9 @@
         "posterImage": {
           "type": "string"
         },
+        "horizontalImage": {
+          "type": "string"
+        },
         "galleryImages": {
           "type": "array",
           "items": {
@@ -38,7 +41,17 @@
           "type": "boolean",
           "default": false
         },
+        "isFilm": {
+          "type": "boolean",
+          "default": false
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
         "isMain": {
+          "type": "boolean"
+        },
+        "isSignificant": {
           "type": "boolean"
         },
         "order": {
@@ -54,6 +67,7 @@
         "title",
         "description",
         "posterImage",
+        "horizontalImage",
         "galleryImages"
       ],
       "additionalProperties": false

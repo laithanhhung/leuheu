@@ -15,6 +15,7 @@ const campaigns = defineCollection({
         galleryImages: z.array(z.string()),
         isDark: z.boolean().default(false),
         isFilm: z.boolean().default(false),
+        backgroundColor: z.string().optional(),
         isMain: z.boolean().optional(),
         isSignificant: z.boolean().optional(),
         order: z.number().default(0),
