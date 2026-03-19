@@ -1,45 +1,355 @@
 ---
-import { getCollection, render } from "astro:content";
-import { CldImage } from "astro-cloudinary";
+import { getCollection } from "astro:content";
 
 const services = await getCollection("services");
 const sortedServices = services.sort(
     (a, b) => (a.data.order || 0) - (b.data.order || 0),
 );
 
-const servicesWithContent = await Promise.all(
-    sortedServices.map(async (service) => {
-        const { Content } = await render(service);
-        return { ...service, Content };
-    }),
-);
+const colors = ["#fe6d38", "#c6fe69", "#7a78ff"];
+
+const keywords = [
+    "communication",
+    "attention",
+    "impact",
+    "engagement",
+    "shareability",
+    "visibility",
+    "growth",
+    "creativity",
+    "connections",
+    "strategic",
+    "production",
+    "partner",
+];
 ---
 
-<section class="text-black py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16">
-    <div
-        class="max-w-7xl 3xl:max-w-[100rem] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xs:gap-12 3xl:gap-16"
-    >
-        {
-            servicesWithContent.map((service) => (
-                <div class="flex flex-col gap-3 xs:gap-4 3xl:gap-8">
-                    <div class="overflow-hidden rounded-2xl 3xl:rounded-[2rem]">
-                        <CldImage
-                            src={service.data.image}
-                            alt={service.data.title}
-                            width={600}
-                            height={400}
-                            crop="fill"
-                            class="w-full h-56 xs:h-64 3xl:h-96 object-cover hover:scale-105 transition-transform duration-500"
-                        />
+<div class="svc-wrapper">
+    {
+        sortedServices.map((service, i) => (
+            <>
+                {/* Title section */}
+                <section
+                    class={`svc-title svc-title-${i + 1}`}
+                    style={`--svc-color: ${colors[i % colors.length]}`}
+                >
+                    <div class="svc-copy-container">
+                        <h2>{service.data.title}</h2>
                     </div>
-                    <h3 class="text-xl xs:text-2xl 3xl:text-4xl font-black uppercase mt-2 xs:mt-4 3xl:mt-6">
-                        {service.data.title}
-                    </h3>
-                    <div class="text-gray-600 font-medium text-sm xs:text-base 3xl:text-xl">
-                        <service.Content />
+                </section>
+
+                {/* Info / animated text section */}
+                <section
+                    class={`svc-info svc-info-${i + 1} svc-anime-container`}
+                >
+                    <div class="svc-copy-container">
+                        <div class="svc-anime-text">
+                            <p>{service.data.info}</p>
+                        </div>
                     </div>
-                </div>
-            ))
-        }
-    </div>
-</section>
+                </section>
+            </>
+        ))
+    }
+</div>
+
+<style is:global>
+    .svc-wrapper .svc-title,
+    .svc-wrapper .svc-info {
+        position: relative;
+        width: 100vw;
+        height: 100svh;
+        padding: 2em;
+        overflow: hidden;
+    }
+
+    .svc-wrapper .svc-copy-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 2rem;
+    }
+
+    .svc-wrapper .svc-title .svc-copy-container {
+        background: var(--svc-color);
+    }
+
+    .svc-wrapper .svc-info .svc-copy-container {
+        border: 0.15rem dashed rgb(60, 60, 60);
+    }
+
+    .svc-wrapper .svc-copy-container h2 {
+        color: #141414;
+        font-size: clamp(2rem, 5vw, 5rem);
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    /* Anime text */
+    .svc-wrapper .svc-anime-text {
+        width: 75%;
+    }
+
+    .svc-wrapper .svc-anime-text p {
+        color: #fff;
+        text-align: center;
+        font-size: clamp(1.25rem, 2vw, 2rem);
+        font-weight: 900;
+        line-height: 1.4;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word {
+        display: inline-block;
+        position: relative;
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+        padding: 0.1rem 0.2rem;
+        border-radius: 2rem;
+        will-change: background-color, opacity;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word.svc-keyword-wrapper {
+        margin: 0 0.4rem 0.2rem 0.2rem;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word span {
+        font-weight: 900;
+        color: #fff;
+        font-size: clamp(1.25rem, 2vw, 2rem);
+        position: relative;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word span.svc-keyword {
+        display: inline-block;
+        border-radius: 2rem;
+        padding: 0.1rem 0;
+        color: #141414;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word span.svc-keyword::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: calc(100% + 1rem);
+        height: calc(100% + 1rem);
+        border-radius: 2rem;
+        background: #fff;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Keyword colors */
+    .svc-wrapper .svc-anime-text .svc-word span.communication::before,
+    .svc-wrapper .svc-anime-text .svc-word span.attention::before,
+    .svc-wrapper .svc-anime-text .svc-word span.impact::before,
+    .svc-wrapper .svc-anime-text .svc-word span.strategic::before {
+        background: #7a78ff;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word span.engagement::before,
+    .svc-wrapper .svc-anime-text .svc-word span.shareability::before,
+    .svc-wrapper .svc-anime-text .svc-word span.visibility::before,
+    .svc-wrapper .svc-anime-text .svc-word span.production::before {
+        background: #fe6d38;
+    }
+
+    .svc-wrapper .svc-anime-text .svc-word span.growth::before,
+    .svc-wrapper .svc-anime-text .svc-word span.creativity::before,
+    .svc-wrapper .svc-anime-text .svc-word span.connections::before,
+    .svc-wrapper .svc-anime-text .svc-word span.partner::before {
+        background: #c6fe69;
+    }
+
+    /* Start hidden — JS controls reveal */
+    .svc-anime-text .svc-word,
+    .svc-anime-text .svc-word span {
+        opacity: 0;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    window.initServicesAnimation = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const wordHighlightBgColor = "255, 255, 255";
+        const keywords = [
+            "communication",
+            "attention",
+            "impact",
+            "engagement",
+            "shareability",
+            "visibility",
+            "growth",
+            "creativity",
+            "connections",
+            "strategic",
+            "production",
+            "partner",
+        ];
+
+        // Split paragraphs into individual word spans
+        const animeTexts = document.querySelectorAll(".svc-anime-text");
+        animeTexts.forEach((container) => {
+            const p = container.querySelector("p");
+            if (!p) return;
+            const text = p.textContent ?? "";
+            const words = text.split(/\s+/);
+            p.innerHTML = "";
+
+            words.forEach((word) => {
+                if (!word.trim()) return;
+                const wordSpan = document.createElement("span");
+                wordSpan.className = "svc-word";
+
+                const innerSpan = document.createElement("span");
+                innerSpan.textContent = word;
+
+                const normalized = word
+                    .toLowerCase()
+                    .replace(/[.,!?;:*—–]/g, "");
+                if (keywords.includes(normalized)) {
+                    wordSpan.classList.add("svc-keyword-wrapper");
+                    innerSpan.classList.add("svc-keyword", normalized);
+                }
+
+                wordSpan.appendChild(innerSpan);
+                p.appendChild(wordSpan);
+            });
+        });
+
+        // Pin each info section and animate words on scroll
+        const containers = document.querySelectorAll(".svc-anime-container");
+        containers.forEach((container) => {
+            ScrollTrigger.create({
+                trigger: container,
+                pin: container,
+                start: "top top",
+                end: `+=${window.innerHeight * 4}`,
+                pinSpacing: true,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    const words = Array.from(
+                        container.querySelectorAll(".svc-anime-text .svc-word"),
+                    );
+                    const totalWords = words.length;
+
+                    words.forEach((word, index) => {
+                        const wordText = word.querySelector("span");
+                        if (!wordText) return;
+
+                        if (progress < 0.7) {
+                            const progressTarget = 0.7;
+                            const revealProgress = Math.min(
+                                1,
+                                progress / progressTarget,
+                            );
+
+                            const overlapWords = 15;
+                            const totalAnimationLength =
+                                1 + overlapWords + totalWords;
+                            const wordStart = index / totalWords;
+                            const wordEnd =
+                                wordStart + overlapWords / totalWords;
+                            const timelineScale =
+                                1 /
+                                Math.min(
+                                    totalAnimationLength,
+                                    1 +
+                                        (totalWords - 1) / totalWords +
+                                        overlapWords / totalWords,
+                                );
+
+                            const adjustedStart = wordStart * timelineScale;
+                            const adjustedEnd = wordEnd - adjustedStart;
+                            const duration = wordEnd - adjustedStart;
+
+                            const wordProgress =
+                                revealProgress <= adjustedStart
+                                    ? 0
+                                    : revealProgress >= adjustedEnd
+                                      ? 1
+                                      : (revealProgress - adjustedStart) /
+                                        duration;
+
+                            (word as HTMLElement).style.opacity =
+                                String(wordProgress);
+
+                            const bgFadeStart =
+                                wordProgress >= 0.9
+                                    ? (wordProgress - 0.9) / 0.1
+                                    : 0;
+                            const bgOpacity = Math.max(0, 1 - bgFadeStart);
+                            (word as HTMLElement).style.backgroundColor =
+                                `rgba(${wordHighlightBgColor}, ${bgOpacity})`;
+
+                            const textRevealThreshold = 0.9;
+                            const textRevealProgress =
+                                wordProgress >= textRevealThreshold
+                                    ? (wordProgress - textRevealThreshold) /
+                                      (1 - textRevealThreshold)
+                                    : 0;
+                            (wordText as HTMLElement).style.opacity = String(
+                                Math.pow(textRevealProgress, 0.5),
+                            );
+                        } else {
+                            const reverseProgress = (progress - 0.7) / 0.3;
+                            (word as HTMLElement).style.opacity = "1";
+
+                            const reverseOverlapWords = 5;
+                            const reverseWordStart = index / totalWords;
+                            const reverseWordEnd =
+                                reverseWordStart +
+                                reverseOverlapWords / totalWords;
+                            const reverseTimelineScale =
+                                1 /
+                                Math.max(
+                                    1,
+                                    (totalWords - 1) / totalWords +
+                                        reverseOverlapWords / totalWords,
+                                );
+
+                            const reverseAdjustedStart =
+                                reverseWordStart * reverseTimelineScale;
+                            const reverseAdjustedEnd =
+                                reverseWordEnd - reverseAdjustedStart;
+                            const reverseDuration =
+                                reverseWordEnd - reverseAdjustedStart;
+
+                            const reverseWordProgress =
+                                reverseProgress <= reverseAdjustedStart
+                                    ? 0
+                                    : reverseProgress >= reverseAdjustedEnd
+                                      ? 1
+                                      : (reverseProgress -
+                                            reverseAdjustedStart) /
+                                        reverseDuration;
+
+                            if (reverseWordProgress > 0) {
+                                (word as HTMLElement).style.opacity = String(
+                                    1 - reverseWordProgress,
+                                );
+                                (word as HTMLElement).style.backgroundColor =
+                                    `rgba(${wordHighlightBgColor}, ${reverseWordProgress})`;
+                            } else {
+                                (wordText as HTMLElement).style.opacity = "1";
+                                (word as HTMLElement).style.backgroundColor =
+                                    `rgba(${wordHighlightBgColor}, 0)`;
+                            }
+                        }
+                    });
+                },
+            });
+        });
+
+        ScrollTrigger.refresh();
+    };
+</script>

@@ -60,12 +60,12 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
             <Welcome />
             <!-- About -->
             <About />
+            <!-- Background SVG -->
+            <WaveDivider />
             <!-- Stats -->
             <Stats />
             <!-- Services -->
             <Services />
-            <!-- Background SVG -->
-            <WaveDivider />
             <!-- Campaigns -->
             <CampaignSection />
             <!-- Tiktok Award -->
@@ -90,6 +90,7 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
             declare global {
                 interface Window {
                     initStatsAnimation?: () => void;
+                    initServicesAnimation?: () => void;
                     initTikTokAwardAnimation?: () => void;
                     initCampaignAnimation?: () => void;
                     initSpotlightAnimation?: () => void;
@@ -124,6 +125,11 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
                 // Call the globally exposed Stats animation script now that GSAP/Lenis is ready
                 if (typeof window.initStatsAnimation === "function") {
                     window.initStatsAnimation();
+                }
+
+                // Call the globally exposed Services animation script
+                if (typeof window.initServicesAnimation === "function") {
+                    window.initServicesAnimation();
                 }
 
                 // Call the TikTok Award animation script

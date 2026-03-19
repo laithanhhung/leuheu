@@ -30,7 +30,8 @@ const sections = defineCollection({
         badge: z.string().optional(),
         stats: z.array(z.object({
             label: z.string(),
-            value: z.string()
+            value: z.string(),
+            likes: z.string().optional(),
         })).optional(),
         // Allow flexible fields for different section types
         extraData: z.record(z.any()).optional(),
@@ -47,7 +48,7 @@ const services = defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/services" }),
     schema: z.object({
         title: z.string(),
-        image: z.string(),
+        info: z.string(),
         order: z.number().default(0),
     })
 });

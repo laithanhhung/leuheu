@@ -7,7 +7,7 @@
         "title": {
           "type": "string"
         },
-        "image": {
+        "info": {
           "type": "string"
         },
         "order": {
@@ -20,7 +20,7 @@
       },
       "required": [
         "title",
-        "image"
+        "info"
       ],
       "additionalProperties": false
     }

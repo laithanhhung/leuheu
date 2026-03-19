@@ -12,26 +12,28 @@ const creators = Array(12)
         img: `https://picsum.photos/100/100?random=${300 + i}`,
         name: `Creator ${i + 1}`,
         followers: `${(Math.random() * 5).toFixed(1)}M`,
+        likes: `${(Math.random() * 5).toFixed(1)}M`,
     }));
 ---
 
 <section
-    class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 relative"
+    class="stats-section text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 relative"
+    style="background: linear-gradient(to bottom, #c7f900 0%, #8aa800 25%, #1e2800 55%, #000000 85%)"
 >
     <div class="max-w-6xl 3xl:max-w-8xl mx-auto">
         <h2
-            class="text-3xl xs:text-4xl md:text-6xl 3xl:text-8xl font-black mb-8 xs:mb-12 3xl:mb-20 uppercase"
+            class="heading text-3xl xs:text-4xl md:text-6xl 3xl:text-8xl font-black mb-8 xs:mb-12 3xl:mb-20 uppercase"
         >
             {data.title}
             <span class="text-black">{data.subtitle}</span>
         </h2>
 
         <div
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 3xl:grid-cols-8 gap-3 xs:gap-4 3xl:gap-8 mb-12 xs:mb-16 3xl:mb-24"
+            class="container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 3xl:grid-cols-8 gap-3 xs:gap-4 3xl:gap-8 mb-12 xs:mb-16 3xl:mb-24"
         >
             {
                 creators.map((c) => (
-                    <div class="bg-card-gray rounded-xl 3xl:rounded-2xl p-3 xs:p-4 3xl:p-6 flex flex-col items-center text-center hover:bg-white hover:text-black transition-colors duration-300 cursor-pointer group">
+                    <div class="card bg-card-gray rounded-xl 3xl:rounded-2xl p-3 xs:p-4 3xl:p-6 flex flex-col items-center text-center hover:bg-white hover:text-black transition-colors duration-300 cursor-pointer group">
                         <CldImage
                             src={c.img}
                             alt={c.name}
@@ -45,13 +47,16 @@ const creators = Array(12)
                         <p class="text-[0.6rem] xs:text-xs 3xl:text-base text-gray-400 group-hover:text-gray-600">
                             {c.followers} followers
                         </p>
+                        <p class="text-[0.6rem] xs:text-xs 3xl:text-base text-gray-400 group-hover:text-gray-600">
+                            {c.likes} likes
+                        </p>
                     </div>
                 ))
             }
         </div>
 
         <div
-            class="flex flex-col md:flex-row gap-6 xs:gap-8 3xl:gap-16 items-center"
+            class="stats-container flex flex-col md:flex-row gap-6 xs:gap-8 3xl:gap-16 items-center"
         >
             <div
                 class="bg-card-gray rounded-[1.5rem] xs:rounded-[2rem] 3xl:rounded-[3rem] p-6 xs:p-8 3xl:p-12 flex-1 w-full flex items-center justify-between border border-gray-800"
@@ -98,3 +103,75 @@ const creators = Array(12)
         </div>
     </div>
 </section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    window.initStatsAnimation = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const cards = document.querySelectorAll(".card");
+
+        // Set initial state — cards start invisible and rotated
+        gsap.set(cards, {
+            scale: 0,
+            opacity: 0,
+            rotation: () => gsap.utils.random(-60, 60),
+        });
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".stats-section",
+                start: "top top",
+                end: "+=2000",
+                scrub: 2,
+                pin: true,
+                pinSpacing: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+            },
+        });
+
+        const heading = document.querySelector(".heading");
+
+        // Set heading initial state
+        gsap.set(heading, { opacity: 0, y: -50 });
+
+        const statsContainer = document.querySelector(".stats-container");
+        gsap.set(statsContainer, { opacity: 0, y: 50 });
+
+        // Animate heading in at the start (same time as cards)
+        tl.to(
+            heading,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+            },
+            "<",
+        );
+
+        // Stagger each card appearing one by one
+        tl.to(cards, {
+            scale: 1,
+            opacity: 1,
+            rotation: 0,
+            duration: 1,
+            ease: "power2.inOut",
+            stagger: 0.1,
+        });
+
+        // Stats container slides up after cards are done
+        tl.to(statsContainer, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+        });
+
+        // Recalculate all ScrollTriggers after pin spacer is inserted
+        ScrollTrigger.refresh();
+    };
+</script>

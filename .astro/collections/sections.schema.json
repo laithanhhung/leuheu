@@ -23,6 +23,9 @@
               },
               "value": {
                 "type": "string"
+              },
+              "likes": {
+                "type": "string"
               }
             },
             "required": [

@@ -1,6 +1,5 @@
 ---
-title: "COMMUNICATION ON SOCIAL PLATFORMS"
-image: "https://picsum.photos/600/400?random=101"
+title: "Social Communication"
 order: 1
+info: "We craft high-impact communication strategies that turn brands into conversations. From concept to execution, we design integrated campaigns across TikTok and emerging platforms—driving awareness, engagement, and measurable growth for entertainment products including music, shows, and digital content."
 ---
-Strategic planning and executing marketing / communication plan for the entertainment products (movie, music, shows) on TikTok platform and other social platforms.
