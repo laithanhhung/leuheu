@@ -84,9 +84,15 @@ import { CldImage } from "astro-cloudinary";
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    gsap.registerPlugin(ScrollTrigger);
+    declare global {
+        interface Window {
+            initWelcomeAnimation?: () => void;
+        }
+    }
 
-    function initWelcomeAnimation() {
+    window.initWelcomeAnimation = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
         const welcomeSection = document.getElementById("welcome-section");
         const welcomeBg = document.querySelector(".welcome-bg");
         const welcomeCard = document.querySelector(".welcome-card");
@@ -97,10 +103,10 @@ import { CldImage } from "astro-cloudinary";
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: welcomeSection,
-                start: "top top", // Pin when the section hits the top of the viewport
-                end: "+=100%", // Keep pinned for 100% of the viewport height (creates the scroll delay)
+                start: "top top",
+                end: "+=100%",
                 pin: true,
-                scrub: 1, // Smooth tight scrub for the card slide
+                scrub: 1,
                 invalidateOnRefresh: true,
             },
         });
@@ -138,19 +144,13 @@ import { CldImage } from "astro-cloudinary";
                 },
                 {
                     scale: 1,
-                    y: "150svh", // Moves down (increases top distance) 100svh as it scales
+                    y: "150svh",
                     ease: "none",
                 },
                 0,
             );
         }
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initWelcomeAnimation);
-    } else {
-        initWelcomeAnimation();
-    }
+    };
 </script>
 
 <style>

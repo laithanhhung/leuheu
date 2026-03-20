@@ -1,35 +1,462 @@
 ---
-import { ArrowUpRight } from "lucide-astro";
 import { getEntry } from "astro:content";
 
 const hero = await getEntry("sections", "hero");
 const { data } = hero!;
+
+const textSegments = [
+    "Outstanding Entertainment",
+    "Viral Social Content",
+    "Professional Campaigns",
+    "Strategic Distribution",
+    "Exclusive Creators",
+];
 ---
 
-<section
-    class="bg-neon-lime text-black w-full min-h-[100vh] flex flex-col justify-center p-4 xs:p-6 md:p-8 3xl:p-16 relative overflow-hidden"
->
-    <div
-        class="absolute top-4 right-4 md:top-8 md:right-8 bg-black rounded-full p-2 md:p-4 text-neon-lime"
-    >
-        <ArrowUpRight size={32} class="md:w-12 md:h-12" />
+<section class="hero-section">
+    <!-- Header: fades out on first scroll phase -->
+    <div class="hero-header">
+        <h1>{data.title ?? "#leuheu"}</h1>
+        <p>{data.subtitle ?? "ChiuChiu Entertainment"}</p>
     </div>
 
-    <div class="flex flex-col items-center justify-center my-8 3xl:my-16">
-        <h1
-            class="text-5xl xs:text-6xl md:text-8xl lg:text-9xl 3xl:text-[150px] font-black tracking-tighter leading-none text-center"
-        >
-            {data.title}
-        </h1>
-        <p
-            class="text-xl md:text-3xl 3xl:text-5xl font-medium mt-2 3xl:mt-4 text-center"
-        >
-            {data.subtitle}
-        </p>
-        <p
-            class="text-lg md:text-xl 3xl:text-3xl font-light mt-2 3xl:mt-4 text-center"
-        >
-            {data.extraData?.bottomText}
-        </p>
+    <!-- 5 animated icons (bottom bar) -->
+    <div class="animated-icons">
+        {
+            [1, 2, 3, 4, 5].map((n) => (
+                <div class={`animated-icon icon-${n}`}>
+                    <img src={`/icons/icon-${n}.svg`} alt={`icon-${n}`} />
+                </div>
+            ))
+        }
     </div>
+
+    <!-- Big tagline text with icon placeholders -->
+    <h2 class="animated-text">
+        {
+            textSegments.map((seg) => (
+                <>
+                    <span class="placeholder-icon" />
+                    <span class="text-segment">{seg}</span>
+                </>
+            ))
+        }
+        <span class="placeholder-icon"></span>
+    </h2>
 </section>
+<section class="outro bg-black h-screen w-screen">
+    <h1>Outro</h1>
+</section>
+
+<style is:global>
+    .hero-section {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        color: #e3e3db;
+        overflow: hidden;
+        flex-direction: column;
+        transition: background-color 0.3s ease;
+    }
+
+    .hero-header {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        will-change: transform, opacity;
+    }
+
+    .hero-header h1 {
+        font-size: clamp(3rem, 8vw, 9rem);
+        font-weight: 900;
+        line-height: 1;
+        color: #c7f900;
+    }
+
+    .hero-header p {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        font-weight: 400;
+        color: #e3e3db;
+    }
+
+    .animated-icons {
+        /* Match the demo: keep icons relative to the viewport while hero is pinned */
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        will-change: transform;
+        z-index: 2;
+    }
+
+    .animated-icon {
+        flex: 1;
+        aspect-ratio: 1;
+        will-change: transform;
+    }
+
+    .animated-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .animated-text {
+        position: relative;
+        max-width: 1000px;
+        text-align: center;
+        color: #141414;
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .text-segment {
+        opacity: 0;
+    }
+
+    .placeholder-icon {
+        margin-top: -10px;
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        vertical-align: middle;
+        will-change: transform;
+        visibility: hidden;
+    }
+
+    @media (max-width: 1000px) {
+        .hero-header {
+            top: 45%;
+            width: 90%;
+        }
+
+        .placeholder-icon {
+            margin-top: -4px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .animated-text {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+        }
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    declare global {
+        interface Window {
+            initHeroAnimation?: () => void;
+            duplicateIcons?: HTMLElement[] | null;
+        }
+    }
+
+    window.initHeroAnimation = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const heroSection = document.querySelector(
+            ".hero-section",
+        ) as HTMLElement;
+        const heroHeader = document.querySelector(
+            ".hero-header",
+        ) as HTMLElement;
+        const animatedIcons = document.querySelector(
+            ".animated-icons",
+        ) as HTMLElement;
+        const iconElements =
+            document.querySelectorAll<HTMLElement>(".animated-icon");
+        const textSegments =
+            document.querySelectorAll<HTMLElement>(".text-segment");
+        const placeholders =
+            document.querySelectorAll<HTMLElement>(".placeholder-icon");
+
+        // Shuffle text reveal order
+        const textAnimationOrder: {
+            segment: HTMLElement;
+            originalIndex: number;
+        }[] = [];
+        textSegments.forEach((segment, index) => {
+            textAnimationOrder.push({ segment, originalIndex: index });
+        });
+        for (let i = textAnimationOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [textAnimationOrder[i], textAnimationOrder[j]] = [
+                textAnimationOrder[j],
+                textAnimationOrder[i],
+            ];
+        }
+
+        const isMobile = window.innerWidth <= 1000;
+        const headerIconSize = isMobile ? 30 : 60;
+        const currentIconSize = iconElements[0].getBoundingClientRect().width;
+        const exactScale = headerIconSize / currentIconSize;
+
+        // ── Cleanup helper: remove duplicates + reset bg ───────────────
+        function cleanupHero() {
+            if (window.duplicateIcons) {
+                window.duplicateIcons.forEach((d) =>
+                    d.parentNode?.removeChild(d),
+                );
+                window.duplicateIcons = null;
+            }
+            heroSection.style.backgroundColor = "";
+            gsap.set(animatedIcons, {
+                x: 0,
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                clearProps: "all",
+            });
+        }
+
+        ScrollTrigger.create({
+            trigger: ".hero-section",
+            start: "top top",
+            end: `+=${window.innerHeight * 8}px`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onLeave: cleanupHero,
+            onLeaveBack: cleanupHero,
+            onUpdate: (self) => {
+                const progress = self.progress;
+
+                // Always hide text segments unless in phase 4
+                textSegments.forEach((seg) => gsap.set(seg, { opacity: 0 }));
+
+                // ─── Phase 1 (0–0.3): Icons float up, header fades ───────────
+                if (progress <= 0.3) {
+                    const moveProgress = progress / 0.3;
+                    const containerMoveY =
+                        -window.innerHeight * 0.3 * moveProgress;
+
+                    if (progress <= 0.15) {
+                        const hp = progress / 0.15;
+                        gsap.set(heroHeader, {
+                            transform: `translate(-50%, calc(-50% + ${-50 * hp}px))`,
+                            opacity: 1 - hp,
+                        });
+                    } else {
+                        gsap.set(heroHeader, {
+                            /* Demo resets to the original translate(-50%, -50%) once header fades out */
+                            transform: `translate(-50%, -50%)`,
+                            opacity: 0,
+                        });
+                    }
+
+                    if (window.duplicateIcons) {
+                        window.duplicateIcons.forEach((d) =>
+                            d.parentNode?.removeChild(d),
+                        );
+                        window.duplicateIcons = null;
+                    }
+
+                    gsap.set(animatedIcons, {
+                        x: 0,
+                        y: containerMoveY,
+                        scale: 1,
+                        opacity: 1,
+                    });
+
+                    iconElements.forEach((icon, index) => {
+                        const start = index * 0.1;
+                        const end = start + 0.5;
+                        const ip = gsap.utils.mapRange(
+                            start,
+                            end,
+                            0,
+                            1,
+                            moveProgress,
+                        );
+                        const clamped = Math.max(0, Math.min(1, ip));
+                        gsap.set(icon, {
+                            x: 0,
+                            y: -containerMoveY * (1 - clamped),
+                        });
+                    });
+
+                    // ─── Phase 2 (0.3–0.6): Scale to center ─────────────────────
+                } else if (progress <= 0.6) {
+                    const sp = (progress - 0.3) / 0.3;
+
+                    gsap.set(heroHeader, {
+                        transform: `translate(-50%, calc(-50% + -50px))`,
+                        opacity: 0,
+                    });
+
+                    heroSection.style.backgroundColor =
+                        sp >= 0.5 ? "#e3e3db" : "#141414";
+
+                    if (window.duplicateIcons) {
+                        window.duplicateIcons.forEach((d) =>
+                            d.parentNode?.removeChild(d),
+                        );
+                        window.duplicateIcons = null;
+                    }
+
+                    const containerRect = animatedIcons.getBoundingClientRect();
+                    const cx = containerRect.left + containerRect.width / 2;
+                    const cy = containerRect.top + containerRect.height / 2;
+                    const dx = (window.innerWidth / 2 - cx) * sp;
+                    const dy = (window.innerHeight / 2 - cy) * sp;
+                    const baseY = -window.innerHeight * 0.3;
+
+                    gsap.set(animatedIcons, {
+                        x: dx,
+                        y: baseY + dy,
+                        scale: 1 + (exactScale - 1) * sp,
+                        opacity: 1,
+                    });
+
+                    iconElements.forEach((icon) =>
+                        gsap.set(icon, { x: 0, y: 0 }),
+                    );
+
+                    // ─── Phase 3 (0.6–0.75): Duplicate icons fly to placeholders ─
+                } else if (progress <= 0.75) {
+                    const mp = (progress - 0.6) / 0.15;
+
+                    gsap.set(heroHeader, {
+                        transform: `translate(-50%, calc(-50% + -50px))`,
+                        opacity: 0,
+                    });
+                    heroSection.style.backgroundColor = "#e3e3db";
+
+                    const containerRect = animatedIcons.getBoundingClientRect();
+                    const cx = containerRect.left + containerRect.width / 2;
+                    const cy = containerRect.top + containerRect.height / 2;
+                    const dx = window.innerWidth / 2 - cx;
+                    const dy = window.innerHeight / 2 - cy;
+                    const baseY = -window.innerHeight * 0.3;
+
+                    gsap.set(animatedIcons, {
+                        x: dx,
+                        y: baseY + dy,
+                        scale: exactScale,
+                        opacity: 0,
+                    });
+                    iconElements.forEach((icon) =>
+                        gsap.set(icon, { x: 0, y: 0 }),
+                    );
+
+                    if (!window.duplicateIcons) {
+                        window.duplicateIcons = [];
+                        iconElements.forEach((icon) => {
+                            const dup = icon.cloneNode(true) as HTMLElement;
+                            dup.className = "duplicate-icon";
+                            dup.style.cssText = `position:absolute;width:${headerIconSize}px;height:${headerIconSize}px;`;
+                            document.body.appendChild(dup);
+                            window.duplicateIcons!.push(dup);
+                        });
+                    }
+
+                    window.duplicateIcons?.forEach((dup, i) => {
+                        if (i >= placeholders.length) return;
+                        const iconRect =
+                            iconElements[i].getBoundingClientRect();
+                        const startX =
+                            iconRect.left +
+                            iconRect.width / 2 +
+                            window.pageXOffset;
+                        const startY =
+                            iconRect.top +
+                            iconRect.height / 2 +
+                            window.pageYOffset;
+                        const targetRect =
+                            placeholders[i].getBoundingClientRect();
+                        const targetX =
+                            targetRect.left +
+                            targetRect.width / 2 +
+                            window.pageXOffset;
+                        const targetY =
+                            targetRect.top +
+                            targetRect.height / 2 +
+                            window.pageYOffset;
+                        const moveX = targetX - startX;
+                        const moveY = targetY - startY;
+
+                        let cx = 0,
+                            cy = 0;
+                        if (mp <= 0.5) {
+                            cy = moveY * (mp / 0.5);
+                        } else {
+                            cx = moveX * ((mp - 0.5) / 0.5);
+                            cy = moveY;
+                        }
+
+                        dup.style.left = `${startX + cx - headerIconSize / 2}px`;
+                        dup.style.top = `${startY + cy - headerIconSize / 2}px`;
+                        dup.style.opacity = "1";
+                        dup.style.display = "flex";
+                    });
+
+                    // ─── Phase 4 (0.75–1.0): Text segments reveal ───────────────
+                } else {
+                    gsap.set(heroHeader, {
+                        transform: `translate(-50%, calc(-50% + -100px))`,
+                        opacity: 0,
+                    });
+                    heroSection.style.backgroundColor = "#e3e3db";
+                    gsap.set(animatedIcons, { opacity: 0 });
+
+                    window.duplicateIcons?.forEach((dup, i) => {
+                        if (i >= placeholders.length) return;
+                        const targetRect =
+                            placeholders[i].getBoundingClientRect();
+                        const tx =
+                            targetRect.left +
+                            targetRect.width / 2 +
+                            window.pageXOffset;
+                        const ty =
+                            targetRect.top +
+                            targetRect.height / 2 +
+                            window.pageYOffset;
+                        dup.style.left = `${tx - headerIconSize / 2}px`;
+                        dup.style.top = `${ty - headerIconSize / 2}px`;
+                        dup.style.opacity = "1";
+                        dup.style.display = "flex";
+                    });
+
+                    textAnimationOrder.forEach((item, index) => {
+                        // Match the demo reveal timing
+                        const segStart = 0.75 + index * 0.03;
+                        const segEnd = segStart + 0.015;
+                        const sp = Math.max(
+                            0,
+                            Math.min(
+                                1,
+                                gsap.utils.mapRange(
+                                    segStart,
+                                    segEnd,
+                                    0,
+                                    1,
+                                    progress,
+                                ),
+                            ),
+                        );
+                        gsap.set(item.segment, { opacity: sp });
+                    });
+                }
+            },
+        });
+        // (ScrollTrigger.refresh() is called centrally in index.astro after all inits)
+    };
+</script>

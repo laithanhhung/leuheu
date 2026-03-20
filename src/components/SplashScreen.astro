@@ -1,77 +1,136 @@
-<div
-    id="splash-screen"
-    class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.87,0,0.13,1)]"
->
-    <div class="relative z-10 text-center px-4">
-        {/* Brand */}
-        <div class="mb-6">
-            <h1
-                class="text-6xl md:text-9xl font-black text-neon-lime tracking-tighter animate-pulse leading-none"
-            >
-                #leuheu
-            </h1>
-            <p
-                class="text-white text-lg md:text-2xl font-bold uppercase tracking-widest mt-2"
-            >
-                ChiuChiu Entertainment
-            </p>
-        </div>
+<!-- Loader: 10-bar overlay + counter + leuheu letter reveal -->
+<div id="lh-splash">
+    <!-- Counter -->
+    <div id="lh-counter">0</div>
 
-        {/* Progress Bar */}
-        <div
-            class="w-full max-w-xs md:max-w-md h-1 bg-gray-900 rounded-full overflow-hidden mx-auto relative mt-12"
-        >
-            <div
-                id="splash-progress-bar"
-                class="absolute left-0 top-0 bottom-0 bg-neon-lime transition-all duration-100 ease-out"
-                style="width: 0%"
-            >
-            </div>
-        </div>
+    <!-- Bar overlay -->
+    <div id="lh-overlay">
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+        <div class="lh-bar"></div>
+    </div>
 
-        <div
-            class="flex justify-between w-full max-w-xs md:max-w-md mx-auto mt-2"
-        >
-            <span class="text-gray-600 font-mono text-xs uppercase"
-                >Loading assets</span
-            >
-            <span
-                id="splash-progress-text"
-                class="text-neon-lime font-mono text-xs font-bold"
-            >
-                0%
-            </span>
-        </div>
+    <!-- Brand letters -->
+    <div id="lh-header">
+        <div class="lh-letter">l</div>
+        <div class="lh-letter">e</div>
+        <div class="lh-letter">u</div>
+        <div class="lh-letter">h</div>
+        <div class="lh-letter">e</div>
+        <div class="lh-letter">u</div>
     </div>
 </div>
 
+<style is:global>
+    #lh-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        overflow: hidden;
+        background: #000;
+        pointer-events: none;
+    }
+
+    #lh-counter {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 10001;
+        color: #000000;
+        font-size: clamp(8rem, 20vw, 22rem);
+        font-weight: 900;
+        line-height: 1;
+        padding: 0.1em 0.25em;
+        font-family: sans-serif;
+    }
+
+    #lh-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+    }
+
+    .lh-bar {
+        width: 10vw;
+        height: 105vh;
+        background-color: #c7f900;
+    }
+
+    #lh-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10002;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.15em 0.3em;
+        overflow: hidden;
+    }
+
+    .lh-letter {
+        font-size: clamp(4rem, 22vw, 28rem);
+        font-weight: 900;
+        color: #141414;
+        line-height: 1;
+        font-family: sans-serif;
+        transform: translateY(110%);
+    }
+</style>
+
 <script>
-    const splashScreen = document.getElementById("splash-screen");
-    const progressBar = document.getElementById("splash-progress-bar");
-    const progressText = document.getElementById("splash-progress-text");
+    import { gsap } from "gsap";
 
-    let progress = 0;
-    const interval = setInterval(() => {
-        // Random increment for organic feel
-        const increment = Math.random() * 4 + 1;
-        progress += increment;
+    // Counter
+    const counterEl = document.getElementById("lh-counter")!;
+    let count = 0;
+    function tick() {
+        if (count >= 100) return;
+        count = Math.min(100, count + Math.floor(Math.random() * 10) + 1);
+        counterEl.textContent = String(count);
+        setTimeout(tick, Math.floor(Math.random() * 180) + 40);
+    }
+    tick();
 
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
+    // Bars collapse → letters slide up → remove splash
+    gsap.to("#lh-counter", {
+        delay: 3.5,
+        duration: 0.25,
+        opacity: 0,
+    });
 
-            // Start exit sequence
-            setTimeout(() => {
-                splashScreen?.classList.add("-translate-y-full");
+    gsap.to(".lh-bar", {
+        delay: 3.5,
+        duration: 1.5,
+        height: 0,
+        stagger: { amount: 0.5 },
+        ease: "power4.inOut",
+    });
 
-                // Remove from DOM after transition
-                setTimeout(() => {
-                    splashScreen?.remove();
-                }, 1000);
-            }, 400);
-        }
+    gsap.to(".lh-letter", {
+        delay: 4,
+        duration: 1.5,
+        y: 0,
+        stagger: { amount: 0.5 },
+        ease: "power4.inOut",
+    });
 
-        if (progressBar) progressBar.style.width = `${progress}%`;
-        if (progressText) progressText.innerText = `${Math.floor(progress)}%`;
-    }, 40);
+    // After letters have risen, slide the whole splash up and remove
+    gsap.to("#lh-splash", {
+        delay: 5.8,
+        duration: 1,
+        y: "-100%",
+        ease: "power4.inOut",
+        onComplete: () => {
+            document.getElementById("lh-splash")?.remove();
+        },
+    });
 </script>

@@ -171,7 +171,6 @@ const creators = Array(12)
             ease: "power2.out",
         });
 
-        // Recalculate all ScrollTriggers after pin spacer is inserted
-        ScrollTrigger.refresh();
+        // (ScrollTrigger.refresh() is called centrally in index.astro after all inits)
     };
 </script>

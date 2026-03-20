@@ -46,7 +46,7 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
     </head>
     <body class="font-sans overflow-x-hidden">
         {/* Splash Screen */}
-        <SplashScreen />
+        <!-- <SplashScreen /> -->
         <div class="relative h-full overflow-hidden z-10">
             <Hero />
 
@@ -89,22 +89,84 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
             // Extend window correctly for the global TS declaration
             declare global {
                 interface Window {
+                    initHeroAnimation?: () => void;
+                    initWelcomeAnimation?: () => void;
                     initStatsAnimation?: () => void;
                     initServicesAnimation?: () => void;
                     initTikTokAwardAnimation?: () => void;
                     initCampaignAnimation?: () => void;
                     initSpotlightAnimation?: () => void;
+                    duplicateIcons?: HTMLElement[] | null;
                 }
             }
 
             // Initialize Lenis once
             const lenis = new Lenis({
-                lerp: 0.05, // Lower value for smoother scrolling (default is 0.1)
-                wheelMultiplier: 0.4, // Slows down wheel scroll step
+                lerp: 0.05,
+                wheelMultiplier: 0.4,
                 smoothWheel: true,
             });
 
-            // Sincronize Lenis with ScrollTrigger
+            // Helper: smoothly change Lenis scroll speed
+            function setScrollSpeed(lerp: number, wheelMultiplier: number) {
+                gsap.to(lenis, {
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onUpdate: () => {
+                        // lerp and wheelMultiplier are updated via gsap's interpolation
+                    },
+                });
+                // Since Lenis options aren't directly tweenable, we use a proxy
+                const proxy = {
+                    l: lenis.options.lerp,
+                    w: lenis.options.wheelMultiplier,
+                };
+                gsap.to(proxy, {
+                    l: lerp,
+                    w: wheelMultiplier,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onUpdate: () => {
+                        lenis.options.lerp = proxy.l;
+                        lenis.options.wheelMultiplier = proxy.w;
+                    },
+                });
+            }
+
+            // Per-section scroll speed config
+            // Lower lerp = smoother/slower feel, higher = snappier
+            // Lower wheelMultiplier = less scroll per wheel tick
+            const sectionSpeeds: {
+                selector: string;
+                lerp: number;
+                wheelMultiplier: number;
+            }[] = [
+                { selector: ".hero-section", lerp: 0.05, wheelMultiplier: 1 }, //scroll normal
+                {
+                    selector: "#welcome-section",
+                    lerp: 0.06,
+                    wheelMultiplier: 0.5,
+                }, // Medium
+                { selector: ".spotlight", lerp: 0.07, wheelMultiplier: 0.6 }, // About — slightly faster
+                {
+                    selector: ".stats-section",
+                    lerp: 0.05,
+                    wheelMultiplier: 0.45,
+                }, // Stats — moderate
+                { selector: ".svc-wrapper", lerp: 0.08, wheelMultiplier: 0.7 }, // Services — faster
+                {
+                    selector: ".campaigns-container",
+                    lerp: 0.09,
+                    wheelMultiplier: 0.8,
+                }, // Campaigns — fast
+                {
+                    selector: ".tiktok-award-wrapper",
+                    lerp: 0.04,
+                    wheelMultiplier: 0.35,
+                }, // TikTok Award — slow & dramatic
+            ];
+
+            // Synchronize Lenis with ScrollTrigger
             lenis.on("scroll", ScrollTrigger.update);
 
             // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
@@ -117,6 +179,16 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
 
             // Main Animation Logic
             function initAnimations() {
+                // Call the Hero animation first (first visible section)
+                if (typeof window.initHeroAnimation === "function") {
+                    window.initHeroAnimation();
+                }
+
+                // Call the Welcome animation (right after Hero)
+                if (typeof window.initWelcomeAnimation === "function") {
+                    window.initWelcomeAnimation();
+                }
+
                 // Call the globally exposed Spotlight animation script
                 if (typeof window.initSpotlightAnimation === "function") {
                     window.initSpotlightAnimation();
@@ -141,6 +213,10 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
                 if (typeof window.initCampaignAnimation === "function") {
                     window.initCampaignAnimation();
                 }
+
+                // Single refresh after ALL triggers are registered
+                // so pin spacers are correct for every component
+                ScrollTrigger.refresh();
             }
 
             // Execute logic when ready
