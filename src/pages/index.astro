@@ -12,7 +12,6 @@ import Partners from "../components/Partners.astro";
 import Footer from "../components/Footer.astro";
 import SplashScreen from "../components/SplashScreen.astro";
 import TikTokAward from "../components/TikTokAward.astro";
-import SignificantCampaign from "@/components/SignificantCampaign.astro";
 ---
 
 <!doctype html>
@@ -47,8 +46,8 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
     <body class="font-sans overflow-x-hidden">
         {/* Splash Screen */}
         <!-- <SplashScreen /> -->
-        <div class="relative h-full overflow-hidden z-10">
-            <Hero />
+        <div class="relative h-full overflow-hidden">
+            <!-- <Hero /> -->
 
             <div class="text-neon-lime">
                 <Marquee
@@ -141,29 +140,29 @@ import SignificantCampaign from "@/components/SignificantCampaign.astro";
                 lerp: number;
                 wheelMultiplier: number;
             }[] = [
-                { selector: ".hero-section", lerp: 0.05, wheelMultiplier: 1 }, //scroll normal
+                { selector: ".hero-section", lerp: 0.1, wheelMultiplier: 1.2 }, // hero — standard responsive
                 {
                     selector: "#welcome-section",
-                    lerp: 0.06,
-                    wheelMultiplier: 0.5,
-                }, // Medium
-                { selector: ".spotlight", lerp: 0.07, wheelMultiplier: 0.6 }, // About — slightly faster
+                    lerp: 0.1,
+                    wheelMultiplier: 1.0,
+                }, // Welcome
+                { selector: ".spotlight", lerp: 0.1, wheelMultiplier: 1.0 }, // About
                 {
                     selector: ".stats-section",
-                    lerp: 0.05,
-                    wheelMultiplier: 0.45,
-                }, // Stats — moderate
-                { selector: ".svc-wrapper", lerp: 0.08, wheelMultiplier: 0.7 }, // Services — faster
+                    lerp: 0.08,
+                    wheelMultiplier: 0.9,
+                }, // Stats
+                { selector: ".svc-wrapper", lerp: 0.1, wheelMultiplier: 1.1 }, // Services
                 {
                     selector: ".campaigns-container",
-                    lerp: 0.09,
-                    wheelMultiplier: 0.8,
-                }, // Campaigns — fast
+                    lerp: 0.08,
+                    wheelMultiplier: 0.9,
+                }, // Campaigns
                 {
                     selector: ".tiktok-award-wrapper",
-                    lerp: 0.04,
-                    wheelMultiplier: 0.35,
-                }, // TikTok Award — slow & dramatic
+                    lerp: 0.06,
+                    wheelMultiplier: 0.7,
+                }, // TikTok Award
             ];
 
             // Synchronize Lenis with ScrollTrigger

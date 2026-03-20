@@ -1,51 +1,39 @@
----
-import { getEntry } from "astro:content";
-
-const hero = await getEntry("sections", "hero");
-const { data } = hero!;
-
-const textSegments = [
-    "Outstanding Entertainment",
-    "Viral Social Content",
-    "Professional Campaigns",
-    "Strategic Distribution",
-    "Exclusive Creators",
-];
----
-
 <section class="hero-section">
-    <!-- Header: fades out on first scroll phase -->
     <div class="hero-header">
-        <h1>{data.title ?? "#leuheu"}</h1>
-        <p>{data.subtitle ?? "ChiuChiu Entertainment"}</p>
+        <h1>#leuheu</h1>
+        <p>ChillChillEntertainment</p>
     </div>
 
-    <!-- 5 animated icons (bottom bar) -->
     <div class="animated-icons">
-        {
-            [1, 2, 3, 4, 5].map((n) => (
-                <div class={`animated-icon icon-${n}`}>
-                    <img src={`/icons/icon-${n}.svg`} alt={`icon-${n}`} />
-                </div>
-            ))
-        }
+        <div class="animated-icon icon-1">
+            <img src="/icons/icon-1.svg" alt="icon-1" />
+        </div>
+        <div class="animated-icon icon-2">
+            <img src="/icons/icon-2.svg" alt="icon-2" />
+        </div>
+        <div class="animated-icon icon-3">
+            <img src="/icons/icon-3.svg" alt="icon-3" />
+        </div>
+        <div class="animated-icon icon-4">
+            <img src="/icons/icon-4.svg" alt="icon-4" />
+        </div>
+        <div class="animated-icon icon-5">
+            <img src="/icons/icon-5.svg" alt="icon-5" />
+        </div>
     </div>
 
-    <!-- Big tagline text with icon placeholders -->
     <h2 class="animated-text">
-        {
-            textSegments.map((seg) => (
-                <>
-                    <span class="placeholder-icon" />
-                    <span class="text-segment">{seg}</span>
-                </>
-            ))
-        }
-        <span class="placeholder-icon"></span>
+        <div class="placeholder-icon"></div>
+        <span class="text-segment">Outstanding Accessories</span>
+        <div class="placeholder-icon"></div>
+        <span class="text-segment">Trend of the year</span>
+        <div class="placeholder-icon"></div>
+        <span class="text-segment">Professional Team</span>
+        <div class="placeholder-icon"></div>
+        <span class="text-segment">Interval contents</span>
+        <div class="placeholder-icon"></div>
+        <span class="text-segment">Extraordinary Marketing</span>
     </h2>
-</section>
-<section class="outro bg-black h-screen w-screen">
-    <h1>Outro</h1>
 </section>
 
 <style is:global>
@@ -208,24 +196,7 @@ const textSegments = [
         const currentIconSize = iconElements[0].getBoundingClientRect().width;
         const exactScale = headerIconSize / currentIconSize;
 
-        // ── Cleanup helper: remove duplicates + reset bg ───────────────
-        function cleanupHero() {
-            if (window.duplicateIcons) {
-                window.duplicateIcons.forEach((d) =>
-                    d.parentNode?.removeChild(d),
-                );
-                window.duplicateIcons = null;
-            }
-            heroSection.style.backgroundColor = "";
-            gsap.set(animatedIcons, {
-                x: 0,
-                y: 0,
-                scale: 1,
-                opacity: 1,
-                clearProps: "all",
-            });
-        }
-
+        // No cleanup on leave; let GSAP states persist precisely like the demo
         ScrollTrigger.create({
             trigger: ".hero-section",
             start: "top top",
@@ -234,8 +205,6 @@ const textSegments = [
             pinSpacing: true,
             scrub: 1,
             invalidateOnRefresh: true,
-            onLeave: cleanupHero,
-            onLeaveBack: cleanupHero,
             onUpdate: (self) => {
                 const progress = self.progress;
 
@@ -263,7 +232,7 @@ const textSegments = [
                     }
 
                     if (window.duplicateIcons) {
-                        window.duplicateIcons.forEach((d) =>
+                        window.duplicateIcons?.forEach((d) =>
                             d.parentNode?.removeChild(d),
                         );
                         window.duplicateIcons = null;
@@ -277,8 +246,9 @@ const textSegments = [
                     });
 
                     iconElements.forEach((icon, index) => {
-                        const start = index * 0.1;
-                        const end = start + 0.5;
+                        const staggerDelay = index * 0.1;
+                        const start = staggerDelay;
+                        const end = staggerDelay + 0.5;
                         const ip = gsap.utils.mapRange(
                             start,
                             end,
@@ -287,15 +257,18 @@ const textSegments = [
                             moveProgress,
                         );
                         const clamped = Math.max(0, Math.min(1, ip));
+
+                        const startOffSet = -containerMoveY;
+                        const individualY = startOffSet * (1 - clamped);
                         gsap.set(icon, {
                             x: 0,
-                            y: -containerMoveY * (1 - clamped),
+                            y: individualY,
                         });
                     });
 
                     // ─── Phase 2 (0.3–0.6): Scale to center ─────────────────────
                 } else if (progress <= 0.6) {
-                    const sp = (progress - 0.3) / 0.3;
+                    const scaleProgress = (progress - 0.3) / 0.3;
 
                     gsap.set(heroHeader, {
                         transform: `translate(-50%, calc(-50% + -50px))`,
@@ -303,26 +276,35 @@ const textSegments = [
                     });
 
                     heroSection.style.backgroundColor =
-                        sp >= 0.5 ? "#e3e3db" : "#141414";
+                        scaleProgress >= 0.5 ? "#e3e3db" : "#141414";
 
                     if (window.duplicateIcons) {
-                        window.duplicateIcons.forEach((d) =>
-                            d.parentNode?.removeChild(d),
+                        window.duplicateIcons?.forEach((duplicateIcon) =>
+                            duplicateIcon.parentNode?.removeChild(
+                                duplicateIcon,
+                            ),
                         );
                         window.duplicateIcons = null;
                     }
 
+                    const targetCenterY = window.innerHeight / 2;
+                    const targetCenterX = window.innerWidth / 2;
                     const containerRect = animatedIcons.getBoundingClientRect();
-                    const cx = containerRect.left + containerRect.width / 2;
-                    const cy = containerRect.top + containerRect.height / 2;
-                    const dx = (window.innerWidth / 2 - cx) * sp;
-                    const dy = (window.innerHeight / 2 - cy) * sp;
+                    const currentCenterX =
+                        containerRect.left + containerRect.width / 2;
+                    const currentCenterY =
+                        containerRect.top + containerRect.height / 2;
+                    const deltaX =
+                        (targetCenterX - currentCenterX) * scaleProgress;
+                    const deltaY =
+                        (targetCenterY - currentCenterY) * scaleProgress;
                     const baseY = -window.innerHeight * 0.3;
+                    const currentScale = 1 + (exactScale - 1) * scaleProgress;
 
                     gsap.set(animatedIcons, {
-                        x: dx,
-                        y: baseY + dy,
-                        scale: 1 + (exactScale - 1) * sp,
+                        x: deltaX,
+                        y: baseY + deltaY,
+                        scale: currentScale,
                         opacity: 1,
                     });
 
@@ -332,7 +314,7 @@ const textSegments = [
 
                     // ─── Phase 3 (0.6–0.75): Duplicate icons fly to placeholders ─
                 } else if (progress <= 0.75) {
-                    const mp = (progress - 0.6) / 0.15;
+                    const moveProgress = (progress - 0.6) / 0.15;
 
                     gsap.set(heroHeader, {
                         transform: `translate(-50%, calc(-50% + -50px))`,
@@ -340,16 +322,22 @@ const textSegments = [
                     });
                     heroSection.style.backgroundColor = "#e3e3db";
 
+                    const targetCenterX = window.innerWidth / 2;
+                    const targetCenterY = window.innerHeight / 2;
                     const containerRect = animatedIcons.getBoundingClientRect();
-                    const cx = containerRect.left + containerRect.width / 2;
-                    const cy = containerRect.top + containerRect.height / 2;
-                    const dx = window.innerWidth / 2 - cx;
-                    const dy = window.innerHeight / 2 - cy;
+                    const currentCenterX =
+                        containerRect.left + containerRect.width / 2;
+                    const currentCenterY =
+                        containerRect.top + containerRect.height / 2;
+                    const deltaX =
+                        (targetCenterX - currentCenterX) * moveProgress;
+                    const deltaY =
+                        (targetCenterY - currentCenterY) * moveProgress;
                     const baseY = -window.innerHeight * 0.3;
 
                     gsap.set(animatedIcons, {
-                        x: dx,
-                        y: baseY + dy,
+                        x: deltaX,
+                        y: baseY + deltaY,
                         scale: exactScale,
                         opacity: 0,
                     });
@@ -359,12 +347,18 @@ const textSegments = [
 
                     if (!window.duplicateIcons) {
                         window.duplicateIcons = [];
-                        iconElements.forEach((icon) => {
-                            const dup = icon.cloneNode(true) as HTMLElement;
-                            dup.className = "duplicate-icon";
-                            dup.style.cssText = `position:absolute;width:${headerIconSize}px;height:${headerIconSize}px;`;
-                            document.body.appendChild(dup);
-                            window.duplicateIcons!.push(dup);
+                        iconElements.forEach((icon, index) => {
+                            const duplicate = icon.cloneNode(
+                                true,
+                            ) as HTMLElement;
+                            duplicate.className = "duplicate-icon";
+                            duplicate.style.position = "absolute";
+                            duplicate.style.width = headerIconSize + "px";
+                            duplicate.style.height = headerIconSize + "px";
+                            duplicate.style.zIndex = "9999";
+
+                            heroSection.appendChild(duplicate);
+                            window.duplicateIcons!.push(duplicate);
                         });
                     }
 
@@ -372,38 +366,31 @@ const textSegments = [
                         if (i >= placeholders.length) return;
                         const iconRect =
                             iconElements[i].getBoundingClientRect();
-                        const startX =
-                            iconRect.left +
-                            iconRect.width / 2 +
-                            window.pageXOffset;
-                        const startY =
-                            iconRect.top +
-                            iconRect.height / 2 +
-                            window.pageYOffset;
+                        const startViewportX =
+                            iconRect.left + iconRect.width / 2;
+                        const startViewportY =
+                            iconRect.top + iconRect.height / 2;
                         const targetRect =
                             placeholders[i].getBoundingClientRect();
-                        const targetX =
-                            targetRect.left +
-                            targetRect.width / 2 +
-                            window.pageXOffset;
-                        const targetY =
-                            targetRect.top +
-                            targetRect.height / 2 +
-                            window.pageYOffset;
-                        const moveX = targetX - startX;
-                        const moveY = targetY - startY;
+                        const targetViewportX =
+                            targetRect.left + targetRect.width / 2;
+                        const targetViewportY =
+                            targetRect.top + targetRect.height / 2;
+                        const moveX = targetViewportX - startViewportX;
+                        const moveY = targetViewportY - startViewportY;
 
-                        let cx = 0,
-                            cy = 0;
-                        if (mp <= 0.5) {
-                            cy = moveY * (mp / 0.5);
+                        let currentX = 0,
+                            currentY = 0;
+                        if (moveProgress <= 0.5) {
+                            currentY = moveY * (moveProgress / 0.5);
                         } else {
-                            cx = moveX * ((mp - 0.5) / 0.5);
-                            cy = moveY;
+                            currentX = moveX * ((moveProgress - 0.5) / 0.5);
+                            currentY = moveY;
                         }
 
-                        dup.style.left = `${startX + cx - headerIconSize / 2}px`;
-                        dup.style.top = `${startY + cy - headerIconSize / 2}px`;
+                        // Restore animation calculation directly in viewport coordinates
+                        dup.style.left = `${startViewportX + currentX - headerIconSize / 2}px`;
+                        dup.style.top = `${startViewportY + currentY - headerIconSize / 2}px`;
                         dup.style.opacity = "1";
                         dup.style.display = "flex";
                     });
@@ -421,14 +408,8 @@ const textSegments = [
                         if (i >= placeholders.length) return;
                         const targetRect =
                             placeholders[i].getBoundingClientRect();
-                        const tx =
-                            targetRect.left +
-                            targetRect.width / 2 +
-                            window.pageXOffset;
-                        const ty =
-                            targetRect.top +
-                            targetRect.height / 2 +
-                            window.pageYOffset;
+                        const tx = targetRect.left + targetRect.width / 2;
+                        const ty = targetRect.top + targetRect.height / 2;
                         dup.style.left = `${tx - headerIconSize / 2}px`;
                         dup.style.top = `${ty - headerIconSize / 2}px`;
                         dup.style.opacity = "1";
@@ -439,7 +420,7 @@ const textSegments = [
                         // Match the demo reveal timing
                         const segStart = 0.75 + index * 0.03;
                         const segEnd = segStart + 0.015;
-                        const sp = Math.max(
+                        const segProgress = Math.max(
                             0,
                             Math.min(
                                 1,
@@ -452,11 +433,10 @@ const textSegments = [
                                 ),
                             ),
                         );
-                        gsap.set(item.segment, { opacity: sp });
+                        gsap.set(item.segment, { opacity: segProgress });
                     });
                 }
             },
         });
-        // (ScrollTrigger.refresh() is called centrally in index.astro after all inits)
     };
 </script>
