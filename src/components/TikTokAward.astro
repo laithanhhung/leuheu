@@ -706,9 +706,11 @@ import { CldImage } from "astro-cloudinary";
                 -center.z,
             );
 
-            model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(-35);
+            // model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(-35);
+            model.rotation.z = THREE.MathUtils.degToRad(-35);
 
-            const cameraDistance = isMobile ? 2 : 1.25;
+            // const cameraDistance = isMobile ? 2 : 1.25;
+            const cameraDistance = 1.25;
             camera.position.set(
                 0,
                 0,
