@@ -12,6 +12,7 @@ import Partners from "../components/Partners.astro";
 import Footer from "../components/Footer.astro";
 import SplashScreen from "../components/SplashScreen.astro";
 import TikTokAward from "../components/TikTokAward.astro";
+import LandscapePrompt from "../components/LandscapePrompt.astro";
 ---
 
 <!doctype html>
@@ -46,6 +47,10 @@ import TikTokAward from "../components/TikTokAward.astro";
     <body class="font-sans overflow-x-hidden">
         {/* Splash Screen */}
         <SplashScreen />
+        
+        {/* Landscape Prompt for mobile portrait mode */}
+        <LandscapePrompt />
+
         <div class="relative h-full overflow-hidden">
             <Hero />
 

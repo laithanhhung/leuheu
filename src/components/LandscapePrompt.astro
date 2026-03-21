@@ -1,0 +1,92 @@
+---
+// LandscapePrompt.astro
+---
+<div id="landscape-prompt" class="font-sans">
+    <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#c7f900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="phone-icon">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+            <path d="M12 18h.01"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+        </svg>
+    </div>
+    <h2 class="title">Vui lòng xoay ngang thiết bị</h2>
+    <p class="subtitle">Trải nghiệm website tốt nhất khi xem ở chế độ nằm ngang.</p>
+</div>
+
+<style>
+    #landscape-prompt {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh; /* For accurate mobile viewport height */
+        background-color: #000000;
+        z-index: 99999999; /* Highest priority to be above SplashScreen and everything */
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+
+    .icon-wrapper {
+        position: relative;
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .phone-icon {
+        animation: rotateAnimation 3s ease-in-out infinite;
+    }
+
+    .arrow-icon {
+        position: absolute;
+        z-index: 0;
+        animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #c7f900; /* text-neon-lime */
+        margin-bottom: 1rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        color: #a1a1aa; /* text-gray-400 */
+        max-width: 300px;
+        line-height: 1.5;
+    }
+
+    @keyframes rotateAnimation {
+        0%, 15% { transform: rotate(0deg); }
+        45%, 55% { transform: rotate(-90deg); }
+        85%, 100% { transform: rotate(0deg); }
+    }
+
+    @keyframes fadeInOut {
+        0%, 15% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+        45%, 55% { opacity: 1; transform: scale(1.4) rotate(-90deg); }
+        85%, 100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+    }
+
+    /* Target mobile devices in portrait orientation */
+    /* Many phones have a max-width around 500-600px in portrait, and up to 900+ in landscape.
+       Using max-width: 800px or so captures portrait tablets and phones. */
+    @media screen and (max-width: 850px) and (orientation: portrait) {
+        #landscape-prompt {
+            display: flex;
+        }
+    }
+</style>
