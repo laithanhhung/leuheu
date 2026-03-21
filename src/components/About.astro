@@ -12,7 +12,7 @@ const { Content } = await render(about!);
     <section class="h-[100svh] w-full"></section>
 
     <section
-        class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 relative z-20 -mt-10 md:-mt-20 3xl:-mt-32"
+        class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 landscape:py-6 landscape:md:px-24 relative z-20 -mt-10 md:-mt-20 3xl:-mt-32 landscape:-mt-4"
     >
         <div
             class="max-w-6xl 3xl:max-w-8xl mx-auto flex flex-col items-start gap-16 md:gap-12 3xl:gap-24"
@@ -65,13 +65,13 @@ const { Content } = await render(about!);
             </div>
 
             <!-- section empty -->
-            <section class="h-[95svh] w-full"></section>
+            <section class="h-[95svh] landscape:h-[40svh] w-full"></section>
 
             <div
                 class="flex-1 w-full flex justify-center items-center md:justify-end mt-8 md:mt-0"
             >
                 <div
-                    class="about-card mx-auto bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-md 3xl:max-w-xl w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
+                    class="about-card mx-auto bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-md 3xl:max-w-xl landscape:max-w-sm w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
                 >
                     <div
                         class="flex items-center gap-3 3xl:gap-6 mb-4 3xl:mb-8"
@@ -159,50 +159,56 @@ const { Content } = await render(about!);
                 stroke="#CCFF00"
                 stroke-width="370"
                 stroke-linecap="round"></path>
-            <rect
-                x="984.551"
-                y="1299.53"
-                width="128"
-                height="128"
-                rx="64"
-                fill="url(#paint0_linear_175_2)"></rect>
-            <g filter="url(#filter0_d_175_2)">
-                <path
-                    d="M1032.43 1335.9V1392.15M1019.93 1349.97H1032.43M1019.93 1364.03H1076.18M1019.93 1378.09H1032.43M1063.68 1335.9V1392.15M1063.68 1349.97H1076.18M1063.68 1378.09H1076.18M1026.18 1335.9H1069.93C1073.38 1335.9 1076.18 1338.7 1076.18 1342.15V1385.9C1076.18 1389.36 1073.38 1392.15 1069.93 1392.15H1026.18C1022.72 1392.15 1019.93 1389.36 1019.93 1385.9V1342.15C1019.93 1338.7 1022.72 1335.9 1026.18 1335.9Z"
-                    stroke="white"
-                    stroke-width="6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
+            <g class="about-svg-icon" style="transform-origin: 1048.55px 1363.53px;">
+                <rect
+                    x="984.551"
+                    y="1299.53"
+                    width="128"
+                    height="128"
+                    rx="64"
+                    fill="url(#paint0_linear_175_2)"></rect>
+                <g filter="url(#filter0_d_175_2)">
+                    <path
+                        d="M1032.43 1335.9V1392.15M1019.93 1349.97H1032.43M1019.93 1364.03H1076.18M1019.93 1378.09H1032.43M1063.68 1335.9V1392.15M1063.68 1349.97H1076.18M1063.68 1378.09H1076.18M1026.18 1335.9H1069.93C1073.38 1335.9 1076.18 1338.7 1076.18 1342.15V1385.9C1076.18 1389.36 1073.38 1392.15 1069.93 1392.15H1026.18C1022.72 1392.15 1019.93 1389.36 1019.93 1385.9V1342.15C1019.93 1338.7 1022.72 1335.9 1026.18 1335.9Z"
+                        stroke="white"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
             </g>
-            <rect
-                x="830.551"
-                y="709.529"
-                width="128"
-                height="128"
-                rx="64"
-                fill="url(#paint1_linear_175_2)"></rect>
-            <g filter="url(#filter1_d_175_2)">
-                <path
-                    d="M909.884 777.363L929.906 790.71C930.194 790.902 930.53 791.013 930.876 791.029C931.222 791.046 931.566 790.968 931.872 790.804C932.178 790.641 932.433 790.397 932.611 790.1C932.79 789.802 932.884 789.462 932.884 789.116V757.698C932.884 757.36 932.795 757.029 932.626 756.737C932.458 756.445 932.215 756.203 931.922 756.035C931.63 755.867 931.298 755.779 930.961 755.78C930.624 755.782 930.293 755.872 930.001 756.042L909.884 767.779M863.884 750.529H902.217C906.452 750.529 909.884 753.962 909.884 758.196V788.863C909.884 793.097 906.452 796.529 902.217 796.529H863.884C859.65 796.529 856.217 793.097 856.217 788.863V758.196C856.217 753.962 859.65 750.529 863.884 750.529Z"
-                    stroke="white"
-                    stroke-width="6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
+            <g class="about-svg-icon" style="transform-origin: 894.55px 773.53px;">
+                <rect
+                    x="830.551"
+                    y="709.529"
+                    width="128"
+                    height="128"
+                    rx="64"
+                    fill="url(#paint1_linear_175_2)"></rect>
+                <g filter="url(#filter1_d_175_2)">
+                    <path
+                        d="M909.884 777.363L929.906 790.71C930.194 790.902 930.53 791.013 930.876 791.029C931.222 791.046 931.566 790.968 931.872 790.804C932.178 790.641 932.433 790.397 932.611 790.1C932.79 789.802 932.884 789.462 932.884 789.116V757.698C932.884 757.36 932.795 757.029 932.626 756.737C932.458 756.445 932.215 756.203 931.922 756.035C931.63 755.867 931.298 755.779 930.961 755.78C930.624 755.782 930.293 755.872 930.001 756.042L909.884 767.779M863.884 750.529H902.217C906.452 750.529 909.884 753.962 909.884 758.196V788.863C909.884 793.097 906.452 796.529 902.217 796.529H863.884C859.65 796.529 856.217 793.097 856.217 788.863V758.196C856.217 753.962 859.65 750.529 863.884 750.529Z"
+                        stroke="white"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
             </g>
-            <rect
-                x="723.551"
-                y="1564.53"
-                width="128"
-                height="128"
-                rx="64"
-                fill="url(#paint2_linear_175_2)"></rect>
-            <g filter="url(#filter2_d_175_2)">
-                <path
-                    d="M794.27 1616.53L812.207 1647.59M779.832 1616.53H815.707M772.613 1629.03L790.551 1597.97M779.832 1641.53L761.895 1610.47M794.27 1641.53H758.395M801.488 1629.03L783.551 1660.09M818.301 1629.03C818.301 1646.29 804.31 1660.28 787.051 1660.28C769.792 1660.28 755.801 1646.29 755.801 1629.03C755.801 1611.77 769.792 1597.78 787.051 1597.78C804.31 1597.78 818.301 1611.77 818.301 1629.03Z"
-                    stroke="white"
-                    stroke-width="6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"></path>
+            <g class="about-svg-icon" style="transform-origin: 787.55px 1628.53px;">
+                <rect
+                    x="723.551"
+                    y="1564.53"
+                    width="128"
+                    height="128"
+                    rx="64"
+                    fill="url(#paint2_linear_175_2)"></rect>
+                <g filter="url(#filter2_d_175_2)">
+                    <path
+                        d="M794.27 1616.53L812.207 1647.59M779.832 1616.53H815.707M772.613 1629.03L790.551 1597.97M779.832 1641.53L761.895 1610.47M794.27 1641.53H758.395M801.488 1629.03L783.551 1660.09M818.301 1629.03C818.301 1646.29 804.31 1660.28 787.051 1660.28C769.792 1660.28 755.801 1646.29 755.801 1629.03C755.801 1611.77 769.792 1597.78 787.051 1597.78C804.31 1597.78 818.301 1611.77 818.301 1629.03Z"
+                        stroke="white"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
             </g>
             <defs>
                 <filter
@@ -416,6 +422,26 @@ const { Content } = await render(about!);
                         toggleActions: "play none none reverse", // Play on scroll down, reverse on scroll up
                     },
                 },
+            );
+        });
+
+        // Add SVG Icons pop-in animation
+        const svgIcons = document.querySelectorAll(".about-svg-icon");
+        svgIcons.forEach((icon) => {
+            gsap.fromTo(
+                icon,
+                { opacity: 0, scale: 0 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "back.out(2)",
+                    scrollTrigger: {
+                        trigger: icon,
+                        start: "top 85%", // Appears when it enters 85% of viewport
+                        toggleActions: "play reverse play reverse",
+                    },
+                }
             );
         });
     }
