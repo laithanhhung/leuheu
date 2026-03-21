@@ -13,13 +13,13 @@ const sortedCampaigns = campaigns.sort(
     {/* Campaign Cards Loop */}
     <div class="campaigns-container w-full bg-neon-lime">
         <div
-            class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0"
+            class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0"
         >
             <SignificantCampaign className="campaign-card" />
         </div>
         {
             sortedCampaigns.map((campaign, index) => (
-                <div class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100vh] xs:min-h-[100vh] relative mb-16 xs:mb-0 ">
+                <div class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0 ">
                     <CampaignCard
                         className="campaign-card overflow-hidden relative w-full h-full transform origin-bottom-left will-change-transform rotate-[30deg]"
                         campaign={campaign.data}

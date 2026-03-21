@@ -3,10 +3,10 @@ import { Image } from "astro:assets";
 import { CldImage } from "astro-cloudinary";
 ---
 
-<section id="welcome-section" class="relative w-full h-[100vh] bg-neon-lime">
+<section id="welcome-section" class="relative w-full h-[100svh] bg-neon-lime">
     {/* Pinned Background Content */}
     <div
-        class="welcome-bg tracking-widest absolute top-0 left-0 w-full h-[100vh] flex flex-col items-center pt-32 bg-neon-lime"
+        class="welcome-bg tracking-widest absolute top-0 left-0 w-full h-[100svh] flex flex-col items-center pt-32 bg-neon-lime"
     >
         <h2
             class="text-4xl md:text-6xl lg:text-[8rem] font-black leading-none text-center tracking-tighter"
@@ -22,10 +22,10 @@ import { CldImage } from "astro-cloudinary";
 
     {/* Sliding Card Layer */}
     <div
-        class="welcome-card absolute bottom-0 left-0 w-full h-[100vh] translate-y-full will-change-transform z-10"
+        class="welcome-card absolute bottom-0 left-0 w-full h-[100svh] translate-y-full will-change-transform z-10"
     >
         <div
-            class="relative w-full h-full bg-black rounded-t-[3rem] p-8 md:p-16 lg:p-24 flex items-center"
+            class="relative w-full h-[100svh] bg-black rounded-t-[3rem] p-8 md:p-16 lg:p-24 landscape:max-h-[100svh] landscape:h-auto flex items-center landscape:items-end landscape:pb-12"
         >
             {/* The Floating Illustration attached to top of card */}
             <div
@@ -47,14 +47,14 @@ import { CldImage } from "astro-cloudinary";
             {/* Card Content */}
             <div class="w-full md:w-1/2 relative z-10">
                 <p
-                    class="text-2xl md:text-3xl lg:text-3xl font-medium text-white leading-tight tracking-tight max-w-96"
+                    class="text-2xl md:text-3xl lg:text-3xl font-medium text-white leading-tight tracking-tight max-w-96 landscape:text-xl"
                 >
                     Lêu Hêu nhưng mà <span class="text-neon-lime">chuấtttt</span
                     >
                 </p>
 
                 <button
-                    class="mt-12 bg-white text-[#2A2A2A] px-8 py-4 rounded-full font-bold text-lg flex items-center gap-4 hover:scale-105 transition-transform"
+                    class="mt-12 landscape:mt-6 bg-white text-[#2A2A2A] px-8 py-4 landscape:py-2 landscape:px-6 rounded-full font-bold text-lg landscape:text-base flex items-center gap-4 hover:scale-105 transition-transform"
                 >
                     Let's goooo
                     <span
