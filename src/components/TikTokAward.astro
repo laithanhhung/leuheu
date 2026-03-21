@@ -449,85 +449,78 @@ import { CldImage } from "astro-cloudinary";
         animation: ta-gold-shimmer 4s linear infinite;
     }
 
-    /* ---- Responsive ---- */
-    @media (max-width: 1000px) {
+    /* ---- Responsive Horizontal Scaling ---- */
+    @media (max-width: 1200px) {
+        .ta-tooltips {
+            width: 90%;
+            gap: 4rem;
+        }
+        
+        .ta-header-1 h1,
+        .ta-header-2 h1 {
+            font-size: 14vw;
+        }
+
         .ta-intro h1,
         .ta-outro h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
         }
 
         .ta-tooltip h2 {
-            font-size: 1.6rem;
+            font-size: 2.2rem;
         }
 
-        .ta-tooltips {
-            width: 100%;
-            align-items: center;
-            flex-direction: column;
-            gap: 3rem;
-            padding-top: 5rem;
+        .ta-tooltip p {
+            font-size: 0.9rem;
         }
 
-        .ta-tooltip {
-            width: 90%;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .ta-tooltip:nth-child(2) {
-            justify-content: center;
-            align-items: center;
-        }
-
-        .ta-divider {
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .ta-tooltip:nth-child(1) .ta-divider,
-        .ta-tooltip:nth-child(2) .ta-divider {
-            transform-origin: center center;
-            background: linear-gradient(
-                90deg,
-                transparent 0%,
-                var(--ta-gold) 50%,
-                transparent 100%
-            );
-        }
-
-        .ta-tooltip:nth-child(2) .ta-title,
-        .ta-tooltip:nth-child(2) .ta-description,
-        .ta-description {
-            width: 100%;
-        }
-
-        .ta-header-1,
-        .ta-header-2 {
-            height: auto;
-            min-height: 50svh;
-            display: flex;
-            align-items: center;
-        }
-
-        .ta-header-2 h1 {
-            font-size: 5vw;
+        .ta-avatar, .ta-avatar-clip, .ta-avatar img {
+            width: 60px;
+            height: 60px;
         }
     }
 
-    @media (max-width: 500px) {
+    /* Mobile landscape specifically or very short screens */
+    @media (max-width: 1000px), (max-height: 500px) {
         .ta-intro h1,
         .ta-outro h1 {
-            font-size: 1.8rem;
+            font-size: min(2rem, 10vh);
+        }
+
+        .ta-tooltips {
+            width: 95%;
+            gap: 2rem;
+        }
+
+        .ta-tooltip {
+            gap: 0.5rem;
         }
 
         .ta-tooltip h2 {
-            font-size: 1.3rem;
+            font-size: min(1.5rem, 6vh);
         }
 
+        .ta-tooltip p {
+            font-size: min(0.8rem, 3.5vh);
+            line-height: 1.4;
+        }
+
+        .ta-description {
+            width: 100%;
+        }
+        
+        .ta-tooltip:nth-child(2) .ta-description {
+            width: 100%;
+        }
+
+        .ta-avatar, .ta-avatar-clip, .ta-avatar img {
+            width: min(50px, 12vh);
+            height: min(50px, 12vh);
+        }
+
+        .ta-header-1 h1,
         .ta-header-2 h1 {
-            font-size: 6vw;
+            font-size: 16vw;
         }
     }
 </style>
@@ -694,28 +687,21 @@ import { CldImage } from "astro-cloudinary";
         function setupModel() {
             if (!model || !modelSize) return;
 
-            const isMobile = window.innerWidth < 1000;
             const box = new THREE.Box3().setFromObject(model);
             const center = box.getCenter(new THREE.Vector3());
 
             model.position.set(
-                isMobile
-                    ? center.x + modelSize.x * 1
-                    : -center.x - modelSize.x * 0.4,
+                -center.x - modelSize.x * 0.4,
                 -center.y + modelSize.y * 0.085,
                 -center.z,
             );
 
-            // model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(-35);
             model.rotation.z = THREE.MathUtils.degToRad(-35);
 
-            // const cameraDistance = isMobile ? 2 : 1.25;
-            const cameraDistance = 1.25;
             camera.position.set(
                 0,
                 0,
-                Math.max(modelSize.x, modelSize.y, modelSize.z) *
-                    cameraDistance,
+                Math.max(modelSize.x, modelSize.y, modelSize.z) * 1.25,
             );
             camera.lookAt(0, 0, 0);
         }
