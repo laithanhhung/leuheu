@@ -8,7 +8,13 @@ interface Props {
 const { className } = Astro.props;
 
 const campaigns = await getCollection("campaigns");
-// Sort or filter if needed, here we just use the fetched ones
+
+const sideCampaigns = campaigns
+    .filter((c) => c.data.title.includes("Tee Yod"))
+    .slice(0, 2);
+const coverCampaign =
+    campaigns.find((c) => c.data.title.includes("Truy tìm long diên hương")) ||
+    campaigns[0];
 ---
 
 <section
@@ -55,44 +61,47 @@ const campaigns = await getCollection("campaigns");
                 </div>
             </div>
 
-            <div class="cover-img rounded-lg overflow-hidden">
-                {
-                    campaigns.length > 0 && (
-                        <CldImage
-                            src={
-                                campaigns[0].data.horizontalImage ||
-                                campaigns[0].data.posterImage
-                            }
-                            alt={campaigns[0].data.title}
-                        />
-                    )
-                }
-            </div>
-
-            <div class="site-info">
-                <div class="row">
-                    <div class="col">
-                        <div class="line">
-                            <p>Highlight Campaigns</p>
-                        </div>
+            <div class="bottom-flex-row">
+                <div class="col-small">
+                    <div class="line mb-4">
+                        <p
+                            class="section-label uppercase font-mono text-[11px] font-medium text-white m-0"
+                        >
+                            Highlight Campaigns
+                        </p>
                     </div>
-                    <div class="col images-col flex flex-col gap-4 w-full">
+                </div>
+
+                <div class="col-medium images-col">
+                    {
+                        sideCampaigns.map((campaign) => (
+                            <div class="line w-full">
+                                <CldImage
+                                    class="info-img w-full h-full object-cover"
+                                    src={
+                                        campaign.data.horizontalImage ||
+                                        campaign.data.posterImage
+                                    }
+                                    alt={campaign.data.title}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div class="col-large">
+                    <div class="cover-img rounded-lg overflow-hidden">
                         {
-                            campaigns
-                                .filter((campaign) => !campaign.data.isMain)
-                                .slice(0, 2)
-                                .map((campaign) => (
-                                    <div class="line w-full">
-                                        <CldImage
-                                            class="info-img w-full h-full object-cover"
-                                            src={
-                                                campaign.data.horizontalImage ||
-                                                campaign.data.posterImage
-                                            }
-                                            alt={campaign.data.title}
-                                        />
-                                    </div>
-                                ))
+                            coverCampaign && (
+                                <CldImage
+                                    class="w-full h-full object-cover"
+                                    src={
+                                        coverCampaign.data.horizontalImage ||
+                                        coverCampaign.data.posterImage
+                                    }
+                                    alt={coverCampaign.data.title}
+                                />
+                            )
                         }
                     </div>
                 </div>
@@ -121,7 +130,9 @@ const campaigns = await getCollection("campaigns");
                     transparent 50%
                 ),
                 linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
-            box-shadow: inset 0 0 150px rgba(0,0,0,0.9), 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow:
+                inset 0 0 150px rgba(0, 0, 0, 0.9),
+                0 20px 50px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(199, 249, 0, 0.2);
             color: #fff;
             font-family: "PP Neue Montreal", sans-serif;
@@ -144,16 +155,25 @@ const campaigns = await getCollection("campaigns");
             background-color: #030303;
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
             position: relative;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-            border-left: 1px solid rgba(255,255,255,0.03);
-            border-right: 1px solid rgba(255,255,255,0.03);
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+            border-left: 1px solid rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
         }
-        
+
         .revealer::after {
-            content: '';
+            content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.02) 4px, rgba(255,255,255,0.02) 8px);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 4px,
+                rgba(255, 255, 255, 0.02) 4px,
+                rgba(255, 255, 255, 0.02) 8px
+            );
             z-index: 1;
         }
 
@@ -173,8 +193,9 @@ const campaigns = await getCollection("campaigns");
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.5);
-            width: 100%;
+            width: auto;
             height: 100%;
+            aspect-ratio: 16/9;
             visibility: visible;
             will-change: transform;
             opacity: 0;
@@ -183,42 +204,11 @@ const campaigns = await getCollection("campaigns");
         :global(.img img) {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .img:first-child {
             opacity: 1;
-        }
-
-        .images.stacked-container {
-            position: absolute;
-            left: 2em;
-            bottom: 2em;
-            width: auto;
-            height: auto;
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: flex-start;
-            gap: 1em;
-            transform: none;
-            will-change: transform;
-        }
-
-        .img.stacked {
-            position: relative;
-            width: 150px;
-            height: 100px;
-            transform: none;
-            top: auto;
-            left: auto;
-            opacity: 1;
-            will-change: transform;
-        }
-
-        :global(.img.stacked img) {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .hero-content {
@@ -230,10 +220,10 @@ const campaigns = await getCollection("campaigns");
 
         .site-logo {
             position: absolute;
-            top: 3em;
-            left: 3em;
+            top: 3vw;
+            left: 3vw;
             display: flex;
-            gap: 1.5em;
+            gap: 1.5vw;
             align-items: flex-start;
             flex-direction: column;
             z-index: 10;
@@ -269,13 +259,80 @@ const campaigns = await getCollection("campaigns");
             text-transform: uppercase;
         }
 
-        .cover-img {
-            border-radius: 10px;
+        /* FLEXBOX LAYOUT */
+        .bottom-flex-row {
             position: absolute;
-            right: 2em;
             bottom: 2em;
-            width: 40%;
-            height: 50%;
+            left: 2em;
+            right: 2em;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2vw;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .bottom-flex-row > * {
+            pointer-events: auto;
+        }
+
+        .col-small {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .col-medium {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+            justify-content: flex-end;
+        }
+
+        .col-large {
+            flex: 2.5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .images.stacked-container {
+            position: relative;
+            transform: none;
+            top: auto;
+            left: auto;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column-reverse; /* Usually stack upwards */
+            gap: 1vw;
+        }
+
+        .img.stacked {
+            position: relative;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            transform: none;
+            top: auto;
+            left: auto;
+            opacity: 1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        :global(.img.stacked img) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover-img {
+            position: relative;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
             clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
         }
 
@@ -286,33 +343,8 @@ const campaigns = await getCollection("campaigns");
             object-fit: cover;
         }
 
-        .site-info {
-            position: absolute;
-            bottom: 2em;
-            left: 2em;
-            width: 50%;
-            height: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .site-info .row {
-            display: flex;
-            gap: 2em;
-        }
-
-        .site-info .row .col {
-            flex: 1;
-        }
-
-        .images-col {
-            display: flex;
-            gap: 1em;
-        }
-
         .images-col .line {
-            flex: 1;
+            width: 100%;
             height: auto;
             aspect-ratio: 16/9;
         }
@@ -324,15 +356,6 @@ const campaigns = await getCollection("campaigns");
             object-fit: cover;
             transform: translateY(150%);
             will-change: transform;
-        }
-
-        .site-info p {
-            text-transform: uppercase;
-            font-family: "Apercu Mono Pro", monospace;
-            font-size: 11px;
-            font-weight: 500;
-            color: #fff;
-            margin: 0;
         }
 
         .word,
@@ -357,114 +380,153 @@ const campaigns = await getCollection("campaigns");
         import { gsap } from "gsap";
         import { CustomEase, Flip, ScrollTrigger } from "gsap/all";
 
-        gsap.registerPlugin(Flip, CustomEase, ScrollTrigger);
-
         document.addEventListener("DOMContentLoaded", () => {
-            CustomEase.create(
-                "hop",
-                "M0,0 C0.355,0.022 0.448,0.079 0.5,0.5 0.542,0.846 0.615,1 1,1",
-            );
-            CustomEase.create(
-                "hop2",
-                "M0,0 C0.078,0.617 0.114,0.716 0.255,0.828 0.373,0.922 0.561,1 1,1",
-            );
+            const initSignificantCampaign = () => {
+                gsap.registerPlugin(Flip, CustomEase, ScrollTrigger);
+                CustomEase.create(
+                    "hop",
+                    "M0,0 C0.355,0.022 0.448,0.079 0.5,0.5 0.542,0.846 0.615,1 1,1",
+                );
+                CustomEase.create(
+                    "hop2",
+                    "M0,0 C0.078,0.617 0.114,0.716 0.255,0.828 0.373,0.922 0.561,1 1,1",
+                );
 
-            const mainTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#significant-campaign",
-                    start: "bottom 100%",
-                },
-            });
-            const revealer = gsap.timeline();
-            const scaleTl = gsap.timeline();
+                const mainTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#significant-campaign",
+                        start: "bottom 100%",
+                        onEnter: () => {
+                            if (window.lenis) window.lenis.stop();
+                        },
+                    },
+                });
+                const revealer = gsap.timeline();
+                const scaleTl = gsap.timeline();
 
-            revealer
-                .to(".r-1", {
-                    clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-                    duration: 1.8,
-                    ease: "power4.inOut",
-                })
-                .to(
-                    ".r-2",
-                    {
-                        clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+                revealer
+                    .to(".r-1", {
+                        clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
                         duration: 1.8,
                         ease: "power4.inOut",
-                    },
-                    "<",
+                    })
+                    .to(
+                        ".r-2",
+                        {
+                            clipPath:
+                                "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+                            duration: 1.8,
+                            ease: "power4.inOut",
+                        },
+                        "<",
+                    );
+
+                scaleTl.to(".img:first-child", {
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power4.inOut",
+                });
+
+                const images = document.querySelectorAll(
+                    ".img:not(:first-child)",
                 );
+                images.forEach((image) => {
+                    scaleTl.to(
+                        image,
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.7,
+                            ease: "power3.out",
+                        },
+                        ">-0.5",
+                    );
+                });
 
-            scaleTl.to(".img:first-child", {
-                scale: 1,
-                duration: 1.5,
-                ease: "power4.inOut",
-            });
-
-            const images = document.querySelectorAll(".img:not(:first-child)");
-            images.forEach((image) => {
-                scaleTl.to(
-                    image,
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.7,
-                        ease: "power3.out",
-                    },
-                    ">-0.5",
-                );
-            });
-
-            mainTl
-                .add(revealer)
-                .add(scaleTl, "-=1.25")
-                .add(() => {
-                    document
-                        .querySelectorAll(".img:not(.main)")
-                        .forEach((image) => {
-                            image.remove();
-                        });
-
-                    const state = Flip.getState(".main");
-
-                    const imagesContainer = document.querySelector(".images");
-                    if (imagesContainer) {
-                        imagesContainer.classList.add("stacked-container");
-                    }
-
-                    document
-                        .querySelectorAll(".main")
-                        .forEach((image, index) => {
-                            image.classList.add("stacked");
-                            if (image instanceof HTMLElement) {
-                                image.style.order = index.toString();
-                            }
-                            gsap.set(image, {
-                                clearProps: "transform, top, left",
+                mainTl
+                    .add(revealer)
+                    .add(scaleTl, "-=1.25")
+                    .add(() => {
+                        document
+                            .querySelectorAll(".img:not(.main)")
+                            .forEach((image) => {
+                                image.remove();
                             });
-                        });
 
-                    Flip.from(state, {
-                        duration: 2,
+                        const state = Flip.getState(".main, .images");
+
+                        const imagesContainer =
+                            document.querySelector(".images");
+                        const colSmall = document.querySelector(".col-small");
+                        if (imagesContainer && colSmall) {
+                            colSmall.appendChild(imagesContainer);
+                            imagesContainer.classList.add("stacked-container");
+                        }
+
+                        document
+                            .querySelectorAll(".main")
+                            .forEach((image, index) => {
+                                image.classList.add("stacked");
+                                if (image instanceof HTMLElement) {
+                                    image.style.order = index.toString();
+                                }
+                                gsap.set(image, {
+                                    clearProps: "transform, top, left",
+                                });
+                            });
+
+                        Flip.from(state, {
+                            duration: 2,
+                            ease: "hop",
+                            absolute: true,
+                            nested: true,
+                            stagger: {
+                                amount: -0.3,
+                            },
+                        });
+                    })
+                    .to(".word h1, .word p, .line p, .info-img", {
+                        y: 0,
+                        duration: 3,
+                        ease: "hop2",
+                        stagger: 0.1,
+                        delay: 1.25,
+                    })
+                    .to(".cover-img", {
+                        clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0% 0%)",
+                        duration: 1.5,
                         ease: "hop",
-                        absolute: true,
-                        stagger: {
-                            amount: -0.3,
+                        delay: -4.75,
+                        onComplete: () => {
+                            if (window.lenis) window.lenis.start();
                         },
                     });
-                })
-                .to(".word h1, .word p, .line p, .info-img", {
-                    y: 0,
-                    duration: 3,
-                    ease: "hop2",
-                    stagger: 0.1,
-                    delay: 1.25,
-                })
-                .to(".cover-img", {
-                    clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0% 0%)",
-                    duration: 1.5,
-                    ease: "hop",
-                    delay: -4.75,
+            };
+
+            let isInitialized = false;
+            const tryInit = () => {
+                if (isInitialized) return;
+
+                const splashScreen = document.getElementById("lh-splash");
+                const prompt = document.getElementById("landscape-prompt");
+                const isPromptActive = prompt && window.getComputedStyle(prompt).display !== "none";
+
+                if (!splashScreen && !isPromptActive) {
+                    isInitialized = true;
+                    initSignificantCampaign();
+                }
+            };
+
+            // Attempt to initialize immediately if possible
+            tryInit();
+
+            // If blocked, wait for relevant events
+            if (!isInitialized) {
+                window.addEventListener("splashComplete", () => setTimeout(tryInit, 50), { once: true });
+                window.matchMedia("(max-width: 850px) and (orientation: portrait)").addEventListener("change", (e) => {
+                    if (!e.matches) setTimeout(tryInit, 50);
                 });
+            }
         });
     </script>
 </section>

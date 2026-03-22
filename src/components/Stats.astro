@@ -1,19 +1,10 @@
 ---
 import { getEntry } from "astro:content";
 import { CldImage } from "astro-cloudinary";
+import { creators } from "../data/creators";
 
 const statsEntry = await getEntry("sections", "stats");
 const { data } = statsEntry!;
-
-const creators = Array(12)
-    .fill(0)
-    .map((_, i) => ({
-        id: i,
-        img: `https://picsum.photos/100/100?random=${300 + i}`,
-        name: `Creator ${i + 1}`,
-        followers: `${(Math.random() * 5).toFixed(1)}M`,
-        likes: `${(Math.random() * 5).toFixed(1)}M`,
-    }));
 ---
 
 <section
@@ -29,7 +20,7 @@ const creators = Array(12)
         </h2>
 
         <div
-            class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 3xl:grid-cols-8 gap-3 xs:gap-4 3xl:gap-8 mb-12 xs:mb-16 3xl:mb-24"
+            class="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 xs:gap-4 3xl:gap-8 mb-12 xs:mb-16 3xl:mb-24"
         >
             {
                 creators.map((c) => (

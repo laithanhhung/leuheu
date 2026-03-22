@@ -101,74 +101,18 @@ import LandscapePrompt from "../components/LandscapePrompt.astro";
                     initCampaignAnimation?: () => void;
                     initSpotlightAnimation?: () => void;
                     duplicateIcons?: HTMLElement[] | null;
+                    lenis?: any;
                 }
             }
 
-            // Initialize Lenis once
+            // Initialize Lenis once for standard unified scrolling
             const lenis = new Lenis({
-                lerp: 0.05,
-                wheelMultiplier: 0.4,
+                lerp: 0.1,  // Standard smooth interpolation
+                wheelMultiplier: 1, // Normal scrolling distance
                 smoothWheel: true,
             });
 
-            // Helper: smoothly change Lenis scroll speed
-            function setScrollSpeed(lerp: number, wheelMultiplier: number) {
-                gsap.to(lenis, {
-                    duration: 0.4,
-                    ease: "power2.out",
-                    onUpdate: () => {
-                        // lerp and wheelMultiplier are updated via gsap's interpolation
-                    },
-                });
-                // Since Lenis options aren't directly tweenable, we use a proxy
-                const proxy = {
-                    l: lenis.options.lerp,
-                    w: lenis.options.wheelMultiplier,
-                };
-                gsap.to(proxy, {
-                    l: lerp,
-                    w: wheelMultiplier,
-                    duration: 0.4,
-                    ease: "power2.out",
-                    onUpdate: () => {
-                        lenis.options.lerp = proxy.l;
-                        lenis.options.wheelMultiplier = proxy.w;
-                    },
-                });
-            }
-
-            // Per-section scroll speed config
-            // Lower lerp = smoother/slower feel, higher = snappier
-            // Lower wheelMultiplier = less scroll per wheel tick
-            const sectionSpeeds: {
-                selector: string;
-                lerp: number;
-                wheelMultiplier: number;
-            }[] = [
-                { selector: ".hero-section", lerp: 0.1, wheelMultiplier: 1.2 }, // hero — standard responsive
-                {
-                    selector: "#welcome-section",
-                    lerp: 0.1,
-                    wheelMultiplier: 1.0,
-                }, // Welcome
-                { selector: ".spotlight", lerp: 0.1, wheelMultiplier: 1.0 }, // About
-                {
-                    selector: ".stats-section",
-                    lerp: 0.08,
-                    wheelMultiplier: 0.9,
-                }, // Stats
-                { selector: ".svc-wrapper", lerp: 0.1, wheelMultiplier: 1.1 }, // Services
-                {
-                    selector: ".campaigns-container",
-                    lerp: 0.05,
-                    wheelMultiplier: 0.4,
-                }, // Campaigns
-                {
-                    selector: ".tiktok-award-wrapper",
-                    lerp: 0.06,
-                    wheelMultiplier: 0.7,
-                }, // TikTok Award
-            ];
+            window.lenis = lenis;
 
             // Synchronize Lenis with ScrollTrigger
             lenis.on("scroll", ScrollTrigger.update);

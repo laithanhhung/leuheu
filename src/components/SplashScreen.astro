@@ -131,6 +131,7 @@
         ease: "power4.inOut",
         onComplete: () => {
             document.getElementById("lh-splash")?.remove();
+            window.dispatchEvent(new Event("splashComplete"));
         },
     });
 </script>
