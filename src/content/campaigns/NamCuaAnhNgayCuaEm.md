@@ -5,7 +5,7 @@ badge: "ROMANCE SERIES"
 posterImage: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1500&auto=format&fit=crop"
 horizontalImage: "NCANCE_poster_ngang_xmpkik"
 isDark: true
-order: 15
+order: 14
 mainStat: "20M+ Romantic Views"
 secondaryStat: "Top 3 Teen Shows"
 galleryImages:

@@ -5,7 +5,7 @@ badge: "MUSIC VIDEO LAUNCH"
 posterImage: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=1500&auto=format&fit=crop"
 horizontalImage: "NDTDNCT_ngang_ewy66u"
 isDark: true
-order: 13
+order: 12
 isMain: true
 mainStat: "35M+ Streams"
 secondaryStat: "Top 1 Trending Music"

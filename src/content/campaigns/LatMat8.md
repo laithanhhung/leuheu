@@ -6,7 +6,7 @@ posterImage: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&
 horizontalImage: "LM8_Poster_Ngang_vdns9t"
 isMain: true
 isDark: true
-order: 12
+order: 11
 mainStat: "50M+ Views & Counting"
 secondaryStat: "Most Anticipated Movie"
 galleryImages:
