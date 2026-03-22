@@ -1,149 +1,54 @@
-<section class="hero-section">
-    <div class="hero-header">
-        <h1>#leuheu</h1>
-        <p>ChillChillEntertainment</p>
+<section class="hero-section relative w-full h-[100svh] bg-[#050505] text-white flex flex-col justify-center items-center overflow-hidden">
+    
+    <!-- Atmospheric Ambient Light -->
+    <div class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
+        <div class="hero-ambient-glow absolute w-[60vw] h-[60vw] bg-neon-lime mix-blend-screen rounded-full blur-[150px] opacity-10"></div>
+        <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
     </div>
 
-    <div class="animated-icons">
-        <div class="animated-icon icon-1">
-            <img src="/icons/icon-1.svg" alt="icon-1" />
+    <!-- Massive Text Header -->
+    <div class="hero-header absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center flex flex-col gap-2 md:gap-4 z-10 will-change-transform">
+        <h1 class="text-[clamp(4.5rem,14vw,14rem)] font-black leading-none tracking-tighter text-white [text-shadow:0_0_50px_rgba(204,255,0,0.3)] mix-blend-plus-lighter">
+            #leuheu
+        </h1>
+        <p class="text-[clamp(0.6rem,2vw,1.5rem)] font-medium text-gray-400 tracking-[0.4em] sm:tracking-[0.6em] xl:tracking-[0.8em] uppercase">
+            ChillChillEntertainment
+        </p>
+    </div>
+
+    <!-- Animated Falling Icons -->
+    <div class="animated-icons fixed bottom-4 md:bottom-8 left-4 right-4 md:left-8 md:right-8 flex items-center gap-4 z-20 will-change-transform">
+        <div class="animated-icon flex-1 aspect-square will-change-transform">
+            <img src="/icons/icon-1.svg" alt="icon-1" class="w-full h-full object-contain" />
         </div>
-        <div class="animated-icon icon-2">
-            <img src="/icons/icon-2.svg" alt="icon-2" />
+        <div class="animated-icon flex-1 aspect-square will-change-transform">
+            <img src="/icons/icon-2.svg" alt="icon-2" class="w-full h-full object-contain" />
         </div>
-        <div class="animated-icon icon-3">
-            <img src="/icons/icon-3.svg" alt="icon-3" />
+        <div class="animated-icon flex-1 aspect-square will-change-transform">
+            <img src="/icons/icon-3.svg" alt="icon-3" class="w-full h-full object-contain" />
         </div>
-        <div class="animated-icon icon-4">
-            <img src="/icons/icon-4.svg" alt="icon-4" />
+        <div class="animated-icon flex-1 aspect-square will-change-transform">
+            <img src="/icons/icon-4.svg" alt="icon-4" class="w-full h-full object-contain" />
         </div>
-        <div class="animated-icon icon-5">
-            <img src="/icons/icon-5.svg" alt="icon-5" />
+        <div class="animated-icon flex-1 aspect-square will-change-transform">
+            <img src="/icons/icon-5.svg" alt="icon-5" class="w-full h-full object-contain" />
         </div>
     </div>
 
-    <h2 class="animated-text">
-        <div class="placeholder-icon"></div>
-        <span class="text-segment">Outstanding Accessories</span>
-        <div class="placeholder-icon"></div>
-        <span class="text-segment">Trend of the year</span>
-        <div class="placeholder-icon"></div>
-        <span class="text-segment">Professional Team</span>
-        <div class="placeholder-icon"></div>
-        <span class="text-segment">Interval contents</span>
-        <div class="placeholder-icon"></div>
-        <span class="text-segment">Extraordinary Marketing</span>
+    <!-- Sequence Text -->
+    <h2 class="animated-text relative max-w-[1200px] text-center text-white text-[clamp(2rem,5vw,4.5rem)] font-black leading-[1.2] z-10 px-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+        <div class="placeholder-icon invisible inline-block w-[30px] h-[30px] md:w-[60px] md:h-[60px] align-middle mt-[-4px] md:mt-[-10px] will-change-transform"></div>
+        <span class="text-segment opacity-0">Outstanding Accessories</span>
+        <div class="placeholder-icon invisible inline-block w-[30px] h-[30px] md:w-[60px] md:h-[60px] align-middle mt-[-4px] md:mt-[-10px] will-change-transform"></div>
+        <span class="text-segment opacity-0">Trend of the year</span>
+        <div class="placeholder-icon invisible inline-block w-[30px] h-[30px] md:w-[60px] md:h-[60px] align-middle mt-[-4px] md:mt-[-10px] will-change-transform"></div>
+        <span class="text-segment opacity-0">Professional Team</span>
+        <div class="placeholder-icon invisible inline-block w-[30px] h-[30px] md:w-[60px] md:h-[60px] align-middle mt-[-4px] md:mt-[-10px] will-change-transform"></div>
+        <span class="text-segment opacity-0 text-neon-lime drop-shadow-[0_0_20px_rgba(204,255,0,0.4)]">Interval contents</span>
+        <div class="placeholder-icon invisible inline-block w-[30px] h-[30px] md:w-[60px] md:h-[60px] align-middle mt-[-4px] md:mt-[-10px] will-change-transform"></div>
+        <span class="text-segment opacity-0">Extraordinary Marketing</span>
     </h2>
 </section>
-
-<style is:global>
-    .hero-section {
-        position: relative;
-        width: 100vw;
-        height: 100svh;
-        padding: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #000;
-        color: #e3e3db;
-        overflow: hidden;
-        flex-direction: column;
-        transition: background-color 0.3s ease;
-    }
-
-    .hero-header {
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60%;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        will-change: transform, opacity;
-    }
-
-    .hero-header h1 {
-        font-size: clamp(3rem, 8vw, 9rem);
-        font-weight: 900;
-        line-height: 1;
-        color: #c7f900;
-    }
-
-    .hero-header p {
-        font-size: clamp(1rem, 2vw, 1.5rem);
-        font-weight: 400;
-        color: #e3e3db;
-    }
-
-    .animated-icons {
-        /* Match the demo: keep icons relative to the viewport while hero is pinned */
-        position: fixed;
-        bottom: 1rem;
-        left: 1rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        will-change: transform;
-        z-index: 2;
-    }
-
-    .animated-icon {
-        flex: 1;
-        aspect-ratio: 1;
-        will-change: transform;
-    }
-
-    .animated-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    .animated-text {
-        position: relative;
-        max-width: 1000px;
-        text-align: center;
-        color: #141414;
-        font-size: clamp(2rem, 5vw, 4rem);
-        font-weight: 800;
-        line-height: 1.2;
-    }
-
-    .text-segment {
-        opacity: 0;
-    }
-
-    .placeholder-icon {
-        margin-top: -10px;
-        width: 60px;
-        height: 60px;
-        display: inline-block;
-        vertical-align: middle;
-        will-change: transform;
-        visibility: hidden;
-    }
-
-    @media (max-width: 1000px) {
-        .hero-header {
-            top: 45%;
-            width: 90%;
-        }
-
-        .placeholder-icon {
-            margin-top: -4px;
-            width: 30px;
-            height: 30px;
-        }
-
-        .animated-text {
-            font-size: clamp(1.5rem, 6vw, 2.5rem);
-        }
-    }
-</style>
 
 <script>
     import { gsap } from "gsap";
@@ -159,36 +64,22 @@
     window.initHeroAnimation = () => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const heroSection = document.querySelector(
-            ".hero-section",
-        ) as HTMLElement;
-        const heroHeader = document.querySelector(
-            ".hero-header",
-        ) as HTMLElement;
-        const animatedIcons = document.querySelector(
-            ".animated-icons",
-        ) as HTMLElement;
-        const iconElements =
-            document.querySelectorAll<HTMLElement>(".animated-icon");
-        const textSegments =
-            document.querySelectorAll<HTMLElement>(".text-segment");
-        const placeholders =
-            document.querySelectorAll<HTMLElement>(".placeholder-icon");
+        const heroSection = document.querySelector(".hero-section") as HTMLElement;
+        const heroHeader = document.querySelector(".hero-header") as HTMLElement;
+        const animatedIcons = document.querySelector(".animated-icons") as HTMLElement;
+        const ambientGlow = document.querySelector(".hero-ambient-glow") as HTMLElement;
+        const iconElements = document.querySelectorAll<HTMLElement>(".animated-icon");
+        const textSegments = document.querySelectorAll<HTMLElement>(".text-segment");
+        const placeholders = document.querySelectorAll<HTMLElement>(".placeholder-icon");
 
         // Shuffle text reveal order
-        const textAnimationOrder: {
-            segment: HTMLElement;
-            originalIndex: number;
-        }[] = [];
+        const textAnimationOrder: { segment: HTMLElement; originalIndex: number }[] = [];
         textSegments.forEach((segment, index) => {
             textAnimationOrder.push({ segment, originalIndex: index });
         });
         for (let i = textAnimationOrder.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [textAnimationOrder[i], textAnimationOrder[j]] = [
-                textAnimationOrder[j],
-                textAnimationOrder[i],
-            ];
+            [textAnimationOrder[i], textAnimationOrder[j]] = [textAnimationOrder[j], textAnimationOrder[i]];
         }
 
         const isMobile = window.innerWidth <= 1000;
@@ -196,7 +87,6 @@
         const currentIconSize = iconElements[0].getBoundingClientRect().width;
         const exactScale = headerIconSize / currentIconSize;
 
-        // No cleanup on leave; let GSAP states persist precisely like the demo
         ScrollTrigger.create({
             trigger: ".hero-section",
             start: "top top",
@@ -214,8 +104,9 @@
                 // ─── Phase 1 (0–0.3): Icons float up, header fades ───────────
                 if (progress <= 0.3) {
                     const moveProgress = progress / 0.3;
-                    const containerMoveY =
-                        -window.innerHeight * 0.3 * moveProgress;
+                    const containerMoveY = -window.innerHeight * 0.3 * moveProgress;
+
+                    if (ambientGlow) gsap.set(ambientGlow, { opacity: 0.1, scale: 1 });
 
                     if (progress <= 0.15) {
                         const hp = progress / 0.15;
@@ -225,16 +116,13 @@
                         });
                     } else {
                         gsap.set(heroHeader, {
-                            /* Demo resets to the original translate(-50%, -50%) once header fades out */
                             transform: `translate(-50%, -50%)`,
                             opacity: 0,
                         });
                     }
 
                     if (window.duplicateIcons) {
-                        window.duplicateIcons?.forEach((d) =>
-                            d.parentNode?.removeChild(d),
-                        );
+                        window.duplicateIcons?.forEach((d) => d.parentNode?.removeChild(d));
                         window.duplicateIcons = null;
                     }
 
@@ -249,13 +137,7 @@
                         const staggerDelay = index * 0.1;
                         const start = staggerDelay;
                         const end = staggerDelay + 0.5;
-                        const ip = gsap.utils.mapRange(
-                            start,
-                            end,
-                            0,
-                            1,
-                            moveProgress,
-                        );
+                        const ip = gsap.utils.mapRange(start, end, 0, 1, moveProgress);
                         const clamped = Math.max(0, Math.min(1, ip));
 
                         const startOffSet = -containerMoveY;
@@ -266,7 +148,7 @@
                         });
                     });
 
-                    // ─── Phase 2 (0.3–0.6): Scale to center ─────────────────────
+                // ─── Phase 2 (0.3–0.6): Scale to center ─────────────────────
                 } else if (progress <= 0.6) {
                     const scaleProgress = (progress - 0.3) / 0.3;
 
@@ -275,29 +157,21 @@
                         opacity: 0,
                     });
 
-                    heroSection.style.backgroundColor =
-                        scaleProgress >= 0.5 ? "#e3e3db" : "#141414";
+                    // Ambient glow gets stronger as icons merge
+                    if (ambientGlow) gsap.set(ambientGlow, { opacity: 0.1 + (scaleProgress * 0.1), scale: 1 + scaleProgress });
 
                     if (window.duplicateIcons) {
-                        window.duplicateIcons?.forEach((duplicateIcon) =>
-                            duplicateIcon.parentNode?.removeChild(
-                                duplicateIcon,
-                            ),
-                        );
+                        window.duplicateIcons?.forEach((d) => d.parentNode?.removeChild(d));
                         window.duplicateIcons = null;
                     }
 
                     const targetCenterY = window.innerHeight / 2;
                     const targetCenterX = window.innerWidth / 2;
                     const containerRect = animatedIcons.getBoundingClientRect();
-                    const currentCenterX =
-                        containerRect.left + containerRect.width / 2;
-                    const currentCenterY =
-                        containerRect.top + containerRect.height / 2;
-                    const deltaX =
-                        (targetCenterX - currentCenterX) * scaleProgress;
-                    const deltaY =
-                        (targetCenterY - currentCenterY) * scaleProgress;
+                    const currentCenterX = containerRect.left + containerRect.width / 2;
+                    const currentCenterY = containerRect.top + containerRect.height / 2;
+                    const deltaX = (targetCenterX - currentCenterX) * scaleProgress;
+                    const deltaY = (targetCenterY - currentCenterY) * scaleProgress;
                     const baseY = -window.innerHeight * 0.3;
                     const currentScale = 1 + (exactScale - 1) * scaleProgress;
 
@@ -308,31 +182,24 @@
                         opacity: 1,
                     });
 
-                    iconElements.forEach((icon) =>
-                        gsap.set(icon, { x: 0, y: 0 }),
-                    );
+                    iconElements.forEach((icon) => gsap.set(icon, { x: 0, y: 0 }));
 
-                    // ─── Phase 3 (0.6–0.75): Duplicate icons fly to placeholders ─
+                // ─── Phase 3 (0.6–0.75): Duplicate icons fly to placeholders ─
                 } else if (progress <= 0.75) {
                     const moveProgress = (progress - 0.6) / 0.15;
 
-                    gsap.set(heroHeader, {
-                        transform: `translate(-50%, calc(-50% + -50px))`,
-                        opacity: 0,
-                    });
-                    heroSection.style.backgroundColor = "#e3e3db";
+                    gsap.set(heroHeader, { transform: `translate(-50%, calc(-50% + -50px))`, opacity: 0 });
+
+                    // Maximum glowing atmosphere
+                    if (ambientGlow) gsap.set(ambientGlow, { opacity: 0.2 + (moveProgress * 0.1), scale: 2 });
 
                     const targetCenterX = window.innerWidth / 2;
                     const targetCenterY = window.innerHeight / 2;
                     const containerRect = animatedIcons.getBoundingClientRect();
-                    const currentCenterX =
-                        containerRect.left + containerRect.width / 2;
-                    const currentCenterY =
-                        containerRect.top + containerRect.height / 2;
-                    const deltaX =
-                        (targetCenterX - currentCenterX) * moveProgress;
-                    const deltaY =
-                        (targetCenterY - currentCenterY) * moveProgress;
+                    const currentCenterX = containerRect.left + containerRect.width / 2;
+                    const currentCenterY = containerRect.top + containerRect.height / 2;
+                    const deltaX = (targetCenterX - currentCenterX) * moveProgress;
+                    const deltaY = (targetCenterY - currentCenterY) * moveProgress;
                     const baseY = -window.innerHeight * 0.3;
 
                     gsap.set(animatedIcons, {
@@ -341,22 +208,17 @@
                         scale: exactScale,
                         opacity: 0,
                     });
-                    iconElements.forEach((icon) =>
-                        gsap.set(icon, { x: 0, y: 0 }),
-                    );
+                    iconElements.forEach((icon) => gsap.set(icon, { x: 0, y: 0 }));
 
                     if (!window.duplicateIcons) {
                         window.duplicateIcons = [];
-                        iconElements.forEach((icon, index) => {
-                            const duplicate = icon.cloneNode(
-                                true,
-                            ) as HTMLElement;
+                        iconElements.forEach((icon) => {
+                            const duplicate = icon.cloneNode(true) as HTMLElement;
                             duplicate.className = "duplicate-icon";
                             duplicate.style.position = "absolute";
                             duplicate.style.width = headerIconSize + "px";
                             duplicate.style.height = headerIconSize + "px";
                             duplicate.style.zIndex = "9999";
-
                             heroSection.appendChild(duplicate);
                             window.duplicateIcons!.push(duplicate);
                         });
@@ -364,23 +226,16 @@
 
                     window.duplicateIcons?.forEach((dup, i) => {
                         if (i >= placeholders.length) return;
-                        const iconRect =
-                            iconElements[i].getBoundingClientRect();
-                        const startViewportX =
-                            iconRect.left + iconRect.width / 2;
-                        const startViewportY =
-                            iconRect.top + iconRect.height / 2;
-                        const targetRect =
-                            placeholders[i].getBoundingClientRect();
-                        const targetViewportX =
-                            targetRect.left + targetRect.width / 2;
-                        const targetViewportY =
-                            targetRect.top + targetRect.height / 2;
+                        const iconRect = iconElements[i].getBoundingClientRect();
+                        const startViewportX = iconRect.left + iconRect.width / 2;
+                        const startViewportY = iconRect.top + iconRect.height / 2;
+                        const targetRect = placeholders[i].getBoundingClientRect();
+                        const targetViewportX = targetRect.left + targetRect.width / 2;
+                        const targetViewportY = targetRect.top + targetRect.height / 2;
                         const moveX = targetViewportX - startViewportX;
                         const moveY = targetViewportY - startViewportY;
 
-                        let currentX = 0,
-                            currentY = 0;
+                        let currentX = 0, currentY = 0;
                         if (moveProgress <= 0.5) {
                             currentY = moveY * (moveProgress / 0.5);
                         } else {
@@ -388,26 +243,22 @@
                             currentY = moveY;
                         }
 
-                        // Restore animation calculation directly in viewport coordinates
                         dup.style.left = `${startViewportX + currentX - headerIconSize / 2}px`;
                         dup.style.top = `${startViewportY + currentY - headerIconSize / 2}px`;
                         dup.style.opacity = "1";
                         dup.style.display = "flex";
                     });
 
-                    // ─── Phase 4 (0.75–1.0): Text segments reveal ───────────────
+                // ─── Phase 4 (0.75–1.0): Text segments reveal ───────────────
                 } else {
-                    gsap.set(heroHeader, {
-                        transform: `translate(-50%, calc(-50% + -100px))`,
-                        opacity: 0,
-                    });
-                    heroSection.style.backgroundColor = "#e3e3db";
+                    gsap.set(heroHeader, { transform: `translate(-50%, calc(-50% + -100px))`, opacity: 0 });
+                    
+                    if (ambientGlow) gsap.set(ambientGlow, { opacity: 0.3, scale: 2 });
                     gsap.set(animatedIcons, { opacity: 0 });
 
                     window.duplicateIcons?.forEach((dup, i) => {
                         if (i >= placeholders.length) return;
-                        const targetRect =
-                            placeholders[i].getBoundingClientRect();
+                        const targetRect = placeholders[i].getBoundingClientRect();
                         const tx = targetRect.left + targetRect.width / 2;
                         const ty = targetRect.top + targetRect.height / 2;
                         dup.style.left = `${tx - headerIconSize / 2}px`;
@@ -417,21 +268,11 @@
                     });
 
                     textAnimationOrder.forEach((item, index) => {
-                        // Match the demo reveal timing
                         const segStart = 0.75 + index * 0.03;
                         const segEnd = segStart + 0.015;
                         const segProgress = Math.max(
                             0,
-                            Math.min(
-                                1,
-                                gsap.utils.mapRange(
-                                    segStart,
-                                    segEnd,
-                                    0,
-                                    1,
-                                    progress,
-                                ),
-                            ),
+                            Math.min(1, gsap.utils.mapRange(segStart, segEnd, 0, 1, progress))
                         );
                         gsap.set(item.segment, { opacity: segProgress });
                     });
