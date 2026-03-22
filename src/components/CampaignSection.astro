@@ -11,9 +11,9 @@ const sortedCampaigns = campaigns.sort(
 
 <section class="relative w-full">
     {/* Campaign Cards Loop */}
-    <div class="campaigns-container w-full bg-neon-lime">
+    <div class="campaigns-container w-full bg-[#0a0a0a]">
         <div
-            class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0"
+            class="campaign-container w-full h-auto min-h-[120svh] relative"
         >
             <SignificantCampaign className="campaign-card" />
         </div>
@@ -54,57 +54,62 @@ const sortedCampaigns = campaigns.sort(
             const card = container.querySelector(".campaign-card");
             if (!card) return;
 
-            gsap.to(card, {
-                rotate: 0,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: container,
-                    start: "top bottom",
-                    end: "top 0%",
-                    scrub: true,
-                },
-            });
+            // Slide and rotate entrance - SKIP for SignificantCampaign (index 0)
+            if (index > 0) {
+                gsap.to(card, {
+                    rotate: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top bottom",
+                        end: "top 0%",
+                        scrub: true,
+                        invalidateOnRefresh: true,
+                    },
+                });
+            }
 
-            // GSAP Horizontal gallery slide while pinned
             const track = container.querySelector(".horizontal-gallery-track");
             let scrollDistance = window.innerHeight; // Default 100vh pin
+            let maxSlide = 0;
             
-            if (track) {
+            if (track && track.parentElement) {
                 // Determine how far the track needs to slide to reveal all images
-                const maxSlide = track.scrollWidth - window.innerWidth + 40; // 40px padding
+                // Uses wrapperWidth to mathematically perfectly compute the horizontal overflow amount
+                const wrapperWidth = track.parentElement.offsetWidth;
+                maxSlide = track.scrollWidth - wrapperWidth + 40; 
                 if (maxSlide > 0) {
                     scrollDistance = Math.max(window.innerHeight, maxSlide);
-                    
-                    gsap.to(track, {
-                        x: -maxSlide,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: container,
-                            start: "bottom bottom",
-                            end: () => `+=${scrollDistance}`,
-                            scrub: true,
-                        }
-                    });
                 }
             }
 
-            if (index !== campaignContainers.length - 1) {
-                ScrollTrigger.create({
-                    trigger: container,
-                    start: "bottom bottom",
-                    end: () => `+=${scrollDistance}`,
-                    pin: true,
-                    pinSpacing: false,
+            // Create a single unified timeline to prevent GSAP pin-spacer desync on reverse scroll
+            const isLast = index === campaignContainers.length - 1;
+            const isFirst = index === 0;
+            
+            // CHỈ PIN NẾU KHÔNG PHẢI LÀ TẤM ĐẦU TIÊN (SignificantCampaign)
+            if (!isFirst && (!isLast || (track && maxSlide > 0))) {
+                const pinTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top top", // Pin immediately upon reaching top
+                        end: () => `+=${scrollDistance}`,
+                        pin: true,
+                        pinSpacing: true, 
+                        scrub: true,
+                        invalidateOnRefresh: true,
+                    }
                 });
-            } else if (track && track.scrollWidth > window.innerWidth) {
-                // Pin the very last card too if it has a slider, but use pinSpacing: true
-                 ScrollTrigger.create({
-                    trigger: container,
-                    start: "bottom bottom",
-                    end: () => `+=${scrollDistance}`,
-                    pin: true,
-                    pinSpacing: true,
-                });
+
+                if (track && maxSlide > 0) {
+                    pinTl.to(track, {
+                        x: -maxSlide,
+                        ease: "none",
+                    });
+                } else {
+                    // Empty tween so the pin holds time correctly even if no gallery
+                    pinTl.to(container, { x: 0, duration: 1 });
+                }
             }
         });
     };

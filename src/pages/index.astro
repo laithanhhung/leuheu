@@ -152,18 +152,17 @@ import LandscapePrompt from "../components/LandscapePrompt.astro";
                     window.initServicesAnimation();
                 }
 
-                // Call the TikTok Award animation script
-                if (typeof window.initTikTokAwardAnimation === "function") {
-                    window.initTikTokAwardAnimation();
-                }
-
                 // Call the globally exposed Campaign animation script
                 if (typeof window.initCampaignAnimation === "function") {
                     window.initCampaignAnimation();
                 }
 
+                // Call the TikTok Award animation script
+                if (typeof window.initTikTokAwardAnimation === "function") {
+                    window.initTikTokAwardAnimation();
+                }
+
                 // Single refresh after ALL triggers are registered
-                // so pin spacers are correct for every component
                 ScrollTrigger.refresh();
             }
 

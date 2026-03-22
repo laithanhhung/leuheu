@@ -89,7 +89,7 @@ const { campaign, className = "" } = Astro.props;
         <div class="w-full lg:w-5/12 shrink-0 max-w-full z-20 pb-4 relative overflow-hidden lg:overflow-visible">
             <div class="horizontal-gallery-wrapper w-full hide-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pt-2 xs:pt-4">
                 <div class="horizontal-gallery-track flex gap-3 sm:gap-6 w-max items-center">
-                    {campaign.galleryImages.map((img) => (
+                    {[campaign.posterImage, ...campaign.galleryImages].filter(Boolean).map((img) => (
                         <div class="relative w-[110px] xs:w-[140px] sm:w-[180px] lg:w-[220px] shrink-0 aspect-[2/3] sm:aspect-[3/4] overflow-hidden group shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all duration-700 hover:scale-105 hover:z-30 rounded-lg xs:rounded-none">
                             <CldImage
                                 src={img}
