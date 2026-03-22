@@ -1,6 +1,6 @@
----
+﻿---
 id: 'thamtukien'
-title: "Thám tử Kien"
+title: "ThÃ¡m tá»­ Kien"
 badge: "MYSTERY SERIES"
 posterImage: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1500&auto=format&fit=crop"
 horizontalImage: "TTK_Poster_Ngang_xtmyhf"
@@ -18,3 +18,4 @@ description:
   - "Boosted weekly viewership retention by 45% through engaging social media quizzes."
 
 ---
+

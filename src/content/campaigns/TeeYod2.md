@@ -1,4 +1,4 @@
----
+﻿---
 id: 'teeyod2'
 title: "Tee Yod 2"
 badge: "THAI HORROR HIT"
@@ -18,3 +18,4 @@ description:
   - "Partnered with top tier reviewers and reaction channels for explosive launch day visibility."
 
 ---
+

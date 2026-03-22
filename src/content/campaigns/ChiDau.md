@@ -1,9 +1,9 @@
----
+﻿---
 id: 'chidau'
-title: "Chị dâu"
+title: "Chá»‹ dÃ¢u"
 badge: "CULTURAL HIT"
 posterImage: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1500&auto=format&fit=crop"
-horizontalImage: "Chị_dâu_poster_ngang_fzbgnc"
+horizontalImage: "Chá»‹_dÃ¢u_poster_ngang_fzbgnc"
 isDark: true
 order: 7
 mainStat: "25M+ Viral Views"
@@ -18,3 +18,4 @@ description:
   - "Sparked a massive trend of character parodies across social platforms."
 
 ---
+

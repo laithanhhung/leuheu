@@ -1,9 +1,9 @@
----
+﻿---
 id: 'anmang'
-title: "Án mạng lầu 4"
+title: "Ãn máº¡ng láº§u 4"
 badge: "THRILLER MOVIE"
 posterImage: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1500&auto=format&fit=crop"
-horizontalImage: "Án_mạng_lầu_4_Poster_Ngang_ox19xn"
+horizontalImage: "Ãn_máº¡ng_láº§u_4_Poster_Ngang_ox19xn"
 isDark: true
 order: 6
 mainStat: "45M+ Views & Engagements"
@@ -18,3 +18,4 @@ description:
   - "Generated over 2,000 fan-made theories and massive word-of-mouth traffic."
 
 ---
+

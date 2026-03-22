@@ -1,6 +1,6 @@
----
+﻿---
 id: 'girlfromnowhere'
-title: "Cô gái đến từ hư vô"
+title: "CÃ´ gÃ¡i Ä‘áº¿n tá»« hÆ° vÃ´"
 badge: "NETFLIX SENSATION"
 posterImage: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1500&auto=format&fit=crop"
 horizontalImage: "Girl_From_Nowhere_Poster_Ngang_vhudeo"
@@ -18,3 +18,4 @@ description:
   - "Executed localized meme marketing and high-impact influencer collaborations."
 
 ---
+

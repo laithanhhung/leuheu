@@ -1,4 +1,4 @@
----
+﻿---
 id: 'edsheeranoldphone'
 title: "Ed sheeran: old phone"
 badge: "GLOBAL MUSIC CAMPAIGN"
@@ -14,7 +14,8 @@ galleryImages:
   - "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?q=80&w=2500&auto=format&fit=crop"
   - "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2500&auto=format&fit=crop"
 description:
-  - "Localized Ed Sheeran\'s global hit for the Vietnamese market, collaborating with top-tier creators for widespread impact."
+  - "Localized Ed Sheeran's global hit for the Vietnamese market, collaborating with top-tier creators for widespread impact."
   - "Achieved record-breaking engagement rates within the first 48 hours of launch."
 
 ---
+

@@ -1,6 +1,6 @@
----
+﻿---
 id: 'keanhon'
-title: "Kẻ ăn hồn"
+title: "Káº» Äƒn há»“n"
 badge: "HORROR BLOCKBUSTER"
 posterImage: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?q=80&w=1500&auto=format&fit=crop"
 isDark: true
@@ -17,3 +17,4 @@ description:
   - "Produced cinematic short-cuts and creepy challenges that dominated TikTok feeds for weeks."
 
 ---
+

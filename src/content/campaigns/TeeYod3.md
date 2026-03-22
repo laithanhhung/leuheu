@@ -1,4 +1,4 @@
----
+﻿---
 id: 'teeyod3'
 title: "Tee Yod 3"
 badge: "HORROR CONTINUES"
@@ -18,3 +18,4 @@ description:
   - "Creating immersive, lore-based short content to captivate the hardcore horror community."
 
 ---
+

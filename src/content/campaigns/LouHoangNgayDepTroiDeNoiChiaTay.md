@@ -1,6 +1,6 @@
----
+﻿---
 id: 'louhoangngaydeptroidenoichiatay'
-title: "Lou Hoang: Ngày đẹp trời để nói lời chia tay"
+title: "Lou Hoang: NgÃ y Ä‘áº¹p trá»i Ä‘á»ƒ nÃ³i lá»i chia tay"
 badge: "MUSIC VIDEO LAUNCH"
 posterImage: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=1500&auto=format&fit=crop"
 horizontalImage: "NDTDNCT_ngang_ewy66u"
@@ -19,3 +19,4 @@ description:
   - "Over 100,000 user-generated videos using the official sound snippet."
 
 ---
+
