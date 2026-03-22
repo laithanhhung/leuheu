@@ -12,7 +12,7 @@ const { campaign, className = "" } = Astro.props;
 ---
 
 <div
-    class={`p-6 xs:p-8 md:p-12 lg:p-16 relative flex flex-col justify-end overflow-hidden ${className} text-white`}
+    class={`p-4 xs:p-6 md:p-12 lg:p-16 relative flex flex-col justify-end overflow-hidden ${className} text-white`}
     style={{
         boxShadow: "0 -20px 50px rgba(0,0,0,0.5)"
     }}
@@ -39,26 +39,26 @@ const { campaign, className = "" } = Astro.props;
         {/* Main Content (Title, Desc, Stats) */}
         <div class="w-full lg:w-7/12 flex flex-col">
             {/* Badge */}
-            <div class="flex justify-start mb-4 xs:mb-6">
+            <div class="flex justify-start mb-2 xs:mb-6">
                 <span
-                    class="bg-neon-lime text-black px-4 xs:px-6 py-1.5 xs:py-2 rounded-full font-bold uppercase text-xs xs:text-sm md:text-base tracking-wider inline-block shadow-lg"
+                    class="bg-neon-lime text-black px-3 xs:px-6 py-1 xs:py-2 rounded-full font-bold uppercase text-[10px] xs:text-sm md:text-base tracking-wider inline-block shadow-lg"
                 >
                     {campaign.badge || "Campaign"}
                 </span>
             </div>
 
-            <h3 class="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-black mb-4 xs:mb-6 uppercase leading-tight text-white drop-shadow-2xl">
+            <h3 class="text-3xl xs:text-5xl md:text-6xl lg:text-7xl font-black mb-2 xs:mb-6 uppercase leading-tight text-white drop-shadow-2xl">
                 {campaign.title}
             </h3>
 
-            <ul class="space-y-3 mb-8">
+            <ul class="space-y-1 xs:space-y-3 mb-4 xs:mb-8">
                 {
                     campaign.description.map((desc) => (
-                        <li class="flex items-start gap-3 text-sm xs:text-base md:text-xl font-medium opacity-95 drop-shadow-md">
-                            <span class="text-neon-lime mt-2 text-[0.6rem] xs:text-xs drop-shadow-sm">
+                        <li class="flex items-start gap-2 text-xs xs:text-base md:text-xl font-medium opacity-95 drop-shadow-md">
+                            <span class="text-neon-lime mt-1 text-[0.5rem] xs:text-xs drop-shadow-sm">
                                 ●
                             </span>
-                            <span class="leading-relaxed">{desc}</span>
+                            <span class="leading-relaxed line-clamp-2 xs:line-clamp-none">{desc}</span>
                         </li>
                     ))
                 }
@@ -86,11 +86,11 @@ const { campaign, className = "" } = Astro.props;
         </div>
 
         {/* Cinematic Gallery */}
-        <div class="w-full lg:w-5/12 shrink-0 max-w-full z-20">
-            <div class="horizontal-gallery-wrapper overflow-x-auto w-full hide-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 pt-4">
-                <div class="horizontal-gallery-track flex gap-4 sm:gap-6 w-max items-center">
+        <div class="w-full lg:w-5/12 shrink-0 max-w-full z-20 pb-4 relative overflow-hidden lg:overflow-visible">
+            <div class="horizontal-gallery-wrapper w-full hide-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pt-2 xs:pt-4">
+                <div class="horizontal-gallery-track flex gap-3 sm:gap-6 w-max items-center">
                     {campaign.galleryImages.map((img) => (
-                        <div class="relative w-[140px] sm:w-[180px] lg:w-[220px] shrink-0 aspect-[2/3] sm:aspect-[3/4] overflow-hidden group cursor-pointer shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:scale-110 hover:z-30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+                        <div class="relative w-[110px] xs:w-[140px] sm:w-[180px] lg:w-[220px] shrink-0 aspect-[2/3] sm:aspect-[3/4] overflow-hidden group shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all duration-700 hover:scale-105 hover:z-30 rounded-lg xs:rounded-none">
                             <CldImage
                                 src={img}
                                 alt="Gallery"

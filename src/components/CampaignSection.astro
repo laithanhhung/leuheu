@@ -65,13 +65,45 @@ const sortedCampaigns = campaigns.sort(
                 },
             });
 
+            // GSAP Horizontal gallery slide while pinned
+            const track = container.querySelector(".horizontal-gallery-track");
+            let scrollDistance = window.innerHeight; // Default 100vh pin
+            
+            if (track) {
+                // Determine how far the track needs to slide to reveal all images
+                const maxSlide = track.scrollWidth - window.innerWidth + 40; // 40px padding
+                if (maxSlide > 0) {
+                    scrollDistance = Math.max(window.innerHeight, maxSlide);
+                    
+                    gsap.to(track, {
+                        x: -maxSlide,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "bottom bottom",
+                            end: () => `+=${scrollDistance}`,
+                            scrub: true,
+                        }
+                    });
+                }
+            }
+
             if (index !== campaignContainers.length - 1) {
                 ScrollTrigger.create({
                     trigger: container,
                     start: "bottom bottom",
-                    end: () => `+=${window.innerHeight}`,
+                    end: () => `+=${scrollDistance}`,
                     pin: true,
                     pinSpacing: false,
+                });
+            } else if (track && track.scrollWidth > window.innerWidth) {
+                // Pin the very last card too if it has a slider, but use pinSpacing: true
+                 ScrollTrigger.create({
+                    trigger: container,
+                    start: "bottom bottom",
+                    end: () => `+=${scrollDistance}`,
+                    pin: true,
+                    pinSpacing: true,
                 });
             }
         });

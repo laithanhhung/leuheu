@@ -30,7 +30,7 @@ const { data } = statsEntry!;
                             alt={c.name}
                             width={100}
                             height={100}
-                            class="w-14 h-14 xs:w-16 xs:h-16 3xl:w-24 3xl:h-24 rounded-full mb-3 3xl:mb-6 border-2 border-neon-lime group-hover:border-black"
+                            class="w-20 h-20 xs:w-24 xs:h-24 md:w-28 md:h-28 3xl:w-32 3xl:h-32 shrink-0 object-cover rounded-full mb-3 3xl:mb-6 border-2 border-neon-lime group-hover:border-black"
                         />
                         <p class="font-bold text-xs xs:text-sm 3xl:text-xl truncate w-full">
                             {c.name}
@@ -94,74 +94,3 @@ const { data } = statsEntry!;
         </div>
     </div>
 </section>
-
-<script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    window.initStatsAnimation = () => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const cards = document.querySelectorAll(".card");
-
-        // Set initial state — cards start invisible and rotated
-        gsap.set(cards, {
-            scale: 0,
-            opacity: 0,
-            rotation: () => gsap.utils.random(-60, 60),
-        });
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".stats-section",
-                start: "top top",
-                end: "+=2000",
-                scrub: 2,
-                pin: true,
-                pinSpacing: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-            },
-        });
-
-        const heading = document.querySelector(".heading");
-
-        // Set heading initial state
-        gsap.set(heading, { opacity: 0, y: -50 });
-
-        const statsContainer = document.querySelector(".stats-container");
-        gsap.set(statsContainer, { opacity: 0, y: 50 });
-
-        // Animate heading in at the start (same time as cards)
-        tl.to(
-            heading,
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out",
-            },
-            "<",
-        );
-
-        // Stagger each card appearing one by one
-        tl.to(cards, {
-            scale: 1,
-            opacity: 1,
-            rotation: 0,
-            duration: 1,
-            ease: "power2.inOut",
-            stagger: 0.1,
-        });
-
-        // Stats container slides up after cards are done
-        tl.to(statsContainer, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-        });
-
-        // (ScrollTrigger.refresh() is called centrally in index.astro after all inits)
-    };
-</script>
