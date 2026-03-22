@@ -87,6 +87,7 @@ const keywords = [
         font-weight: 900;
         line-height: 1;
         text-transform: uppercase;
+        letter-spacing: -0.04em;
     }
 
     /* Anime text */
@@ -175,35 +176,44 @@ const keywords = [
     @media (max-width: 1000px) and (orientation: landscape), (max-height: 500px) {
         .svc-wrapper .svc-title,
         .svc-wrapper .svc-info {
-            padding: 0.5rem;
+            padding: 1rem;
         }
 
         .svc-wrapper .svc-copy-container {
-            border-radius: 1.5rem;
+            border-radius: 1rem;
         }
 
         .svc-wrapper .svc-copy-container h2 {
-            font-size: min(2.5rem, 15svh);
+            font-size: min(2.25rem, 12svh);
+            letter-spacing: -0.04em;
         }
 
         .svc-wrapper .svc-anime-text {
-            width: 95%;
+            width: 90%;
+            max-width: 800px;
         }
 
         .svc-wrapper .svc-anime-text p,
         .svc-wrapper .svc-anime-text .svc-word span {
-            font-size: min(1rem, 7svh);
-            line-height: 1.3;
+            font-size: min(0.85rem, 6svh);
+            line-height: 1.6;
         }
 
         .svc-wrapper .svc-anime-text .svc-word {
-            margin-right: 0.1rem;
-            margin-bottom: 0.1rem;
-            padding: 0.05rem 0.15rem;
+            margin-right: 0.15rem;
+            margin-bottom: 0.2rem;
+            padding: 0.05rem 0.2rem;
+            border-radius: 1rem;
         }
 
         .svc-wrapper .svc-anime-text .svc-word.svc-keyword-wrapper {
-            margin: 0 0.15rem 0.1rem 0.1rem;
+            margin: 0 0.25rem 0.2rem 0.15rem;
+        }
+        
+        .svc-wrapper .svc-anime-text .svc-word span.svc-keyword::before {
+            border-radius: 1rem;
+            height: calc(100% + 0.5rem);
+            width: calc(100% + 0.5rem);
         }
     }
 </style>

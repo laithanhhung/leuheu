@@ -1,18 +1,21 @@
 ﻿---
 id: 'namcuaanhngaycuaem'
-title: "NÄƒm cá»§a anh, ngÃ y cá»§a em"
+title: "Năm của anh, ngày của em"
 badge: "ROMANCE SERIES"
-posterImage: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1500&auto=format&fit=crop"
+posterImage: "NCANCE_Poster_xme35r"
 horizontalImage: "NCANCE_poster_ngang_xmpkik"
 isDark: true
-order: 14
+order: 13
 mainStat: "20M+ Romantic Views"
 secondaryStat: "Top 3 Teen Shows"
 galleryImages:
-  - "https://images.unsplash.com/photo-1608889175123-8ee362201f81?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1608889175123-8ee362201f81?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1608889175123-8ee362201f81?q=80&w=2500&auto=format&fit=crop"
+  - "NCANCE_xinqin_rtm1kp"
+  - "NCANCE_cheney_rwe1lk"
+  - "NCANC_dog_mqb3ck"
+  - "NCANCE_cartied_byvajn"
+  - "NCANCE_nguyentai_am1enm"
+  - "NCANCA_b_aleqh6"
+  - "NCANCE_s2pvae"
 description:
   - "Drove the digital conversation for this youth romance hit by highlighting wholesome and dramatic clip highlights."
   - "Pioneered 'couple shipping' trends that kept fans engaged long after episodes aired."

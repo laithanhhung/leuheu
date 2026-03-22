@@ -1,0 +1,88 @@
+﻿
+> chiuchiu-clone@0.0.0 build
+> astro check && astro build
+
+[2m02:14:55[22m [34m[content][39m Syncing content
+[2m02:14:55[22m [34m[content][39m Content config changed
+[2m02:14:55[22m [34m[content][39m Clearing content store
+[2m02:14:56[22m [34m[content][39m Synced content
+[2m02:14:56[22m [34m[types][39m Generated [2m450ms[22m
+[2m02:14:56[22m [34m[check][39m Getting diagnostics for Astro files in D:\Project\leuheu\chiuchiu-clone...
+[96msrc/components/CampaignSection.astro[0m:[93m22[0m:[93m44[0m - [93mwarning[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m22[0m             sortedCampaigns.map((campaign, index) => (
+[7m  [0m [93m                                           ~~~~~[0m
+
+[96msrc/components/Hero.astro[0m:[93m350[0m:[93m53[0m - [93mwarning[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m350[0m                         iconElements.forEach((icon, index) => {
+[7m   [0m [93m                                                    ~~~~~[0m
+
+[96msrc/components/Services.astro[0m:[93m11[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'keywords' is declared but its value is never read.
+
+[7m11[0m const keywords = [
+[7m  [0m [93m      ~~~~~~~~[0m
+
+[96msrc/components/Welcome.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Image' is declared but its value is never read.
+
+[7m2[0m import { Image } from "astro:assets";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/index.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'getCollection' is declared but its value is never read.
+
+[7m2[0m import { getCollection } from "astro:content";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+Result (24 files): 
+- 0 errors
+- 0 warnings
+- 5 hints
+
+[2m02:15:05[22m [34m[content][39m Syncing content
+[2m02:15:05[22m [34m[content][39m Synced content
+[2m02:15:05[22m [34m[types][39m Generated [2m356ms[22m
+[2m02:15:05[22m [34m[build][39m output: [34m"static"[39m
+[2m02:15:05[22m [34m[build][39m mode: [34m"static"[39m
+[2m02:15:05[22m [34m[build][39m directory: [34mD:\Project\leuheu\chiuchiu-clone\dist\[39m
+[2m02:15:05[22m [34m[build][39m adapter: [32m@astrojs/vercel[39m
+[2m02:15:05[22m [34m[build][39m Collecting build info...
+[2m02:15:05[22m [34m[build][39m [32mΓ£ô Completed in 424ms.[39m
+[2m02:15:05[22m [34m[build][39m Building static entrypoints...
+[2m02:15:10[22m [34m[vite][39m [32mΓ£ô built in 4.54s[39m
+[2m02:15:10[22m [34m[build][39m [32mΓ£ô Completed in 4.58s.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m02:15:10[22m [34m[vite][39m transforming...
+[2m02:15:11[22m [34m[vite][39m [32mΓ£ô[39m 409 modules transformed.
+[2m02:15:12[22m [34m[vite][39m rendering chunks...
+[2m02:15:12[22m [34m[vite][39m computing gzip size...
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/CampaignSection.astro_astro_type_script_index_0_lang.BtqQdkEk.js      [39m[1m[2m  0.46 kB[22m[1m[22m[2m Γöé gzip:   0.31 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/util.BpmjTJwX.js                                                      [39m[1m[2m  0.51 kB[22m[1m[22m[2m Γöé gzip:   0.30 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/Welcome.astro_astro_type_script_index_0_lang.D10frznB.js              [39m[1m[2m  0.61 kB[22m[1m[22m[2m Γöé gzip:   0.39 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/SplashScreen.astro_astro_type_script_index_0_lang.ChGyWXhD.js         [39m[1m[2m  0.66 kB[22m[1m[22m[2m Γöé gzip:   0.38 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/Stats.astro_astro_type_script_index_0_lang.B7o1yWEK.js                [39m[1m[2m  0.74 kB[22m[1m[22m[2m Γöé gzip:   0.41 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/CldVideoPlayer.astro_astro_type_script_index_0_lang.BenpXjxX.js       [39m[1m[2m  1.08 kB[22m[1m[22m[2m Γöé gzip:   0.58 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/About.astro_astro_type_script_index_0_lang.CxhO5MQz.js                [39m[1m[2m  1.13 kB[22m[1m[22m[2m Γöé gzip:   0.59 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/Services.astro_astro_type_script_index_0_lang.BFGbV1s3.js             [39m[1m[2m  1.74 kB[22m[1m[22m[2m Γöé gzip:   0.95 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/CldUploadWidget.astro_astro_type_script_index_0_lang.bCPEqopK.js      [39m[1m[2m  2.11 kB[22m[1m[22m[2m Γöé gzip:   0.97 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/Hero.astro_astro_type_script_index_0_lang.DEMs81od.js                 [39m[1m[2m  3.36 kB[22m[1m[22m[2m Γöé gzip:   1.33 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.astro_astro_type_script_index_0_lang.B2MMVcfd.js                [39m[1m[2m 17.84 kB[22m[1m[22m[2m Γöé gzip:   5.13 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/SignificantCampaign.astro_astro_type_script_index_0_lang.AZ9wZNko.js  [39m[1m[2m 33.92 kB[22m[1m[22m[2m Γöé gzip:  13.71 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/ScrollTrigger.Cv03IO65.js                                             [39m[1m[2m 43.63 kB[22m[1m[22m[2m Γöé gzip:  18.15 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.CB87Sc6I.js                                                     [39m[1m[2m 70.32 kB[22m[1m[22m[2m Γöé gzip:  27.76 kB[22m
+[2m02:15:12[22m [34m[vite][39m [2mdist/[22m[36m_astro/TikTokAward.astro_astro_type_script_index_0_lang.DVrbpLQt.js          [39m[1m[33m604.71 kB[39m[22m[2m Γöé gzip: 156.73 kB[22m
+[33m[1m02:15:12[22m [WARN] [vite][39m [33m
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[2m02:15:12[22m [34m[vite][39m [32mΓ£ô built in 1.82s[39m
+
+[42m[30m generating static routes [39m[49m
+[2m02:15:12[22m [32mΓû╢[39m src/pages/index.astro
+[2m02:15:12[22m   [34mΓööΓöÇ[39m [2m/index.html[22m [2m(+49ms)[22m 
+[2m02:15:12[22m [32mΓ£ô Completed in 272ms.
+[39m
+[2m02:15:12[22m [34m[@astrojs/vercel][39m Copying static files to .vercel/output/static
+[2m02:15:12[22m [34m[build][39m 1 page(s) built in [1m7.13s[22m
+[2m02:15:12[22m [34m[build][39m [1mComplete![22m

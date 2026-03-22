@@ -20,7 +20,9 @@ const sortedCampaigns = campaigns.sort(
 
         {
             sortedCampaigns.map((campaign, index) => (
-                <div class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0 ">
+                <div 
+                    class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0"
+                >
                     <CampaignCard
                         className="campaign-card overflow-hidden relative w-full h-full transform origin-bottom-left will-change-transform rotate-[30deg]"
                         campaign={campaign.data}
@@ -67,7 +69,7 @@ const sortedCampaigns = campaigns.sort(
                 ScrollTrigger.create({
                     trigger: container,
                     start: "bottom bottom",
-                    end: "bottom top",
+                    end: () => `+=${window.innerHeight}`,
                     pin: true,
                     pinSpacing: false,
                 });

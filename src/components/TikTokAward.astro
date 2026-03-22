@@ -84,10 +84,27 @@ import { CldImage } from "astro-cloudinary";
     </section>
 
     <!-- Outro -->
-    <section class="ta-outro">
-        <div class="ta-outro-content">
-            <span class="ta-outro-label">TikTok Awards 2025</span>
-            <h1>Congratulations to our creators.</h1>
+    <section class="ta-outro relative w-full h-screen flex items-center justify-center overflow-hidden !p-0">
+        {/* Cinematic Background Image */}
+        <div class="absolute inset-0 z-0">
+            <CldImage
+                src="IMG_4543_1_zldh8c"
+                alt="TikTok Awards 2025"
+                width={1920}
+                height={1080}
+                crop="fill"
+                class="w-full h-full object-cover transform scale-105"
+            />
+            {/* Cinematic Gradients for readability and mood */}
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 mix-blend-multiply"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#000000] to-transparent"></div>
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#000000] to-transparent opacity-90"></div>
+        </div>
+
+        <div class="ta-outro-content relative z-10 px-6">
+            <span class="ta-outro-label drop-shadow-md">TikTok Awards 2025</span>
+            <h1 class="drop-shadow-2xl">Congratulations<br/>to our creators.</h1>
             <p>Creator of the Year</p>
         </div>
     </section>
@@ -455,7 +472,7 @@ import { CldImage } from "astro-cloudinary";
             width: 90%;
             gap: 4rem;
         }
-        
+
         .ta-header-1 h1,
         .ta-header-2 h1 {
             font-size: 14vw;
@@ -474,7 +491,9 @@ import { CldImage } from "astro-cloudinary";
             font-size: 0.9rem;
         }
 
-        .ta-avatar, .ta-avatar-clip, .ta-avatar img {
+        .ta-avatar,
+        .ta-avatar-clip,
+        .ta-avatar img {
             width: 60px;
             height: 60px;
         }
@@ -508,12 +527,14 @@ import { CldImage } from "astro-cloudinary";
         .ta-description {
             width: 100%;
         }
-        
+
         .ta-tooltip:nth-child(2) .ta-description {
             width: 100%;
         }
 
-        .ta-avatar, .ta-avatar-clip, .ta-avatar img {
+        .ta-avatar,
+        .ta-avatar-clip,
+        .ta-avatar img {
             width: min(50px, 12vh);
             height: min(50px, 12vh);
         }

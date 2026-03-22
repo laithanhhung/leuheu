@@ -1,18 +1,18 @@
 ﻿---
 id: 'anmang'
-title: "Ãn máº¡ng láº§u 4"
+title: "Án mạng lầu 4"
 badge: "THRILLER MOVIE"
-posterImage: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1500&auto=format&fit=crop"
-horizontalImage: "Ãn_máº¡ng_láº§u_4_Poster_Ngang_ox19xn"
+posterImage: "Án_mạng_lầu_4_w6ov1e"
+horizontalImage: "ANL4_ulea73"
 isDark: true
 order: 6
 mainStat: "45M+ Views & Engagements"
 secondaryStat: "Top 2 Trending on TikTok"
 galleryImages:
-  - "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1507924538820-ede94a04019d?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1507924538820-ede94a04019d?q=80&w=2500&auto=format&fit=crop"
-  - "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2500&auto=format&fit=crop"
+  - "Án_mạng_lầu_4_4_qmmk8s"
+  - "Án_mạng_lầu_4_vafdkz"
+  - "Án_mạng_lầu_4_3_lcxzuk"
+  - "Án_mạng_lầu_4_2_ok4zm0"
 description:
   - "Masterminded the exclusive TikTok viral campaign, creating chilling suspense that kept audiences on edge."
   - "Generated over 2,000 fan-made theories and massive word-of-mouth traffic."

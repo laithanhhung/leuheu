@@ -7,345 +7,132 @@ const { data } = about!;
 const { Content } = await render(about!);
 ---
 
-<div class="spotlight relative h-full w-full">
-    <!-- section empty -->
-    <section class="h-[100svh] w-full"></section>
+<div
+    class="spotlight relative w-full bg-black overflow-hidden selection:bg-neon-lime selection:text-black"
+>
+    <!-- Seamless Overlay gradient from pure black to hide harsh section cuts -->
+    <div class="absolute top-0 left-0 w-full h-[30vh] bg-gradient-to-b from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
 
-    <section
-        class="text-white py-12 xs:py-16 3xl:py-24 px-4 md:px-8 3xl:px-16 landscape:py-6 landscape:md:px-24 relative z-20 -mt-10 md:-mt-20 3xl:-mt-32 landscape:-mt-4"
-    >
+    <!-- Atmospheric Cinematic Background (Split from previous stroke-path) -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
         <div
-            class="max-w-6xl 3xl:max-w-8xl mx-auto flex flex-col items-start gap-16 md:gap-12 3xl:gap-24"
+            class="absolute top-10 right-[-10%] w-[50vw] h-[50vw] rounded-full bg-neon-lime mix-blend-screen blur-[200px] opacity-[0.05] animate-pulse"
         >
-            <div
-                class="about-card flex-1 shadow-lg w-full mt-[40svh] landscape:mt-[15svh] bg-[#0A0A0A]/80 backdrop-blur-3xl border max-w-xl 3xl:max-w-2xl border-gray-800/60 rounded-3xl p-8 md:p-12 3xl:p-16 shadow-2xl relative overflow-hidden group hover:border-[#CCFF00]/40 hover:shadow-[#CCFF00]/5 transition-all duration-700"
-            >
-                <!-- Decorative Glow Backgrounds -->
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-blue-900 mix-blend-screen blur-[200px] opacity-10"
+        >
+        </div>
+        <div
+            class="absolute inset-0 opacity-[0.03] mix-blend-screen bg-repeat bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"
+        >
+        </div>
+    </div>
+
+    <!-- Cinematic Split Screen Layout -->
+    <section
+        class="relative z-10 w-full max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 py-32 md:py-48 flex flex-col xl:flex-row gap-16 xl:gap-32"
+    >
+        <!-- Left: Sticky Massive Title Block -->
+        <div class="w-full xl:w-5/12 relative">
+            <div class="xl:sticky top-40 flex flex-col">
+                <h2
+                    class="about-title-reveal text-6xl sm:text-7xl lg:text-8xl 3xl:text-9xl font-black tracking-tighter leading-[0.9] text-white drop-shadow-2xl mb-8 opacity-0 translate-y-12"
+                >
+                    {data.title}
+                    <span
+                        class="block text-transparent bg-clip-text bg-gradient-to-r from-neon-lime to-green-500 mt-2 pb-2"
+                    >
+                        {data.subtitle}
+                    </span>
+                </h2>
+
                 <div
-                    class="absolute -top-32 -right-32 w-64 h-64 bg-neon-lime rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-30 transition-opacity duration-1000"
+                    class="about-line-reveal w-1/3 h-1 bg-gradient-to-r from-neon-lime to-transparent rounded-full opacity-0 origin-left mb-12"
+                >
+                </div>
+
+                <div
+                    class="text-gray-400 text-lg sm:text-xl lg:text-2xl leading-relaxed tracking-wide space-y-6 max-w-lg"
+                >
+                    <p class="about-text-reveal opacity-0 translate-y-8">
+                        {data.extraData?.introduction}
+                    </p>
+                    <p
+                        class="about-text-reveal text-gray-500 opacity-0 translate-y-8"
+                    >
+                        {data.extraData?.introduction2}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Vertical Glassmorphism Cards -->
+        <div
+            class="w-full xl:w-7/12 flex flex-col gap-12 sm:gap-24 pt-12 xl:pt-16 pb-32"
+        >
+            <!-- Context Box -->
+            <div
+                class="about-glass-card group relative p-8 sm:p-12 lg:p-16 rounded-[2.5rem] bg-[#0A0A0A]/80 backdrop-blur-3xl border border-white/5 hover:border-neon-lime/30 transition-all duration-700 shadow-2xl hover:shadow-[0_0_80px_rgba(204,255,0,0.05)] overflow-hidden opacity-0 translate-y-24"
+            >
+                <!-- Inner glow -->
+                <div
+                    class="absolute -top-32 -right-32 w-64 h-64 bg-neon-lime rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-30 transition-all duration-1000"
                 >
                 </div>
                 <div
-                    class="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600 rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-20 transition-opacity duration-1000"
+                    class="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600 rounded-full mix-blend-screen blur-[100px] opacity-10 group-hover:opacity-20 transition-all duration-1000"
                 >
                 </div>
 
                 <div class="relative z-10">
-                    <h2
-                        class="text-3xl xs:text-4xl md:text-5xl lg:text-6xl 3xl:text-8xl font-black mb-2 3xl:mb-4 tracking-tighter"
-                    >
-                        {data.title}
-                        <br />
-                        <span
-                            class="text-neon-lime drop-shadow-[0_0_20px_rgba(204,255,0,0.3)]"
-                            >{data.subtitle}</span
-                        >
-                    </h2>
-
-                    <div
-                        class="w-24 3xl:w-40 h-1 3xl:h-2 bg-gradient-to-r from-neon-lime via-neon-lime/50 to-transparent my-8 3xl:my-12 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
-                    >
-                    </div>
-
-                    <div
-                        class="text-base xs:text-lg md:text-xl 3xl:text-3xl leading-relaxed text-gray-300 space-y-6 3xl:space-y-8"
-                    >
-                        <p
-                            class="group-hover:border-neon-lime transition-colors duration-500"
-                        >
-                            {data.extraData?.introduction}
-                        </p>
-                        <p
-                            class="group-hover:border-neon-lime/70 transition-colors duration-500 delay-150"
-                        >
-                            {data.extraData?.introduction2}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- section empty -->
-            <section class="h-[95svh] landscape:h-[40svh] w-full"></section>
-
-            <div
-                class="flex-1 w-full flex justify-center items-center md:justify-end mt-8 md:mt-0"
-            >
-                <div
-                    class="about-card mx-auto bg-white text-black rounded-xl 3xl:rounded-3xl p-4 3xl:p-8 max-w-md 3xl:max-w-xl landscape:max-w-sm w-full transform rotate-3 hover:rotate-0 transition-transform duration-300"
-                >
-                    <div
-                        class="flex items-center gap-3 3xl:gap-6 mb-4 3xl:mb-8"
-                    >
+                    <div class="flex items-start sm:items-center gap-6 mb-10">
                         <div
-                            class="w-12 h-12 3xl:w-20 3xl:h-20 bg-black rounded-full flex items-center justify-center text-neon-lime font-bold 3xl:text-2xl"
+                            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-neon-lime text-2xl font-black shadow-inner"
                         >
                             #
                         </div>
                         <div>
-                            <p class="font-bold 3xl:text-2xl">
+                            <h3
+                                class="text-white text-2xl sm:text-3xl font-bold tracking-tight mb-1"
+                            >
                                 {data.extraData?.cardTitle}
-                            </p>
-                            <p class="text-sm 3xl:text-lg text-gray-500">
-                                {data.extraData?.cardSubtitle}
-                            </p>
+                            </h3>
                         </div>
                     </div>
+
                     <div
-                        class="bg-gray-100 p-2 3xl:p-4 rounded 3xl:rounded-xl text-sm 3xl:text-lg mb-4 3xl:mb-8"
+                        class="bg-black/40 border border-white/5 rounded-2xl p-6 sm:p-8 mb-10 transform -rotate-1 hover:rotate-0 transition-transform duration-500"
                     >
-                        {data.extraData?.cardTagline}
+                        <p
+                            class="text-gray-300 text-lg sm:text-xl leading-relaxed italic"
+                        >
+                            "{data.extraData?.cardTagline}"
+                        </p>
                     </div>
+
                     <div
-                        class="text-sm 3xl:text-lg text-gray-700 mb-4 3xl:mb-16"
+                        class="prose prose-invert prose-lg text-gray-400 mb-12 max-w-none prose-p:leading-relaxed prose-p:text-lg sm:prose-p:text-xl"
                     >
                         <Content />
                     </div>
+
                     <div
-                        class="flex justify-between text-gray-400 text-xs 3xl:text-base"
+                        class="flex items-center justify-between pt-8 border-t border-white/10 text-gray-500 text-sm tracking-widest uppercase"
                     >
-                        <div class="flex items-center gap-1">
-                            <Heart size={14} class="3xl:w-6 3xl:h-6" />
-                            {data.extraData?.cardStats}
+                        <div class="flex items-center gap-3">
+                            <Heart class="w-5 h-5 text-neon-lime/60" />
+                            <span>{data.extraData?.cardStats}</span>
                         </div>
-                        <div>Chia sẻ</div>
+                        <button
+                            class="hover:text-neon-lime transition-colors duration-300"
+                            >Chia sẻ</button
+                        >
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Stroke path -->
-    <div
-        class="absolute top-[50svh] xs:left-[25svw] sm:left-[25svw] md:left-[25svw] lg:left-[25svw] xl:top-[5svh] xl:left-[45svw] -translate-x-1/2 w-[90%] h-full -z-10 pointer-events-none"
-    >
-        <!-- <svg
-            width="1328"
-            height="5382"
-            viewBox="0 0 1328 5382"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                id="stroke-path"
-                d="M722.619 185.029C1504.62 649.529 1029.51 1241.03 614.82 1620.39C200.135 1999.75 91.8898 2487.02 379.504 2743.27C667.119 2999.53 1029.51 2930.76 1029.51 2622.79C1029.51 2314.82 685.005 2222.33 478.004 2413.31C271.004 2604.29 -44.5562 2946.75 552.004 3658.68C1148.57 4370.61 1276.51 5150.03 185.003 5196.53"
-                stroke="#CCFF00"
-                class="[stroke-width:350px] xl:[stroke-width:350px]"
-                stroke-linecap="round"></path>
-        </svg> -->
-        <!-- <svg
-            width="1305"
-            height="3844"
-            viewBox="0 0 1305 3844"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                id="stroke-path"
-                d="M700.446 185.029C1482.45 649.529 1007.33 1241.03 592.648 1620.39C177.963 1999.75 117.946 2871.03 670.946 3295.53C1223.95 3720.03 1080.95 2930.53 1007.33 2622.79C933.719 2315.04 662.832 2222.33 455.831 2413.31C248.831 2604.29 -66.729 2946.75 529.832 3658.68"
-                stroke="#CCFF00"
-                class="[stroke-width:350px] xl:[stroke-width:350px]"
-                stroke-linecap="round"></path>
-        </svg> -->
-        <svg
-            width="1272"
-            height="3314"
-            viewBox="0 0 1272 3314"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                id="stroke-path"
-                d="M666.551 185.029C1448.55 649.529 973.437 1241.03 558.752 1620.39C144.067 1999.75 88.1201 2419.52 323.436 2743.27C558.752 3067.03 685.551 3128.53 685.551 3128.53"
-                stroke="#CCFF00"
-                stroke-width="370"
-                stroke-linecap="round"></path>
-            <g class="about-svg-icon" style="transform-origin: 1048.55px 1363.53px;">
-                <rect
-                    x="984.551"
-                    y="1299.53"
-                    width="128"
-                    height="128"
-                    rx="64"
-                    fill="url(#paint0_linear_175_2)"></rect>
-                <g filter="url(#filter0_d_175_2)">
-                    <path
-                        d="M1032.43 1335.9V1392.15M1019.93 1349.97H1032.43M1019.93 1364.03H1076.18M1019.93 1378.09H1032.43M1063.68 1335.9V1392.15M1063.68 1349.97H1076.18M1063.68 1378.09H1076.18M1026.18 1335.9H1069.93C1073.38 1335.9 1076.18 1338.7 1076.18 1342.15V1385.9C1076.18 1389.36 1073.38 1392.15 1069.93 1392.15H1026.18C1022.72 1392.15 1019.93 1389.36 1019.93 1385.9V1342.15C1019.93 1338.7 1022.72 1335.9 1026.18 1335.9Z"
-                        stroke="white"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </g>
-            </g>
-            <g class="about-svg-icon" style="transform-origin: 894.55px 773.53px;">
-                <rect
-                    x="830.551"
-                    y="709.529"
-                    width="128"
-                    height="128"
-                    rx="64"
-                    fill="url(#paint1_linear_175_2)"></rect>
-                <g filter="url(#filter1_d_175_2)">
-                    <path
-                        d="M909.884 777.363L929.906 790.71C930.194 790.902 930.53 791.013 930.876 791.029C931.222 791.046 931.566 790.968 931.872 790.804C932.178 790.641 932.433 790.397 932.611 790.1C932.79 789.802 932.884 789.462 932.884 789.116V757.698C932.884 757.36 932.795 757.029 932.626 756.737C932.458 756.445 932.215 756.203 931.922 756.035C931.63 755.867 931.298 755.779 930.961 755.78C930.624 755.782 930.293 755.872 930.001 756.042L909.884 767.779M863.884 750.529H902.217C906.452 750.529 909.884 753.962 909.884 758.196V788.863C909.884 793.097 906.452 796.529 902.217 796.529H863.884C859.65 796.529 856.217 793.097 856.217 788.863V758.196C856.217 753.962 859.65 750.529 863.884 750.529Z"
-                        stroke="white"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </g>
-            </g>
-            <g class="about-svg-icon" style="transform-origin: 787.55px 1628.53px;">
-                <rect
-                    x="723.551"
-                    y="1564.53"
-                    width="128"
-                    height="128"
-                    rx="64"
-                    fill="url(#paint2_linear_175_2)"></rect>
-                <g filter="url(#filter2_d_175_2)">
-                    <path
-                        d="M794.27 1616.53L812.207 1647.59M779.832 1616.53H815.707M772.613 1629.03L790.551 1597.97M779.832 1641.53L761.895 1610.47M794.27 1641.53H758.395M801.488 1629.03L783.551 1660.09M818.301 1629.03C818.301 1646.29 804.31 1660.28 787.051 1660.28C769.792 1660.28 755.801 1646.29 755.801 1629.03C755.801 1611.77 769.792 1597.78 787.051 1597.78C804.31 1597.78 818.301 1611.77 818.301 1629.03Z"
-                        stroke="white"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </g>
-            </g>
-            <defs>
-                <filter
-                    id="filter0_d_175_2"
-                    x="1006.55"
-                    y="1326.53"
-                    width="83"
-                    height="83"
-                    filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
-                >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"
-                    ></feFlood>
-                    <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha"></feColorMatrix>
-                    <feOffset dy="4"></feOffset>
-                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                    <feComposite in2="hardAlpha" operator="out"></feComposite>
-                    <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                    ></feColorMatrix>
-                    <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow_175_2"></feBlend>
-                    <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow_175_2"
-                        result="shape"></feBlend>
-                </filter>
-                <filter
-                    id="filter1_d_175_2"
-                    x="844.551"
-                    y="727.529"
-                    width="100"
-                    height="100"
-                    filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
-                >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"
-                    ></feFlood>
-                    <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha"></feColorMatrix>
-                    <feOffset dy="4"></feOffset>
-                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                    <feComposite in2="hardAlpha" operator="out"></feComposite>
-                    <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                    ></feColorMatrix>
-                    <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow_175_2"></feBlend>
-                    <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow_175_2"
-                        result="shape"></feBlend>
-                </filter>
-                <filter
-                    id="filter2_d_175_2"
-                    x="745.551"
-                    y="1591.53"
-                    width="83"
-                    height="83"
-                    filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
-                >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"
-                    ></feFlood>
-                    <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha"></feColorMatrix>
-                    <feOffset dy="4"></feOffset>
-                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                    <feComposite in2="hardAlpha" operator="out"></feComposite>
-                    <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                    ></feColorMatrix>
-                    <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow_175_2"></feBlend>
-                    <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow_175_2"
-                        result="shape"></feBlend>
-                </filter>
-                <linearGradient
-                    id="paint0_linear_175_2"
-                    x1="1109.33"
-                    y1="1427.53"
-                    x2="987.774"
-                    y2="1299.53"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stop-color="#8E2DE2"></stop>
-                    <stop offset="1" stop-color="#4A00E0"></stop>
-                </linearGradient>
-                <linearGradient
-                    id="paint1_linear_175_2"
-                    x1="958.551"
-                    y1="802.863"
-                    x2="862.481"
-                    y2="709.529"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stop-color="#4FACFE"></stop>
-                    <stop offset="1" stop-color="#00F2FE"></stop>
-                </linearGradient>
-                <linearGradient
-                    id="paint2_linear_175_2"
-                    x1="851.045"
-                    y1="1692.53"
-                    x2="724.057"
-                    y2="1564.53"
-                    gradientUnits="userSpaceOnUse"
-                >
-                    <stop stop-color="#43E97B"></stop>
-                    <stop offset="1" stop-color="#38F9D7"></stop>
-                </linearGradient>
-            </defs>
-        </svg>
-    </div>
 </div>
 
 <script>
@@ -354,95 +141,87 @@ const { Content } = await render(about!);
 
     gsap.registerPlugin(ScrollTrigger);
 
-    declare global {
-        interface Window {
-            initSpotlightAnimation?: () => void;
-        }
-    }
-
-    window.initSpotlightAnimation = () => {
-        // SVG Path Animation
-        const path = document.getElementById(
-            "stroke-path",
-        ) as SVGPathElement | null;
-        if (path) {
-            const length = path.getTotalLength();
-            // Set up the starting positions
-            path.style.strokeDasharray = length + " " + length;
-            path.style.strokeDashoffset = String(length);
-
-            // Trigger the animation on scrub
-            gsap.to(path, {
-                strokeDashoffset: 0,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".spotlight",
-                    start: "top top",
-                    end: () => {
-                        const spotlight = document.querySelector(
-                            ".spotlight",
-                        ) as HTMLElement | null;
-                        if (spotlight) {
-                            // Calculate precise pixel distance from start of spotlight to campaign container
-                            const distance =
-                                1024 +
-                                spotlight.getBoundingClientRect().bottom -
-                                spotlight.getBoundingClientRect().top;
-                            return `+=${distance}`;
-                        }
-                        return "bottom bottom";
-                    },
-                    scrub: 1.5,
-                    invalidateOnRefresh: true,
-                },
-            });
-        }
-    };
-
     function initAboutAnimations() {
-        const cards = document.querySelectorAll(".about-card");
-
-        cards.forEach((card) => {
-            gsap.fromTo(
-                card,
-                {
-                    opacity: 0,
-                    scale: 0.8,
-                    y: 100,
-                },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "power2.out", // Bounce/Jelly effect
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 90%", // Start when card is 85% from top of viewport
-                        toggleActions: "play none none reverse", // Play on scroll down, reverse on scroll up
-                    },
-                },
-            );
+        // Sticky Title Reveal
+        gsap.to(".about-title-reveal", {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            scrollTrigger: {
+                trigger: ".spotlight",
+                start: "top 75%",
+            },
         });
 
-        // Add SVG Icons pop-in animation
-        const svgIcons = document.querySelectorAll(".about-svg-icon");
-        svgIcons.forEach((icon) => {
-            gsap.fromTo(
-                icon,
-                { opacity: 0, scale: 0 },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.8,
-                    ease: "back.out(2)",
-                    scrollTrigger: {
-                        trigger: icon,
-                        start: "top 85%", // Appears when it enters 85% of viewport
-                        toggleActions: "play reverse play reverse",
-                    },
+        // Glowing Line Reveal
+        gsap.to(".about-line-reveal", {
+            scaleX: 1,
+            opacity: 0.8,
+            duration: 1.2,
+            delay: 0.4,
+            ease: "power3.inOut",
+            scrollTrigger: {
+                trigger: ".spotlight",
+                start: "top 75%",
+            },
+        });
+
+        // Paragraph Reveals
+        gsap.to(".about-text-reveal", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            delay: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".spotlight",
+                start: "top 75%",
+            },
+        });
+
+        // Glassmorphic Card Reveals
+        const glassCards = document.querySelectorAll(".about-glass-card");
+        glassCards.forEach((card) => {
+            gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+        });
+
+        // Cinematic slow scroll specifically for this component
+        ScrollTrigger.create({
+            trigger: ".spotlight",
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => {
+                if (window.lenis && window.lenis.options) {
+                    window.lenis.options.multiplier = 0.3; // Make it significantly heavier and cinematic
                 }
-            );
+            },
+            onLeave: () => {
+                if (window.lenis && window.lenis.options) {
+                    window.lenis.options.multiplier = 1; // Restore normal speed
+                }
+            },
+            onEnterBack: () => {
+                if (window.lenis && window.lenis.options) {
+                    window.lenis.options.multiplier = 0.3;
+                }
+            },
+            onLeaveBack: () => {
+                if (window.lenis && window.lenis.options) {
+                    window.lenis.options.multiplier = 1;
+                }
+            },
         });
     }
 
