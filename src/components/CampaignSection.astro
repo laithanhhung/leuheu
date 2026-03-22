@@ -69,43 +69,60 @@ const sortedCampaigns = campaigns.sort(
                 });
             }
 
-            const track = container.querySelector(".horizontal-gallery-track");
-            let scrollDistance = window.innerHeight; // Default 100vh pin
-            let maxSlide = 0;
-            
-            if (track && track.parentElement) {
-                // Determine how far the track needs to slide to reveal all images
-                // Uses wrapperWidth to mathematically perfectly compute the horizontal overflow amount
+            const track = container.querySelector(
+                ".horizontal-gallery-track",
+            ) as HTMLElement | null;
+
+            // Compute scroll distance dynamically to avoid stale measurements on refresh/resize/font load
+            const computeScrollDistance = (): number => {
+                if (!track || !track.parentElement) return window.innerHeight;
                 const wrapperWidth = track.parentElement.offsetWidth;
-                maxSlide = track.scrollWidth - wrapperWidth + 40; 
-                if (maxSlide > 0) {
-                    scrollDistance = Math.max(window.innerHeight, maxSlide);
-                }
-            }
+                const overflow = Math.max(0, track.scrollWidth - wrapperWidth + 40);
+                // Ensure at least one viewport worth of scroll so the pin feels natural
+                return Math.max(window.innerHeight, overflow);
+            };
+
+            const computeMaxSlide = (): number => {
+                if (!track || !track.parentElement) return 0;
+                const wrapperWidth = track.parentElement.offsetWidth;
+                return Math.max(0, track.scrollWidth - wrapperWidth + 40);
+            };
 
             // Create a single unified timeline to prevent GSAP pin-spacer desync on reverse scroll
             const isLast = index === campaignContainers.length - 1;
             const isFirst = index === 0;
             
             // CHỈ PIN NẾU KHÔNG PHẢI LÀ TẤM ĐẦU TIÊN (SignificantCampaign)
-            if (!isFirst && (!isLast || (track && maxSlide > 0))) {
+            if (!isFirst && (!isLast || (track && computeMaxSlide() > 0))) {
                 const pinTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: container,
                         start: "top top", // Pin immediately upon reaching top
-                        end: () => `+=${scrollDistance}`,
+                        end: () => `+=${computeScrollDistance()}`,
                         pin: true,
-                        pinSpacing: true, 
+                        pinSpacing: true,
                         scrub: true,
                         invalidateOnRefresh: true,
+                        anticipatePin: 1,
+                        onLeave: () => {
+                            // Clear transforms so following sections don't inherit transforms
+                            if (track) gsap.set(track, { clearProps: "transform" });
+                        },
+                        onLeaveBack: () => {
+                            if (track) gsap.set(track, { clearProps: "transform" });
+                        },
                     }
                 });
 
-                if (track && maxSlide > 0) {
-                    pinTl.to(track, {
-                        x: -maxSlide,
-                        ease: "none",
-                    });
+                if (track) {
+                    pinTl.to(
+                        track,
+                        {
+                            x: () => -computeMaxSlide(),
+                            ease: "none",
+                        },
+                        0,
+                    );
                 } else {
                     // Empty tween so the pin holds time correctly even if no gallery
                     pinTl.to(container, { x: 0, duration: 1 });
