@@ -1,0 +1,37 @@
+﻿
+> chiuchiu-clone@0.0.0 build
+> astro check && astro build
+
+[2m12:16:50[22m [34m[content][39m Syncing content
+[2m12:16:50[22m [34m[content][39m Synced content
+[2m12:16:50[22m [34m[types][39m Generated [2m467ms[22m
+[2m12:16:50[22m [34m[check][39m Getting diagnostics for Astro files in D:\Project\leuheu\chiuchiu-clone...
+[96msrc/components/CampaignSection.astro[0m:[93m22[0m:[93m44[0m - [93mwarning[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m22[0m             sortedCampaigns.map((campaign, index) => (
+[7m  [0m [93m                                           ~~~~~[0m
+
+[96msrc/components/Services.astro[0m:[93m11[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'keywords' is declared but its value is never read.
+
+[7m11[0m const keywords = [
+[7m  [0m [93m      ~~~~~~~~[0m
+
+[96msrc/components/Welcome.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Image' is declared but its value is never read.
+
+[7m2[0m import { Image } from "astro:assets";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/index.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'getCollection' is declared but its value is never read.
+
+[7m2[0m import { getCollection } from "astro:content";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/index.astro[0m:[93m115[0m:[93m17[0m - [91merror[0m[90m ts(2353): [0mObject literal may only specify known properties, and 'smoothTouch' does not exist in type 'LenisOptions'.
+
+[7m115[0m                 smoothTouch: true,
+[7m   [0m [91m                ~~~~~~~~~~~[0m
+
+Result (24 files): 
+- 1 error
+- 0 warnings
+- 4 hints
+
