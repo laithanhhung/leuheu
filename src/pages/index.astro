@@ -105,11 +105,15 @@ import LandscapePrompt from "../components/LandscapePrompt.astro";
                 }
             }
 
-            // Initialize Lenis once for standard unified scrolling
+            // Initialize Lenis once for unified smooth scrolling across desktop + touch
             const lenis = new Lenis({
-                lerp: 0.1,  // Standard smooth interpolation
-                wheelMultiplier: 1, // Normal scrolling distance
+                lerp: 0.08,
+                duration: 1.1,
+                wheelMultiplier: 0.95,
+                touchMultiplier: 1,
                 smoothWheel: true,
+                smoothTouch: true,
+                syncTouch: true,
             });
 
             window.lenis = lenis;

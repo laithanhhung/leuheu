@@ -9,20 +9,18 @@ const sortedCampaigns = campaigns.sort(
 );
 ---
 
-<section class="relative w-full">
+<section class="campaign-section relative w-full">
     {/* Campaign Cards Loop */}
     <div class="campaigns-container w-full bg-[#0a0a0a]">
         <div
-            class="campaign-container w-full h-auto min-h-[120svh] relative"
+            class="campaign-container w-full h-auto min-h-[105svh] md:min-h-[120svh] relative"
         >
             <SignificantCampaign className="campaign-card" />
         </div>
 
         {
             sortedCampaigns.map((campaign, index) => (
-                <div 
-                    class="campaign-container w-full h-[auto] min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-16 xs:mb-0"
-                >
+                <div class="campaign-container w-full h-auto min-h-[0] xs:h-[100svh] xs:min-h-[100svh] relative mb-[8%] xs:mb-0">
                     <CampaignCard
                         className="campaign-card overflow-hidden relative w-full h-full transform origin-bottom-left will-change-transform rotate-[30deg]"
                         campaign={campaign.data}
@@ -51,83 +49,86 @@ const sortedCampaigns = campaigns.sort(
         );
 
         campaignContainers.forEach((container, index) => {
-            const card = container.querySelector(".campaign-card");
+            const card = container.querySelector(".campaign-card") as HTMLElement | null;
             if (!card) return;
 
-            // Slide and rotate entrance - SKIP for SignificantCampaign (index 0)
-            if (index > 0) {
+            const isFirst = index === 0;
+            const track = container.querySelector(".horizontal-gallery-track") as HTMLElement | null;
+            const wrapper = track?.parentElement;
+
+            // Compute Horizontal Offset
+            const computeMaxSlide = () => (track && wrapper) ? Math.max(0, track.scrollWidth - wrapper.offsetWidth + 64) : 0;
+            const horizontalDuration = computeMaxSlide() * 1.5; // Scale for scroll feel
+            const pinDuration = horizontalDuration + window.innerHeight; // How long it stays pinned
+
+            // 1. Entrance rotation (Skip for SignificantCampaign)
+            if (!isFirst) {
                 gsap.to(card, {
                     rotate: 0,
                     ease: "none",
                     scrollTrigger: {
                         trigger: container,
                         start: "top bottom",
-                        end: "top 0%",
+                        end: "top 20%",
                         scrub: true,
                         invalidateOnRefresh: true,
                     },
                 });
             }
 
-            const track = container.querySelector(
-                ".horizontal-gallery-track",
-            ) as HTMLElement | null;
+            // 2. The "Vuốt Vuốt" Stacking (Stays anchored at bottom while next card covers it)
+            // We use pinSpacing: false to allow stacking.
+            // But we add manual margin-bottom to the container to PUSH the next card
+            // for the duration of the horizontal scroll.
+            if (!isFirst && horizontalDuration > 0) {
+                (container as HTMLElement).style.marginBottom = `${horizontalDuration}px`;
+            }
 
-            // Compute scroll distance dynamically to avoid stale measurements on refresh/resize/font load
-            const computeScrollDistance = (): number => {
-                if (!track || !track.parentElement) return window.innerHeight;
-                const wrapperWidth = track.parentElement.offsetWidth;
-                const overflow = Math.max(0, track.scrollWidth - wrapperWidth + 40);
-                // Ensure at least one viewport worth of scroll so the pin feels natural
-                return Math.max(window.innerHeight, overflow);
-            };
-
-            const computeMaxSlide = (): number => {
-                if (!track || !track.parentElement) return 0;
-                const wrapperWidth = track.parentElement.offsetWidth;
-                return Math.max(0, track.scrollWidth - wrapperWidth + 40);
-            };
-
-            // Create a single unified timeline to prevent GSAP pin-spacer desync on reverse scroll
-            const isLast = index === campaignContainers.length - 1;
-            const isFirst = index === 0;
-            
-            // CHỈ PIN NẾU KHÔNG PHẢI LÀ TẤM ĐẦU TIÊN (SignificantCampaign)
-            if (!isFirst && (!isLast || (track && computeMaxSlide() > 0))) {
-                const pinTl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: container,
-                        start: "top top", // Pin immediately upon reaching top
-                        end: () => `+=${computeScrollDistance()}`,
-                        pin: true,
-                        pinSpacing: true,
-                        scrub: true,
-                        invalidateOnRefresh: true,
-                        anticipatePin: 1,
-                        onLeave: () => {
-                            // Clear transforms so following sections don't inherit transforms
-                            if (track) gsap.set(track, { clearProps: "transform" });
-                        },
-                        onLeaveBack: () => {
-                            if (track) gsap.set(track, { clearProps: "transform" });
-                        },
-                    }
-                });
-
-                if (track) {
-                    pinTl.to(
-                        track,
-                        {
-                            x: () => -computeMaxSlide(),
-                            ease: "none",
-                        },
-                        0,
-                    );
-                } else {
-                    // Empty tween so the pin holds time correctly even if no gallery
-                    pinTl.to(container, { x: 0, duration: 1 });
+            const pinTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    start: "bottom bottom",
+                    // For Card 0, pin for 100vh so Card 1 can cover it.
+                    // For others, pin for horizontal scrub + 100vh for next card to cover.
+                    end: () => `+=${isFirst ? window.innerHeight : pinDuration}`,
+                    pin: true,
+                    pinSpacing: false,
+                    scrub: true,
+                    invalidateOnRefresh: true,
                 }
+            });
+
+            // If there's a gallery (and not first card), scrub it during the first part of the pin
+            if (!isFirst && track && horizontalDuration > 0) {
+                pinTl.to(track, {
+                    x: () => -computeMaxSlide(),
+                    ease: "none",
+                    duration: horizontalDuration / pinDuration
+                });
+                // After scrub, the Timeline continues (waiting) for window.innerHeight 
+                // while the next card covers us.
+                pinTl.to({}, { duration: window.innerHeight / pinDuration });
             }
         });
+
+        // Set higher z-index for later cards to ensure they cover previous ones
+        campaignContainers.forEach((c, i) => {
+            (c as HTMLElement).style.zIndex = (i + 1).toString();
+        });
+
+        // Refresh triggers after adding margins and z-index
+        ScrollTrigger.refresh();
     };
 </script>
+
+<style>
+    @media (max-width: 1000px) {
+        .campaigns-container {
+            width: 100%;
+        }
+
+        .campaign-container {
+            width: 100%;
+        }
+    }
+</style>

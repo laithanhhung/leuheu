@@ -10,10 +10,9 @@ mainStat: "60M+ Views Viral Clips"
 secondaryStat: "Box Office Phenomenon"
 galleryImages:
   - "Kẻ_Ăn_Hồn_4_b3kzws"
+  - "Kẻ_Ăn_Hồn_3_vor6wv"
   - "Kẻ_Ăn_Hồn_1_jqivhp"
   - "Kẻ_Ăn_Hồn_2_cojvs8"
-  - "Kẻ_Ăn_Hồn_3_vor6wv"
-  - "Kẻ_Ăn_Hồn_4_n6hx2g"
   - "keanhon_irlipl"
   - "Kẻ_Ăn_Hồn_5_eurmsn"
 description:

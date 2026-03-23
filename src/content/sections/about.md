@@ -10,6 +10,6 @@ extraData:
   introduction2: "LeuHeu aims to provide solutions for partner in Entertainment field to effectively and memorably promote content through viral campaigns on the Tiktok and other social platforms."
 ---
 
-Lêu Hêu là hệ thống đa kênh - đối tác chiến lược hàng đầu của TikTok tại Việt Nam, MCN đầu tiên và lớn nhất trong mảng điện ảnh.
+Leu Heu is a multi-channel network and a leading strategic partner of TikTok in Vietnam — the first and largest MCN in the film category.
 
-Chúng tôi chuyên quản lý và phát triển các nhà sáng tạo nội dung nổi bật, khai thác tối đa thế mạnh trong lĩnh vực giải trí như phim ảnh, âm nhạc và showbiz. Với định hướng rõ nét, tư duy sáng tạo và nền tảng hợp tác chiến lược, Lêu Hêu là nơi giúp các content creator và doanh nghiệp kiến tạo dấu ấn, lan tỏa nội dung và bứt phá trong kỷ nguyên số.
+We specialize in managing and developing standout content creators, leveraging strengths across entertainment such as film, music, and showbiz. With a clear strategy, creative mindset, and strategic partnerships, Leu Heu empowers creators and businesses to craft memorable campaigns, amplify content, and break through in the digital era.
